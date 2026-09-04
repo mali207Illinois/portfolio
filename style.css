@@ -49,6 +49,10 @@ h1 em, h2 em, .art-caption em, .footer em { font-family: var(--serif); font-weig
 .art-label-number { text-align: right; }
 .art-caption { right: 25px; bottom: 22px; color: var(--paper); font-size: 16px; text-align: right; letter-spacing: -.04em; }
 .hero-bottom { grid-column: 1 / -1; align-self: end; display: flex; justify-content: space-between; align-items: center; padding: 26px 0; border-top: 1px solid var(--line); text-transform: uppercase; }
+.hero-signal { position: absolute; z-index: 4; right: 24px; bottom: 104px; display: flex; align-items: center; gap: 10px; padding: 11px 12px; background: var(--lime); border: 1px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); font: 10px/1.25 var(--mono); text-transform: uppercase; transform: rotate(2deg); }
+.hero-signal strong { align-self: flex-start; color: var(--orange); font: 17px/1 var(--sans); }
+.signal-ping { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 4px rgba(255, 99, 56, .18); animation: ping 1.8s ease-in-out infinite; }
+@keyframes ping { 0%, 100% { box-shadow: 0 0 0 3px rgba(255, 99, 56, .18); } 50% { box-shadow: 0 0 0 7px rgba(255, 99, 56, .04); } }
 .scroll-label { display: flex; gap: 11px; align-items: center; }
 .scroll-arrow { font-size: 17px; }
 .location-separator { color: var(--orange); padding: 0 5px; }
@@ -127,6 +131,7 @@ h1 em, h2 em, .art-caption em, .footer em { font-family: var(--serif); font-weig
   .hero { min-height: auto; padding-top: 70px; grid-template-columns: 1fr; gap: 60px; }
   h1 { font-size: clamp(60px, 17vw, 100px); }
   .hero-art { justify-self: stretch; max-width: none; width: 100%; }
+  .hero-signal { right: 8px; top: 18px; bottom: auto; transform: rotate(2deg) scale(.9); transform-origin: top right; }
   .hero-bottom { margin-top: 15px; }
   .location { display: none; }
   .marquee { margin: 75px 0 90px; }
