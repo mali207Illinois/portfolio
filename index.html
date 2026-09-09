@@ -64,6 +64,16 @@
       .side-note::before { content: "↘"; display: block; margin-left: 42px; font: 30px var(--hand); }
       .hero-main { min-width: 0; padding: 34px clamp(24px, 5vw, 76px) 34px 40px; position: relative; overflow: hidden; }
       .hero-main::before { content: ""; position: absolute; inset: 0; opacity: .15; background-image: linear-gradient(rgba(40,40,40,.25) 1px, transparent 1px); background-size: 100% 5px; pointer-events: none; }
+      .hero-main > p, .hero-main > h1, .hero-main > a, .hero-main > .hero-collage { position: relative; z-index: 2; }
+      .pixel-decor { position: absolute; z-index: 1; display: block; pointer-events: none; image-rendering: pixelated; }
+      .pixel-star { width: 6px; height: 6px; background: currentColor; color: var(--blue); box-shadow: 6px 0 currentColor, -6px 0 currentColor, 0 6px currentColor, 0 -6px currentColor; animation: pixel-twinkle 2.2s steps(2, end) infinite; }
+      .pixel-star::before { content: ""; position: absolute; width: 6px; height: 6px; left: -6px; top: -6px; box-shadow: 12px 0 currentColor, 0 12px currentColor, 12px 12px currentColor; }
+      .hero-star-a { top: 73px; right: 17%; }
+      .hero-star-b { top: 184px; left: 7%; color: var(--red); transform: scale(.65); animation-delay: .8s; }
+      .pixel-mushroom { width: 40px; height: 22px; background: var(--red); clip-path: polygon(15% 0, 85% 0, 85% 12%, 100% 12%, 100% 58%, 85% 58%, 85% 100%, 15% 100%, 15% 58%, 0 58%, 0 12%, 15% 12%); animation: pixel-hop 3s steps(2, end) infinite; }
+      .pixel-mushroom::before { content: ""; position: absolute; width: 8px; height: 8px; left: 10px; top: 5px; background: #fff0d1; box-shadow: 14px 0 #fff0d1; }
+      .pixel-mushroom::after { content: ""; position: absolute; width: 15px; height: 9px; left: 13px; bottom: -2px; background: #f6e5c5; }
+      .hero-mushroom { right: 14%; bottom: 92px; transform: scale(.78); }
       .hero-kicker { position: relative; margin: 4px 0 16px; color: var(--blue); font-size: 11px; }
       .hero-title { position: relative; max-width: 570px; margin: 0; font: 600 clamp(75px, 8vw, 139px)/.68 var(--hand); letter-spacing: -.05em; transform: rotate(-2deg); }
       .hero-title .smile { display: inline-block; font-family: Arial, sans-serif; font-size: .62em; transform: rotate(7deg); vertical-align: 16%; }
@@ -103,6 +113,12 @@
 
       .about-window { margin-top: 35px; background: #0d1113; color: #f2f1eb; }
       .about-body { min-height: 584px; display: grid; grid-template-columns: 1fr 1.15fr .8fr; gap: 40px; padding: 52px clamp(24px, 6vw, 95px) 72px; position: relative; overflow: hidden; }
+      .about-copy, .about-photo, .random-facts { position: relative; z-index: 2; }
+      .about-star { top: 72px; left: 5%; color: var(--lime); transform: scale(.72); }
+      .pixel-plant { width: 13px; height: 56px; background: #3da752; clip-path: polygon(38% 0, 62% 0, 62% 65%, 100% 65%, 100% 100%, 0 100%, 0 65%, 38% 65%); }
+      .pixel-plant::before { content: ""; position: absolute; width: 22px; height: 19px; left: -17px; top: 11px; background: #57c45d; clip-path: polygon(54% 0, 100% 0, 100% 54%, 54% 54%, 54% 100%, 0 100%, 0 46%, 54% 46%); }
+      .pixel-plant::after { content: ""; position: absolute; width: 22px; height: 19px; right: -17px; top: 25px; background: #328d4b; clip-path: polygon(0 0, 46% 0, 46% 46%, 100% 46%, 100% 100%, 46% 100%, 46% 54%, 0 54%); }
+      .about-plant { right: 5%; bottom: 26px; transform: scale(1.1); }
       .about-body::after { content: "✶"; position: absolute; right: 12%; bottom: 24px; font-size: 43px; color: #b1b5ac; transform: rotate(15deg); }
       .about-heading { margin: 0; font: 600 clamp(60px, 8vw, 114px)/.72 var(--hand); letter-spacing: -.05em; }
       .about-copy { padding-top: 24px; }
@@ -119,7 +135,12 @@
 
       .section-window { margin-top: 35px; }
       .projects-window { background: var(--purple); }
-      .projects-inner { min-height: 690px; padding: 30px clamp(23px, 5vw, 70px) 52px; }
+      .projects-inner { min-height: 690px; padding: 30px clamp(23px, 5vw, 70px) 52px; position: relative; overflow: hidden; }
+      .window-section-heading, .project-grid, .project-more { position: relative; z-index: 2; }
+      .pixel-gameboy { width: 42px; height: 61px; right: 7%; top: 25px; background: #c9d1b7; border: 4px solid #24283a; border-radius: 5px; box-shadow: inset 0 0 0 4px #9da990, 4px 4px 0 rgba(53,36,82,.24); transform: rotate(8deg); }
+      .pixel-gameboy::before { content: ""; position: absolute; width: 24px; height: 19px; left: 5px; top: 8px; background: #294a45; border: 3px solid #515d4d; box-shadow: inset 0 0 0 2px #172b2a; }
+      .pixel-gameboy::after { content: "+  •"; position: absolute; left: 7px; bottom: 7px; color: #30364a; font: 11px/1 var(--type); letter-spacing: 3px; }
+      .project-spark { right: 24%; bottom: 67px; color: #3d2d76; transform: scale(.6); animation-delay: .4s; }
       .window-section-heading { display: flex; justify-content: space-between; align-items: start; gap: 20px; }
       .window-section-heading h2 { margin: 0; font: 600 65px/.75 var(--hand); transform: rotate(-3deg); }
       .filter-tabs { display: flex; gap: 14px; margin-top: 13px; color: #382d75; font-size: 10px; }
@@ -147,6 +168,9 @@
 
       .diary-window { background-color: #f0eee5; background-image: linear-gradient(rgba(103,130,157,.16) 1px, transparent 1px), linear-gradient(90deg, rgba(103,130,157,.16) 1px, transparent 1px); background-size: 22px 22px; }
       .diary-inner { min-height: 600px; display: grid; grid-template-columns: 145px 1fr; gap: 34px; padding: 34px clamp(22px, 5vw, 74px) 65px; position: relative; }
+      .diary-index, .diary-post { position: relative; z-index: 2; }
+      .diary-star { right: 7%; bottom: 68px; color: var(--red); transform: scale(.65); }
+      .pixel-heart { width: 28px; height: 22px; right: 16%; top: 42px; background: var(--red); clip-path: polygon(0 18%, 18% 18%, 18% 0, 42% 0, 42% 18%, 58% 18%, 58% 0, 82% 0, 82% 18%, 100% 18%, 100% 58%, 82% 58%, 82% 77%, 62% 77%, 62% 100%, 38% 100%, 38% 77%, 18% 77%, 18% 58%, 0 58%); animation: pixel-heartbeat 2.4s steps(2, end) infinite; }
       .diary-index { font-size: 10px; }
       .diary-index ul { display: grid; gap: 22px; margin: 0; padding: 0; list-style: none; }
       .diary-index li { position: relative; padding-left: 3px; }
@@ -165,6 +189,9 @@
 
       .contact-window { background: #0a100d; color: #d9eadc; }
       .contact-inner { min-height: 610px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 75px; padding: 47px clamp(22px, 6vw, 85px) 65px; position: relative; overflow: hidden; }
+      .contact-copy, .contact-aside, .contact-signoff { position: relative; z-index: 2; }
+      .contact-pixel-heart { top: 49px; left: 49%; color: var(--green); transform: scale(.65); }
+      .pixel-terrain { width: 150px; height: 48px; right: 7%; bottom: 27px; background: #2fbe4c; clip-path: polygon(0 100%, 0 74%, 8% 74%, 8% 57%, 16% 57%, 16% 35%, 24% 35%, 24% 57%, 32% 57%, 32% 20%, 40% 20%, 40% 46%, 48% 46%, 48% 4%, 56% 4%, 56% 42%, 65% 42%, 65% 66%, 73% 66%, 73% 31%, 82% 31%, 82% 55%, 91% 55%, 91% 18%, 100% 18%, 100% 100%); opacity: .8; }
       .contact-inner::after { content: "░▒▓ ███ ▓▒░"; position: absolute; right: 8%; bottom: 27px; color: #2fbe4c; font-size: 31px; letter-spacing: -6px; transform: rotate(-3deg); }
       .contact-heading { margin: 0; color: var(--green); font: 700 clamp(54px, 7vw, 99px)/.74 var(--type); text-shadow: 0 0 6px rgba(140,255,158,.3); }
       .contact-heading .blink { animation: cursor-blink 1.1s steps(2) infinite; }
@@ -197,6 +224,9 @@
       @keyframes pulse-dot { 0%, 100% { box-shadow: 0 0 0 0 rgba(68,198,106,.4); } 50% { box-shadow: 0 0 0 5px rgba(68,198,106,0); } }
       @keyframes person-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
       @keyframes cat-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px) rotate(-3deg); } }
+      @keyframes pixel-twinkle { 0%, 100% { opacity: .45; transform: scale(1); } 50% { opacity: 1; transform: scale(1.35); } }
+      @keyframes pixel-hop { 0%, 76%, 100% { transform: translateY(0); } 80% { transform: translateY(-4px); } 87% { transform: translateY(0); } }
+      @keyframes pixel-heartbeat { 0%, 75%, 100% { transform: scale(1); } 80% { transform: scale(1.12); } 86% { transform: scale(1); } }
       @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
       @keyframes cursor-blink { 50% { opacity: 0; } }
       @keyframes screen-flicker { 0%, 95%, 100% { opacity: 0; } 96% { opacity: .35; } 97% { opacity: .05; } }
@@ -299,12 +329,13 @@
             <p class="side-note">good things<br />take time</p>
           </aside>
           <div class="hero-main">
+            <span class="pixel-decor pixel-star hero-star-a" aria-hidden="true"></span><span class="pixel-decor pixel-star hero-star-b" aria-hidden="true"></span>
             <p class="hero-kicker">welcome to my corner of the internet ↘</p>
             <h1 id="hero-heading" class="hero-title">hey, i’m<br />Mustafa <span class="smile">☺</span></h1>
             <p class="hero-description">I make stuff — mostly digital, sometimes physical. This is my little corner of the internet where I dump projects, thoughts, and things I like.</p>
             <a class="hero-scroll" href="#about">→ scroll around (or don’t)</a>
             <div class="hero-collage" aria-label="A handmade collage of a workspace, landscape, and pixel characters">
-              <div class="scrap desk-photo"></div><div class="scrap landscape-photo"><i class="tape"></i></div><div class="pixel-person"></div><button class="pixel-cat" aria-label="Pet the cat"></button><div class="cat-speech" aria-live="polite">you found the right place :)</div>
+              <div class="scrap desk-photo"></div><div class="scrap landscape-photo"><i class="tape"></i></div><div class="pixel-person"></div><button class="pixel-cat" aria-label="Pet the cat"></button><div class="cat-speech" aria-live="polite">you found the right place :)</div><span class="pixel-decor pixel-mushroom hero-mushroom" aria-hidden="true"></span>
             </div>
             <div class="hero-rail"><i class="rail-led"></i><span class="rail-track"><span class="rail-marquee">currently listening: the 1975 — fallingforyou　 ▮▮　♪　 currently listening: the 1975 — fallingforyou　 ▮▮　♪　</span></span><button class="music-button" type="button" aria-pressed="false">music: off</button></div>
           </div>
@@ -314,6 +345,7 @@
         <section id="about" class="window about-window section-window reveal" aria-labelledby="about-heading">
           <div class="titlebar dark"><span class="title-icon">◈</span><span class="window-title">about_me.html</span><span class="window-controls"><i>↗</i><i>□</i><i>×</i></span></div>
           <div class="about-body">
+            <span class="pixel-decor pixel-star about-star" aria-hidden="true"></span><span class="pixel-decor pixel-plant about-plant" aria-hidden="true"></span>
             <div class="about-copy"><h2 id="about-heading" class="about-heading">a little<br />about me...</h2><p>I’m Mustafa. I’m a designer and developer who likes turning ideas into interactive experiences — especially when they feel a little unexpected.</p><p>I care a lot about making things that feel human. Weird internet stuff, analog textures, good food, and long walks (short ones, also fine).</p><span class="about-sign">— Mustafa :)</span></div>
             <div class="about-photo"><i class="tape"></i></div>
             <div class="random-facts"><strong>random facts:</strong><ul><li>I have a cat (obviously)</li><li>I make a very good coffee</li><li>I used to play guitar</li><li>I collect cool internet corners</li><li>I’m working on a few things...</li></ul></div>
@@ -324,6 +356,7 @@
         <section id="projects" class="window projects-window section-window reveal" aria-labelledby="projects-heading">
           <div class="titlebar purple"><span class="title-icon">📁</span><span class="window-title">projects.exe</span><span class="window-controls"><i>−</i><i>□</i><i>×</i></span></div>
           <div class="projects-inner">
+            <span class="pixel-decor pixel-gameboy" aria-hidden="true"></span><span class="pixel-decor pixel-star project-spark" aria-hidden="true"></span>
             <div class="window-section-heading"><h2 id="projects-heading">my<br />projects:</h2><div class="filter-tabs"><a href="#projects">all</a><a href="#projects">/ digital</a><a href="#projects">/ physical</a><a href="#projects">/ misc</a></div></div>
             <div class="project-grid">
               <a class="project-card reveal" href="#contact"><div class="project-image"></div><p class="project-label">night drives<small>a photo series (2025)</small></p><span class="project-arrow">↗</span></a>
@@ -340,6 +373,7 @@
         <section id="diary" class="window diary-window section-window reveal" aria-labelledby="diary-heading">
           <div class="titlebar"><span class="title-icon">🌐</span><span class="window-title">diary.html</span><span class="window-controls"><i>−</i><i>□</i><i>×</i></span></div>
           <div class="diary-inner">
+            <span class="pixel-decor pixel-heart" aria-hidden="true"></span><span class="pixel-decor pixel-star diary-star" aria-hidden="true"></span>
             <nav class="diary-index" aria-label="Diary posts"><ul><li>04.12.2024<br />the best coffee<br />in portland???</li><li>04.05.2024<br />tiny moments<br />that feel big</li><li>03.28.2024<br />a very long<br />walk</li><li>03.14.2024<br />things i’m<br />into right now</li><li>02.27.2024<br />the process<br />is the point</li></ul></nav>
             <article class="diary-post"><span class="diary-date">04.12.2024 / food</span><h2 id="diary-heading">the best coffee<br />in portland???</h2><p>So I finally found this little coffee shop on 12th and it’s honestly life changing. The matcha is unreal, and they have these weird little bookshelf zines and stuff. 10/10.</p><div class="coffee-photo" role="img" aria-label="A stylized photo of a cup of coffee"></div><a class="diary-link" href="#contact">← back to all posts</a></article>
             <span class="mug-doodle">☕</span><p class="diary-note">go here<br />if you’re<br />in portland</p>
@@ -349,6 +383,7 @@
         <section id="contact" class="window contact-window section-window reveal" aria-labelledby="contact-heading">
           <div class="titlebar green"><span class="title-icon">◉</span><span class="window-title">contact.exe</span><span class="window-controls"><i>−</i><i>□</i><i>×</i></span></div>
           <div class="contact-inner">
+            <span class="pixel-decor pixel-star contact-pixel-heart" aria-hidden="true"></span><span class="pixel-decor pixel-terrain" aria-hidden="true"></span>
             <div class="contact-copy"><h2 id="contact-heading" class="contact-heading">Let’s<br />connect <span class="blink">_</span></h2><p>Want to work together? Have a question? Or just wanna say hi? Hit me up.</p><form class="contact-form" id="contact-form"><input name="name" aria-label="Name" placeholder="name" required /><input type="email" name="email" aria-label="Email" placeholder="email" required /><textarea name="message" aria-label="Message" placeholder="message" required></textarea><button type="submit">send →</button><div class="form-status" role="status"></div></form></div>
             <aside class="contact-aside"><div class="mini-window"><div class="mini-bar"><span>cat.exe</span><span>×</span></div><div class="mini-screen">meow</div></div><div class="taped-photo"><i class="tape"></i></div><div class="social-links"><a href="mailto:hello@mustafaali.org">◎ email</a><a href="https://github.com/mali207Illinois/portfolio" target="_blank" rel="noreferrer">◈ github</a><a href="#home">♫ currently online</a></div></aside><span class="contact-signoff">thanks for visiting &lt;3</span>
           </div>
