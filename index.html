@@ -278,7 +278,29 @@
       .contact-form input, .contact-form textarea { border: 0; border-bottom: 1px solid var(--line); background: transparent; }
       .command-bar { padding-top: 10px; border-top-color: var(--line); }
       .command-input { border-bottom: 1px solid #1c3520; padding-bottom: 3px; }
-      .site-mark { right: 14px; bottom: 10px; color: var(--green-dim); }
+      .site-mark { right: 14px; bottom: 42px; color: #8fa7c2; }
+
+      /* desktop environment behind the terminal window */
+      body { background: radial-gradient(circle at 18% 12%, rgba(93,121,158,.45), transparent 32%), linear-gradient(145deg, #2d3a4f 0%, #1c293b 52%, #101a2a 100%); }
+      body::before { opacity: .08; background: linear-gradient(135deg, transparent 0 48%, rgba(190,214,242,.15) 49%, transparent 50%), linear-gradient(45deg, transparent 0 48%, rgba(190,214,242,.1) 49%, transparent 50%); background-size: 150px 150px; }
+      body::after { opacity: .16; background: radial-gradient(circle at 75% 22%, rgba(113,149,197,.22), transparent 25%), linear-gradient(90deg, transparent 0 49.8%, rgba(190,214,242,.035) 50%, transparent 50.2%); }
+      .desktop-taskbar { position: fixed; z-index: 0; right: 0; bottom: 0; left: 0; height: 34px; display: flex; align-items: center; gap: 9px; padding: 0 14px; border-top: 1px solid rgba(188,211,238,.25); background: rgba(11,18,30,.78); box-shadow: 0 -8px 24px rgba(6,12,22,.22); color: #b4c2d6; font: 10px var(--mono); }
+      .desktop-launcher { width: 19px; height: 19px; display: grid; place-items: center; border: 1px solid #90a9c6; color: #d7e4f4; font-size: 11px; }
+      .desktop-taskbar-app { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px; border: 1px solid rgba(188,211,238,.3); background: rgba(101,127,160,.24); color: #d7e4f4; }
+      .desktop-taskbar-app.ghost { background: transparent; color: #8fa7c2; }
+      .desktop-taskbar-app span { color: #a9c4e2; }
+      .desktop-task { margin-left: auto; color: #8fa7c2; letter-spacing: .02em; }
+      .desktop-icons { position: fixed; z-index: 0; top: 28px; left: 24px; display: grid; gap: 18px; width: 68px; }
+      .desktop-icon { display: grid; justify-items: center; gap: 5px; color: #d7e4f4; font: 9px var(--mono); text-align: center; text-shadow: 0 1px 3px #0b1320; }
+      .desktop-icon-art { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #a2b8d2; background: linear-gradient(145deg, rgba(199,218,240,.48), rgba(70,95,126,.58)); box-shadow: 2px 3px 0 rgba(5,11,20,.35), inset 1px 1px rgba(255,255,255,.3); color: #f0f6ff; font-size: 18px; }
+      .terminal-app { z-index: 1; padding: clamp(18px, 4vw, 58px) clamp(18px, 4vw, 58px) clamp(48px, 5vw, 72px); }
+      .terminal-window { width: min(1420px, 100%); border: 1px solid #526987; border-radius: 10px; box-shadow: 0 18px 45px rgba(4,10,20,.55), 0 0 0 1px rgba(214,231,250,.08); }
+      @media (max-width: 780px) {
+        .desktop-icons { display: none; }
+        .desktop-taskbar { height: 29px; padding-inline: 8px; font-size: 8px; }
+        .desktop-taskbar-app.ghost { display: none; }
+        .desktop-task { font-size: 8px; }
+      }
 
       /* classic desktop-program chrome */
       .terminal-titlebar { flex-basis: 34px; padding: 6px 10px; border-bottom: 1px solid #686868; background: linear-gradient(#e1e1e1, #a9a9a9); color: #222; font-size: clamp(9px, 1.1vw, 11px); }
@@ -297,6 +319,8 @@
     </style>
   </head>
   <body>
+    <div class="desktop-icons" aria-hidden="true"><div class="desktop-icon"><span class="desktop-icon-art">⌂</span><span>home</span></div><div class="desktop-icon"><span class="desktop-icon-art">▤</span><span>projects</span></div><div class="desktop-icon"><span class="desktop-icon-art">♲</span><span>trash</span></div></div>
+    <div class="desktop-taskbar" aria-hidden="true"><span class="desktop-launcher">▣</span><span>mustafa desktop</span><span class="desktop-taskbar-app"><span>▣</span> terminal</span><span class="desktop-taskbar-app ghost"><span>▤</span> files</span><span class="desktop-task">▥ 100% &nbsp;|&nbsp; tty1 // active</span></div>
     <div class="terminal-app" id="app">
       <div class="ambient-glow"></div>
       <div class="matrix-rain" aria-hidden="true"></div>
