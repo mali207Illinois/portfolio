@@ -67,7 +67,7 @@
       .view-kicker { margin: 0 0 18px; color: var(--cyan); font-size: 11px; }
       .view-back { display: inline-flex; align-items: center; gap: 7px; margin: 0 0 23px; padding: 7px 10px; border: 1px solid var(--line); background: rgba(35,106,59,.12); color: var(--muted); cursor: pointer; font-size: 10px; transition: color .2s, border-color .2s, background .2s, transform .2s; }
       .view-back:hover, .view-back:focus-visible { border-color: var(--green); background: rgba(140,255,158,.12); color: var(--green); transform: translateX(-2px); outline: none; }
-      .ascii-art { margin: 0 0 22px; overflow-x: auto; color: var(--green); font: clamp(16px, 2.5vw, 36px)/.82 var(--pixel); letter-spacing: .02em; text-shadow: 0 0 12px rgba(135,217,255,.25); white-space: pre; scrollbar-color: var(--line) transparent; }
+      .ascii-art { margin: 0 0 22px; overflow-x: auto; color: var(--green); font: clamp(12px, 1.5vw, 22px)/.82 var(--pixel); letter-spacing: .02em; text-shadow: 0 0 12px rgba(135,217,255,.25); white-space: pre; scrollbar-color: var(--line) transparent; }
       .home-logo { margin: 0; color: var(--green); font: 400 clamp(65px, 11vw, 160px)/.67 var(--pixel); letter-spacing: .03em; text-shadow: 0 0 16px rgba(135,217,255,.25); }
       .home-logo .accent { color: var(--cyan); }
       .home-subtitle { max-width: 650px; margin: 22px 0 0; color: #d7e4ff; font: 18px/1.35 var(--pixel); letter-spacing: .03em; }
@@ -221,11 +221,11 @@
             <div class="output-scroller" id="output-scroller" tabindex="0">
               <section class="view active" data-view="home" aria-labelledby="home-heading">
                 <p class="view-kicker">boot sequence complete // welcome, human</p>
-                <pre id="home-heading" class="ascii-art" aria-label="ASCII art spelling Mustafa Ali">#   #  #   #   ####  #####   ###  #####   ###     ###  #  #####
-## ##  #   #  #    #  #   #  #  #   #    #   #  #    #
-# # #  #   #   ###    #  #####  ####  #####    #####  #    #
-#   #  #   #      #    #  #   #  #  #   #    #   #  #    #
-#   #   ###  ####    #  #   #  #  #   #    #   #  #####  #####</pre>
+                <pre id="home-heading" class="ascii-art" aria-label="ASCII art spelling Mustafa Ali"> __  __  _   _  ____   _____    _    _____    _           _    _      ___
+|  \/  || | | |/ ___| |_   _|  / \  |  ___|  / \         / \  | |    |_ _|
+| |\/| || | | |\___ \  | |   / _ \ | |_    / _ \       / _ \ | |     | |
+| |  | || |_| | ___) |   | |  / ___ \|  _|  / ___ \     / ___ \| |___  | |
+|_|  |_| \___/ |____/    |_|  /_/   \_\|_|    /_/   \_\     /_/   \_\|_____||___|</pre>
                 <p class="home-subtitle">designer + developer making digital things with personality<span class="cursor"></span></p>
                 <ul class="boot-log"><li>loading strange ideas</li><li>mounting portfolio /dev/creative</li><li>checking for good vibes</li><li>no unnecessary gradients found</li></ul>
                 <p class="command-hint">type <code>help</code> to see available commands, or use a shortcut:</p>
