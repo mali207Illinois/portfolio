@@ -221,11 +221,11 @@
             <div class="output-scroller" id="output-scroller" tabindex="0">
               <section class="view active" data-view="home" aria-labelledby="home-heading">
                 <p class="view-kicker">boot sequence complete // welcome, human</p>
-                <pre id="home-heading" class="ascii-art" aria-label="ASCII art spelling Mustafa Ali"> __  __ _   _ ____ _____  _    _____ _        _
-|  \/  | | | / ___|_   _|/ \  |  ___| |      / \
-| |\/| | | | \___ \ | | / _ \ | |_  | |     / _ \
-| |  | | |_| |___) || |/ ___ \|  _| | |___ / ___ \
-|_|  |_|\___/|____/ |_/_/   \_\_|   |_____/_/   \_\</pre>
+                <pre id="home-heading" class="ascii-art" aria-label="ASCII art spelling Mustafa Ali">#   #  #   #   ####  #####   ###  #####   ###     ###  #  #####
+## ##  #   #  #    #  #   #  #  #   #    #   #  #    #
+# # #  #   #   ###    #  #####  ####  #####    #####  #    #
+#   #  #   #      #    #  #   #  #  #   #    #   #  #    #
+#   #   ###  ####    #  #   #  #  #   #    #   #  #####  #####</pre>
                 <p class="home-subtitle">designer + developer making digital things with personality<span class="cursor"></span></p>
                 <ul class="boot-log"><li>loading strange ideas</li><li>mounting portfolio /dev/creative</li><li>checking for good vibes</li><li>no unnecessary gradients found</li></ul>
                 <p class="command-hint">type <code>help</code> to see available commands, or use a shortcut:</p>
@@ -276,6 +276,17 @@
       const transcript = document.querySelector('#transcript');
       const views = [...document.querySelectorAll('.view')];
       const history = [];
+      const catMessages = [
+        'meow. the cat approves of your curiosity.',
+        'pspspspsps... connection accepted.',
+        'the cat has inspected your portfolio. verdict: excellent.',
+        'nya! one tiny paw has pressed the button.',
+        'cat.exe is purring at full capacity.',
+        'a mysterious tail flicks across the terminal.',
+        'the cat requests snacks before approving the next command.',
+        'meow detected. deploying one virtual head scratch.'
+      ];
+      let catMessageIndex = 0;
       let historyIndex = 0;
       const startedAt = Date.now();
 
@@ -312,7 +323,8 @@
           setView('home');
         } else if (command === 'cat' || command === 'meow') {
           setView('home');
-          echoCommand(command, 'meow. the cat approves of your curiosity.');
+          echoCommand(command, catMessages[catMessageIndex % catMessages.length]);
+          catMessageIndex += 1;
         } else if (command === 'sudo hire mustafa') {
           setView('contact');
           echoCommand(command, 'permission granted. smart move.');
