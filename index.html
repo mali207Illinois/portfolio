@@ -138,7 +138,7 @@
       .system-label { margin: 0 0 15px; color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
       .system-label::before { content: "/* "; color: var(--line); }
       .system-label::after { content: " */"; color: var(--line); }
-      .system-avatar { width: 82px; height: 82px; display: grid; place-items: center; margin: 3px auto 19px; border: 1px solid var(--green-dim); border-radius: 50%; color: var(--green); font: 54px var(--pixel); box-shadow: 0 0 20px rgba(140,255,158,.13); animation: avatar-float 4s ease-in-out infinite; }
+      .system-avatar { width: 82px; height: 82px; display: grid; place-items: center; margin: 3px auto 19px; border: 1px solid var(--green-dim); border-radius: 50%; color: var(--green); font: 14px/1 var(--mono); text-align: center; white-space: pre; box-shadow: 0 0 20px rgba(140,255,158,.13); animation: avatar-float 4s ease-in-out infinite; }
       .system-name { margin: 0; color: var(--green); font: 28px var(--pixel); text-align: center; }
       .system-role { margin: 3px 0 24px; color: var(--cyan); font-size: 9px; text-align: center; }
       .system-stats { display: grid; gap: 13px; padding: 17px 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); font-size: 9px; }
@@ -174,7 +174,7 @@
         .system-panel { display: grid; grid-template-columns: 90px 1fr; gap: 0 15px; padding: 13px 16px; border-top: 1px solid var(--line); border-left: 0; }
         .system-label, .system-avatar { grid-row: span 2; }
         .system-label { margin: 4px 0 0; }
-        .system-avatar { width: 58px; height: 58px; margin: 8px auto 0; font-size: 38px; }
+        .system-avatar { width: 58px; height: 58px; margin: 8px auto 0; font-size: 11px; }
         .system-name { align-self: end; text-align: left; font-size: 21px; }
         .system-role { align-self: start; margin: 2px 0 0; text-align: left; }
         .system-stats, .signal-group, .system-shortcuts, .system-footer { display: none; }
@@ -254,7 +254,10 @@
             </div>
             <div class="command-bar"><span class="prompt">mustafa@portfolio:~$</span><form class="command-form" id="command-form"><input class="command-input" id="command-input" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command" placeholder="type a command..." /></form></div>
           </main>
-          <aside class="system-panel"><p class="system-label">system profile</p><div class="system-avatar">MA</div><h2 class="system-name">mustafa ali</h2><p class="system-role">designer / developer</p><div class="system-stats"><div class="stat-row"><span>status</span><strong>available</strong></div><div class="stat-row"><span>location</span><strong>illinois, usa</strong></div><div class="stat-row"><span>uptime</span><strong id="uptime">00:00:00</strong></div><div class="stat-row"><span>visitors</span><strong id="visitor-count">004237</strong></div></div><div class="signal-group"><div class="signal"><span>creativity</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div><div class="signal"><span>caffeine</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div><div class="signal"><span>free time</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div></div><div class="system-shortcuts"><button type="button" data-command="help">[?] command list</button><button type="button" data-command="cat">[+] pet the cat</button><button type="button" data-command="sudo hire mustafa">[!] dangerous option</button></div><p class="system-footer">all systems nominal<br />made with curiosity + too much coffee</p></aside>
+          <aside class="system-panel"><p class="system-label">system profile</p><div class="system-avatar" aria-label="ASCII face art"> .-.
+(o o)
+ |=|
+/___\</div><h2 class="system-name">mustafa ali</h2><p class="system-role">designer / developer</p><div class="system-stats"><div class="stat-row"><span>status</span><strong>available</strong></div><div class="stat-row"><span>location</span><strong>illinois, usa</strong></div><div class="stat-row"><span>uptime</span><strong id="uptime">00:00:00</strong></div><div class="stat-row"><span>visitors</span><strong id="visitor-count">004237</strong></div></div><div class="signal-group"><div class="signal"><span>creativity</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div><div class="signal"><span>caffeine</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div><div class="signal"><span>free time</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div></div><div class="system-shortcuts"><button type="button" data-command="help">[?] command list</button><button type="button" data-command="cat">[+] pet the cat</button><button type="button" data-command="sudo hire mustafa">[!] dangerous option</button></div><p class="system-footer">all systems nominal<br />made with curiosity + too much coffee</p></aside>
         </div>
       </div>
       <span class="site-mark">MA // midnight build</span>
