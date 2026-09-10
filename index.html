@@ -225,6 +225,60 @@
         .shortcut { font-size: 9px; }
         .site-mark { display: none; }
       }
+
+      /* terminal-version: a focused, full-screen shell layout */
+      :root {
+        --void: #030503;
+        --screen: #070b07;
+        --panel: #0b120c;
+        --panel-2: #101a11;
+        --line: #284b2d;
+        --green: #b8ffc0;
+        --green-dim: #72c981;
+        --cyan: #b8ffc0;
+        --amber: #ffd77a;
+        --pink: #9effad;
+        --muted: #78957f;
+      }
+
+      body::before { opacity: .06; background: repeating-linear-gradient(0deg, transparent 0 4px, rgba(184,255,192,.55) 5px 5px); }
+      body::after { opacity: .08; background: radial-gradient(circle at 50% 0, rgba(76,151,82,.16), transparent 48%); }
+      .terminal-app { min-height: 100dvh; padding: 0; }
+      .ambient-glow, .matrix-rain { display: none; }
+      .terminal-window { width: 100%; border: 0; border-radius: 0; background: var(--screen); box-shadow: none; }
+      .terminal-titlebar { flex-basis: 32px; padding: 5px 12px; border-bottom-color: var(--line); background: #0a100b; font-size: 11px; }
+      .terminal-icon { width: auto; height: auto; border: 0; font-size: 11px; }
+      .terminal-controls { display: none; }
+      .terminal-title { color: var(--green); }
+      .terminal-title em { color: var(--muted); }
+      .terminal-content { grid-template-columns: 1fr; }
+      .terminal-main { padding: clamp(14px, 4vw, 32px); }
+      .system-panel { display: none; }
+      .session-bar { padding-bottom: 9px; border-bottom: 1px solid var(--line); }
+      .output-scroller { padding: 18px 0 18px; }
+      .home-logo { max-width: 100%; font-size: clamp(50px, 8vw, 108px); letter-spacing: .02em; text-shadow: 0 0 14px rgba(184,255,192,.2); }
+      .home-logo .accent { color: var(--green); }
+      .home-subtitle { color: #c7e6ca; font-size: 16px; }
+      .view-heading { font-size: clamp(44px, 7vw, 82px); }
+      .view-heading::before { content: "$ "; color: var(--green-dim); }
+      .view-back { margin-bottom: 16px; padding: 0; border: 0; background: transparent; color: var(--green-dim); }
+      .view-back:hover, .view-back:focus-visible { border: 0; background: transparent; color: var(--green); transform: translateX(-3px); }
+      .shortcut-grid { gap: 7px; }
+      .shortcut { border-color: var(--line); border-radius: 0; background: transparent; }
+      .shortcut::before { content: "$ "; color: var(--green-dim); }
+      .shortcut:hover, .shortcut:focus-visible { background: rgba(184,255,192,.08); }
+      .command-hint { margin-top: 26px; }
+      .project-terminal-grid { grid-template-columns: 1fr; gap: 0; margin-top: 21px; border-top: 1px solid var(--line); }
+      .project-terminal-card { min-height: 0; display: grid; grid-template-columns: 54px minmax(0, 1fr); grid-template-rows: auto auto auto; gap: 0 12px; padding: 14px 4px; border: 0; border-bottom: 1px dotted var(--line); background: transparent; }
+      .project-terminal-card .card-top { grid-column: 1 / -1; grid-row: 1; }
+      .project-terminal-card .card-icon { grid-column: 1; grid-row: 2 / 4; min-height: 0; align-self: center; font-size: 30px; }
+      .project-terminal-card h3 { grid-column: 2; grid-row: 2; align-self: end; margin: 0; }
+      .project-terminal-card p { grid-column: 2; grid-row: 3; align-self: start; margin: 3px 0 0; }
+      .diary-row { background: transparent; border-left-color: var(--green-dim); }
+      .contact-form input, .contact-form textarea { border: 0; border-bottom: 1px solid var(--line); background: transparent; }
+      .command-bar { padding-top: 10px; border-top-color: var(--line); }
+      .command-input { border-bottom: 1px solid #1c3520; padding-bottom: 3px; }
+      .site-mark { right: 14px; bottom: 10px; color: var(--green-dim); }
     </style>
   </head>
   <body>
@@ -232,10 +286,10 @@
       <div class="ambient-glow"></div>
       <div class="matrix-rain" aria-hidden="true"></div>
       <div class="terminal-window">
-        <div class="terminal-titlebar"><span class="terminal-icon">&gt;_</span><span class="terminal-title">mustafa@portfolio:~$ <em>interactive session // midnight mode</em></span><span class="terminal-controls"><i></i><i></i><i></i></span></div>
+        <div class="terminal-titlebar"><span class="terminal-icon">&gt;_</span><span class="terminal-title">mustafa@portfolio:~$ <em>tty1 // bash</em></span><span class="terminal-controls"><i></i><i></i><i></i></span></div>
         <div class="terminal-content">
           <main class="terminal-main">
-            <div class="session-bar"><span>SESSION_ID: <strong id="session-id">MA-0000</strong> // BUILD: <strong>branch-2-dark</strong></span></div>
+            <div class="session-bar"><span>SESSION_ID: <strong id="session-id">MA-0000</strong> // BUILD: <strong>branch-terminal-version</strong></span></div>
             <div class="output-scroller" id="output-scroller" tabindex="0">
               <section class="view active" data-view="home" aria-labelledby="home-heading">
                 <p class="view-kicker">boot sequence complete // welcome, human</p>
@@ -279,7 +333,7 @@
           <aside class="system-panel"><p class="system-label">system profile</p><div class="system-avatar"><img src="assets/profile-pixel.png" alt="Pixel art portrait of Mustafa Ali" /></div><h2 class="system-name">mustafa ali</h2><p class="system-role">designer / developer</p><div class="system-stats"><div class="stat-row"><span>status</span><strong>available</strong></div><div class="stat-row"><span>location</span><strong>illinois, usa</strong></div><div class="stat-row"><span>uptime</span><strong id="uptime">00:00:00</strong></div><div class="stat-row"><span>visitors</span><strong id="visitor-count">004237</strong></div></div><div class="system-shortcuts"><button type="button" data-command="help">[?] command list</button><button type="button" data-command="cat">[+] pet the cat</button></div><p class="system-footer">all systems nominal<br />made with curiosity + too much coffee</p></aside>
         </div>
       </div>
-      <span class="site-mark">MA // midnight build</span>
+      <span class="site-mark">tty1 // terminal-version</span>
     </div>
     <div class="boot-overlay" aria-hidden="true"><p>initializing mustafa@portfolio</p></div>
 
