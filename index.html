@@ -301,6 +301,12 @@
       .desktop-taskbar-app.active { border-color: #d6e5f5; background: rgba(194,220,245,.38); color: #ffffff; box-shadow: inset 0 -2px #b8ffc0; }
       .desktop-taskbar-app.active > span { color: #b8ffc0; }
       .desktop-taskbar-app > span { color: #a9c4e2; }
+      .desktop-taskbar .desktop-icon-art { width: 22px; height: 22px; flex: 0 0 22px; border: 0; border-radius: 3px; box-shadow: none; }
+      .desktop-taskbar .desktop-icon-art.icon-home::before { font-size: 18px; }
+      .desktop-taskbar .desktop-icon-art.icon-folder::before { width: 18px; height: 12px; }
+      .desktop-taskbar .desktop-icon-art.icon-folder::after { width: 18px; height: 8px; }
+      .desktop-taskbar .desktop-icon-art.icon-terminal::before { width: 18px; height: 13px; font-size: 8px; }
+      .desktop-taskbar .desktop-icon-art.icon-browser::before { font-size: 18px; }
       .desktop-tray { display: flex; align-items: center; gap: 12px; margin-left: auto; color: #b4c2d6; }
       .desktop-tray-item { color: #a9c4e2; font-size: 11px; }
       .desktop-clock { min-width: 43px; padding-left: 11px; border-left: 1px solid rgba(188,211,238,.3); color: #d7e4f4; font-size: 9px; text-align: right; }
@@ -353,7 +359,7 @@
   </head>
   <body>
     <div class="desktop-icons" aria-hidden="true"><div class="desktop-icon"><span class="desktop-icon-art icon-home"></span><span>home</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-folder"></span><span>projects</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-terminal"></span><span>terminal</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-browser"></span><span>browser</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-document"></span><span>notes.txt</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-trash"></span><span>trash</span></div></div>
-    <div class="desktop-taskbar" aria-hidden="true"><span class="desktop-launcher">⌂</span><span class="desktop-workspace">1</span><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active"><span>▣</span> terminal</span><span class="desktop-taskbar-app ghost"><span>▤</span> files</span><span class="desktop-taskbar-app ghost"><span>◎</span> browser</span></span><span class="desktop-tray"><span class="desktop-tray-item">⌁</span><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
+    <div class="desktop-taskbar" aria-hidden="true"><span class="desktop-launcher"><span class="desktop-icon-art icon-home"></span></span><span class="desktop-workspace">1</span><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active"><span class="desktop-icon-art icon-terminal"></span> terminal</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-folder"></span> files</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-browser"></span> browser</span></span><span class="desktop-tray"><span class="desktop-tray-item">⌁</span><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
     <div class="terminal-app" id="app">
       <div class="ambient-glow"></div>
       <div class="matrix-rain" aria-hidden="true"></div>
