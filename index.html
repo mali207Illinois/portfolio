@@ -146,11 +146,6 @@
       .stat-row { display: flex; justify-content: space-between; gap: 10px; }
       .stat-row span { color: var(--muted); }
       .stat-row strong { color: var(--green); font-weight: 400; text-align: right; }
-      .signal-group { display: grid; gap: 10px; margin-top: 22px; }
-      .signal { display: grid; grid-template-columns: 76px 1fr; align-items: center; gap: 8px; color: var(--muted); font-size: 9px; }
-      .signal-bar { height: 7px; display: flex; gap: 2px; }
-      .signal-bar i { flex: 1; background: var(--line); }
-      .signal-bar i.on { background: var(--green-dim); box-shadow: 0 0 5px rgba(140,255,158,.15); }
       .system-shortcuts { display: grid; gap: 8px; margin-top: auto; padding-top: 25px; }
       .system-shortcuts button { padding: 6px 8px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; text-align: left; font-size: 9px; }
       .system-shortcuts button:hover { border-color: var(--green); color: var(--green); }
@@ -178,7 +173,7 @@
         .system-avatar { width: 58px; height: 58px; margin: 8px auto 0; font-size: 38px; }
         .system-name { align-self: end; text-align: left; font-size: 21px; }
         .system-role { align-self: start; margin: 2px 0 0; text-align: left; }
-        .system-stats, .signal-group, .system-shortcuts, .system-footer { display: none; }
+        .system-stats, .system-shortcuts, .system-footer { display: none; }
         .home-logo { font-size: clamp(62px, 18vw, 110px); }
         .home-subtitle { font-size: 16px; }
         .fact-grid, .project-terminal-grid { grid-template-columns: 1fr 1fr; }
@@ -255,7 +250,7 @@
             </div>
             <div class="command-bar"><span class="prompt">mustafa@portfolio:~$</span><form class="command-form" id="command-form"><input class="command-input" id="command-input" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command" placeholder="type a command..." /></form></div>
           </main>
-          <aside class="system-panel"><p class="system-label">system profile</p><div class="system-avatar"><img src="assets/profile-pixel.png" alt="Pixel art portrait of Mustafa Ali" /></div><h2 class="system-name">mustafa ali</h2><p class="system-role">designer / developer</p><div class="system-stats"><div class="stat-row"><span>status</span><strong>available</strong></div><div class="stat-row"><span>location</span><strong>illinois, usa</strong></div><div class="stat-row"><span>uptime</span><strong id="uptime">00:00:00</strong></div><div class="stat-row"><span>visitors</span><strong id="visitor-count">004237</strong></div></div><div class="signal-group"><div class="signal"><span>creativity</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div><div class="signal"><span>caffeine</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div><div class="signal"><span>free time</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div></div><div class="system-shortcuts"><button type="button" data-command="help">[?] command list</button><button type="button" data-command="cat">[+] pet the cat</button><button type="button" data-command="sudo hire mustafa">[!] dangerous option</button></div><p class="system-footer">all systems nominal<br />made with curiosity + too much coffee</p></aside>
+          <aside class="system-panel"><p class="system-label">system profile</p><div class="system-avatar"><img src="assets/profile-pixel.png" alt="Pixel art portrait of Mustafa Ali" /></div><h2 class="system-name">mustafa ali</h2><p class="system-role">designer / developer</p><div class="system-stats"><div class="stat-row"><span>status</span><strong>available</strong></div><div class="stat-row"><span>location</span><strong>illinois, usa</strong></div><div class="stat-row"><span>uptime</span><strong id="uptime">00:00:00</strong></div><div class="stat-row"><span>visitors</span><strong id="visitor-count">004237</strong></div></div><div class="system-shortcuts"><button type="button" data-command="help">[?] command list</button><button type="button" data-command="cat">[+] pet the cat</button><button type="button" data-command="sudo hire mustafa">[!] dangerous option</button></div><p class="system-footer">all systems nominal<br />made with curiosity + too much coffee</p></aside>
         </div>
       </div>
       <span class="site-mark">MA // midnight build</span>
