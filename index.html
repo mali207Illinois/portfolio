@@ -10,17 +10,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Space+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet" />
     <style>
       :root {
-        --void: #020307;
-        --screen: #050811;
-        --panel: #090e1b;
-        --panel-2: #11182b;
-        --line: #303a6e;
-        --green: #b3ffbf;
-        --green-dim: #6ac69d;
-        --cyan: #87d9ff;
-        --amber: #ffe08c;
-        --pink: #ff8fe0;
-        --muted: #7e87ad;
+        --void: #050807;
+        --screen: #07100c;
+        --panel: #0b1711;
+        --panel-2: #0f2118;
+        --line: #245f3c;
+        --green: #8cff9e;
+        --green-dim: #4ba867;
+        --cyan: #76e5ef;
+        --amber: #ffd66b;
+        --pink: #ff83c8;
+        --muted: #749681;
         --mono: "Space Mono", monospace;
         --pixel: "VT323", monospace;
         --hand: "Caveat", cursive;
@@ -30,40 +30,30 @@
       html, body { width: 100%; height: 100%; }
       html { background: var(--void); }
       body { margin: 0; overflow: hidden; background: var(--void); color: var(--green); font-family: var(--mono); }
-      body::before { content: ""; position: fixed; z-index: 20; inset: 0; pointer-events: none; opacity: .13; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(135,217,255,.7) 4px 4px); mix-blend-mode: screen; }
-      body::after { content: ""; position: fixed; z-index: 19; inset: 0; pointer-events: none; opacity: .22; background: radial-gradient(circle at 50% 0, rgba(104,95,255,.18), transparent 47%), linear-gradient(90deg, transparent 0 49.8%, rgba(135,217,255,.04) 50%, transparent 50.2%); }
+      body::before { content: ""; position: fixed; z-index: 20; inset: 0; pointer-events: none; opacity: .11; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(140,255,158,.8) 4px 4px); mix-blend-mode: screen; }
+      body::after { content: ""; position: fixed; z-index: 19; inset: 0; pointer-events: none; opacity: .18; background: radial-gradient(circle at 50% 0, rgba(63,255,122,.15), transparent 47%), linear-gradient(90deg, transparent 0 49.8%, rgba(140,255,158,.03) 50%, transparent 50.2%); }
       a { color: inherit; text-decoration: none; }
       button, input, textarea { font: inherit; }
       button { color: inherit; }
       ::selection { color: var(--void); background: var(--green); }
 
       .terminal-app { --mx: 50%; --my: 30%; width: 100%; height: 100dvh; min-height: 560px; padding: clamp(12px, 2.5vw, 32px); display: flex; flex-direction: column; position: relative; isolation: isolate; }
-      .ambient-glow { position: absolute; z-index: -1; width: 40vw; height: 40vw; left: var(--mx); top: var(--my); translate: -50% -50%; border-radius: 50%; background: rgba(104,95,255,.11); filter: blur(85px); pointer-events: none; transition: left .25s ease-out, top .25s ease-out; }
+      .ambient-glow { position: absolute; z-index: -1; width: 40vw; height: 40vw; left: var(--mx); top: var(--my); translate: -50% -50%; border-radius: 50%; background: rgba(77,255,135,.07); filter: blur(85px); pointer-events: none; transition: left .25s ease-out, top .25s ease-out; }
       .matrix-rain { position: absolute; z-index: -1; inset: 0; overflow: hidden; opacity: .16; pointer-events: none; }
       .matrix-rain i { position: absolute; top: -12%; color: var(--green-dim); font: 15px var(--pixel); writing-mode: vertical-rl; animation: rain-fall linear infinite; }
       .matrix-rain i:nth-child(3n) { color: var(--cyan); }
       .matrix-rain i:nth-child(4n) { color: var(--pink); }
 
-      .terminal-window { width: min(1420px, 100%); flex: 1; min-height: 0; margin: auto; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--screen); box-shadow: 0 0 0 1px rgba(135,217,255,.06), 0 0 42px rgba(83,71,209,.22), 10px 12px 0 rgba(0,0,0,.4); }
-      .terminal-titlebar { flex: 0 0 39px; display: flex; align-items: center; gap: 10px; padding: 7px 12px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #171634, #080a13); font: 12px var(--mono); }
+      .terminal-window { width: min(1420px, 100%); flex: 1; min-height: 0; margin: auto; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--screen); box-shadow: 0 0 0 1px rgba(140,255,158,.05), 0 0 36px rgba(26,193,87,.15), 10px 12px 0 rgba(0,0,0,.25); }
+      .terminal-titlebar { flex: 0 0 39px; display: flex; align-items: center; gap: 10px; padding: 7px 12px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #12261a, #09140e); font: 12px var(--mono); }
       .terminal-icon { width: 18px; height: 18px; display: grid; place-items: center; border: 1px solid var(--green-dim); color: var(--green); font-size: 12px; }
       .terminal-title { flex: 1; color: var(--cyan); }
       .terminal-title em { color: var(--muted); font-style: normal; }
       .terminal-controls { display: flex; gap: 6px; }
-      .terminal-controls button { width: 12px; height: 12px; padding: 0; border: 1px solid var(--green-dim); border-radius: 50%; cursor: pointer; transition: transform .18s, filter .18s; }
-      .terminal-controls button:hover, .terminal-controls button:focus-visible { transform: scale(1.35); filter: brightness(1.25); outline: none; }
-      .terminal-controls button:nth-child(1) { background: var(--amber); }
-      .terminal-controls button:nth-child(2) { background: var(--green); }
-      .terminal-controls button:nth-child(3) { background: var(--pink); }
-      .terminal-window.is-minimized { flex: 0 0 39px; }
-      .terminal-window.is-minimized .terminal-content, .terminal-window.is-shutdown .terminal-content { display: none; }
-      .terminal-window.is-maximized { position: fixed; z-index: 40; inset: 12px; width: auto; height: auto; }
-      .shutdown-screen { display: none; flex: 1; place-items: center; text-align: center; }
-      .terminal-window.is-shutdown .shutdown-screen { display: grid; }
-      .shutdown-screen p { color: var(--muted); font-size: 11px; line-height: 2; }
-      .shutdown-screen strong { display: block; color: var(--pink); font: 42px var(--pixel); }
-      .shutdown-screen button { margin-top: 14px; padding: 9px 13px; border: 1px solid var(--green); background: transparent; color: var(--green); cursor: pointer; font-size: 10px; }
-      .shutdown-screen button:hover { background: var(--green); color: var(--void); }
+      .terminal-controls i { width: 12px; height: 12px; border: 1px solid var(--green-dim); border-radius: 50%; font-size: 0; }
+      .terminal-controls i:nth-child(1) { background: var(--amber); }
+      .terminal-controls i:nth-child(2) { background: var(--green); }
+      .terminal-controls i:nth-child(3) { background: var(--pink); }
 
       .terminal-content { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 275px; }
       .terminal-main { min-width: 0; min-height: 0; display: flex; flex-direction: column; padding: clamp(17px, 3vw, 38px); }
@@ -76,12 +66,10 @@
       .output-scroller::-webkit-scrollbar-thumb { background: var(--line); }
       .view { display: none; }
       .view.active { display: block; animation: command-in .35s ease-out both; }
-      .view-kicker { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: 0 0 18px; color: var(--cyan); font-size: 11px; }
-      .back-button { flex: 0 0 auto; padding: 5px 8px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; font-size: 9px; transition: border-color .2s, color .2s, transform .2s; }
-      .back-button:hover, .back-button:focus-visible { border-color: var(--green); color: var(--green); transform: translateX(-3px); outline: none; }
-      .home-logo { margin: 0; color: var(--green); font: 400 clamp(65px, 11vw, 160px)/.67 var(--pixel); letter-spacing: .03em; text-shadow: 0 0 16px rgba(135,217,255,.25); }
+      .view-kicker { margin: 0 0 18px; color: var(--cyan); font-size: 11px; }
+      .home-logo { margin: 0; color: var(--green); font: 400 clamp(65px, 11vw, 160px)/.67 var(--pixel); letter-spacing: .03em; text-shadow: 0 0 16px rgba(140,255,158,.25); }
       .home-logo .accent { color: var(--cyan); }
-      .home-subtitle { max-width: 650px; margin: 22px 0 0; color: #d7e4ff; font: 18px/1.35 var(--pixel); letter-spacing: .03em; }
+      .home-subtitle { max-width: 650px; margin: 22px 0 0; color: #d0ead3; font: 18px/1.35 var(--pixel); letter-spacing: .03em; }
       .home-subtitle .cursor { display: inline-block; width: 9px; height: 18px; margin-left: 5px; background: var(--green); vertical-align: -2px; animation: blink 1s steps(2, end) infinite; }
       .boot-log { display: grid; gap: 6px; margin-top: 35px; color: var(--muted); font-size: 10px; }
       .boot-log li { list-style: none; }
@@ -98,7 +86,7 @@
 
       .view-heading { margin: 0; color: var(--green); font: 400 clamp(50px, 8vw, 100px)/.72 var(--pixel); }
       .view-heading::before { content: "> "; color: var(--cyan); }
-      .view-copy { max-width: 700px; margin: 24px 0 0; color: #cbd5e8; font-size: 12px; line-height: 1.8; }
+      .view-copy { max-width: 700px; margin: 24px 0 0; color: #c6ddca; font-size: 12px; line-height: 1.8; }
       .view-copy strong { color: var(--amber); font-weight: 400; }
       .fact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 30px; }
       .fact-box { padding: 14px; border: 1px solid var(--line); background: var(--panel); }
@@ -107,8 +95,8 @@
       .ascii-divider { margin: 30px 0; color: var(--line); white-space: nowrap; overflow: hidden; font-size: 10px; }
 
       .project-terminal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
-      .project-terminal-card { --card-x: 0deg; --card-y: 0deg; --card-lift: 0px; min-height: 160px; display: flex; flex-direction: column; padding: 14px; border: 1px solid var(--line); background: linear-gradient(145deg, var(--panel), #070914); transform: perspective(700px) rotateX(var(--card-y)) rotateY(var(--card-x)) translateY(var(--card-lift)); transition: border-color .2s, transform .18s ease-out, box-shadow .2s; }
-      .project-terminal-card:hover { --card-lift: -4px; border-color: var(--cyan); box-shadow: 0 0 18px rgba(118,229,239,.1); }
+      .project-terminal-card { min-height: 160px; display: flex; flex-direction: column; padding: 14px; border: 1px solid var(--line); background: linear-gradient(145deg, var(--panel), #08110c); transition: border-color .2s, transform .2s, box-shadow .2s; }
+      .project-terminal-card:hover { border-color: var(--cyan); transform: translateY(-4px); box-shadow: 0 0 18px rgba(118,229,239,.1); }
       .project-terminal-card .card-top { display: flex; justify-content: space-between; color: var(--muted); font-size: 9px; }
       .project-terminal-card .card-icon { min-height: 65px; display: grid; place-items: center; color: var(--cyan); font: 53px var(--pixel); text-shadow: 0 0 10px rgba(118,229,239,.25); }
       .project-terminal-card:nth-child(2) .card-icon { color: var(--pink); }
@@ -117,15 +105,15 @@
       .project-terminal-card p { margin: 0; color: var(--muted); font-size: 9px; line-height: 1.5; }
 
       .diary-list { display: grid; gap: 9px; margin-top: 28px; }
-      .diary-row { display: grid; grid-template-columns: 100px 1fr; gap: 17px; padding: 12px; border-left: 2px solid var(--line); background: rgba(73,64,174,.12); }
+      .diary-row { display: grid; grid-template-columns: 100px 1fr; gap: 17px; padding: 12px; border-left: 2px solid var(--line); background: rgba(35,106,59,.1); }
       .diary-row time { color: var(--amber); font-size: 10px; }
-      .diary-row span { color: #cbd5e8; font-size: 11px; }
+      .diary-row span { color: #c6ddca; font-size: 11px; }
       .diary-row span::before { content: "// "; color: var(--muted); }
 
       .contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(210px, .62fr); gap: 35px; margin-top: 29px; }
       .contact-form { display: grid; gap: 10px; }
       .contact-form label { display: grid; gap: 5px; color: var(--muted); font-size: 9px; }
-      .contact-form input, .contact-form textarea { width: 100%; padding: 10px; border: 1px solid var(--line); outline: none; background: #04050c; color: var(--green); font-size: 10px; }
+      .contact-form input, .contact-form textarea { width: 100%; padding: 10px; border: 1px solid var(--line); outline: none; background: #06100a; color: var(--green); font-size: 10px; }
       .contact-form input:focus, .contact-form textarea:focus { border-color: var(--green); box-shadow: 0 0 10px rgba(140,255,158,.12); }
       .contact-form textarea { min-height: 85px; resize: vertical; }
       .terminal-button { justify-self: start; padding: 10px 15px; border: 1px solid var(--green); background: transparent; color: var(--green); cursor: pointer; font-size: 10px; transition: background .2s, color .2s; }
@@ -145,12 +133,6 @@
       .command-form { flex: 1; display: flex; align-items: center; }
       .command-input { width: 100%; border: 0; outline: 0; background: transparent; color: #f0fff0; caret-color: var(--green); font-size: 11px; }
       .command-input::placeholder { color: #467557; }
-      .click-ripple { position: fixed; z-index: 45; pointer-events: none; color: var(--cyan); font: 18px var(--pixel); animation: ripple-pop .7s ease-out forwards; }
-      .lights-out .matrix-rain { opacity: .03; }
-      .lights-out .ambient-glow { opacity: .25; }
-      .lights-out .terminal-window { box-shadow: 0 0 0 1px rgba(135,217,255,.04), 0 0 42px rgba(83,71,209,.12), 10px 12px 0 rgba(0,0,0,.55); }
-      .matrix-boost { opacity: .45; }
-      .matrix-boost i { animation-duration: 4s !important; }
 
       .system-panel { min-width: 0; display: flex; flex-direction: column; padding: 24px 18px; border-left: 1px solid var(--line); background: rgba(5,16,10,.62); }
       .system-label { margin: 0 0 15px; color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
@@ -163,12 +145,6 @@
       .stat-row { display: flex; justify-content: space-between; gap: 10px; }
       .stat-row span { color: var(--muted); }
       .stat-row strong { color: var(--green); font-weight: 400; text-align: right; }
-      .xp-box { margin-top: 18px; padding: 10px; border: 1px solid var(--line); background: rgba(104,95,255,.08); }
-      .xp-label { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 8px; }
-      .xp-label strong { color: var(--amber); font-weight: 400; }
-      .xp-track { height: 6px; margin-top: 8px; background: #11162b; }
-      .xp-fill { display: block; width: 0%; height: 100%; background: linear-gradient(90deg, var(--pink), var(--cyan)); box-shadow: 0 0 7px rgba(135,217,255,.35); transition: width .35s ease-out; }
-      .xp-message { min-height: 14px; margin: 7px 0 0; color: var(--cyan); font-size: 8px; }
       .signal-group { display: grid; gap: 10px; margin-top: 22px; }
       .signal { display: grid; grid-template-columns: 76px 1fr; align-items: center; gap: 8px; color: var(--muted); font-size: 9px; }
       .signal-bar { height: 7px; display: flex; gap: 2px; }
@@ -178,8 +154,6 @@
       .system-shortcuts button { padding: 6px 8px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; text-align: left; font-size: 9px; }
       .system-shortcuts button:hover { border-color: var(--green); color: var(--green); }
       .system-footer { margin-top: 18px; color: var(--line); font-size: 8px; line-height: 1.5; text-align: center; }
-      .game-toast { position: fixed; z-index: 60; left: 50%; bottom: 28px; max-width: min(360px, calc(100% - 30px)); padding: 10px 14px; border: 1px solid var(--cyan); background: rgba(5,8,17,.94); color: var(--cyan); font-size: 10px; text-align: center; box-shadow: 0 0 20px rgba(135,217,255,.16); opacity: 0; pointer-events: none; transform: translate(-50%, 12px); transition: opacity .2s, transform .2s; }
-      .game-toast.show { opacity: 1; transform: translate(-50%, 0); }
 
       .boot-overlay { position: fixed; z-index: 50; inset: 0; display: grid; place-items: center; background: var(--void); color: var(--green); font: 13px var(--mono); animation: boot-away .55s 2.1s forwards; pointer-events: none; }
       .boot-overlay p { animation: boot-pulse .7s infinite alternate; }
@@ -192,7 +166,6 @@
       @keyframes avatar-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
       @keyframes boot-pulse { from { opacity: .45; } to { opacity: 1; } }
       @keyframes boot-away { to { opacity: 0; visibility: hidden; } }
-      @keyframes ripple-pop { from { opacity: .9; transform: translate(-50%, -50%) scale(.5) rotate(0); } to { opacity: 0; transform: translate(-50%, -50%) scale(2.2) rotate(18deg); } }
       @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 
       @media (max-width: 780px) {
@@ -237,10 +210,10 @@
       <div class="ambient-glow"></div>
       <div class="matrix-rain" aria-hidden="true"></div>
       <div class="terminal-window">
-        <div class="terminal-titlebar"><span class="terminal-icon">&gt;_</span><span class="terminal-title">mustafa@portfolio:~$ <em>interactive session // midnight mode</em></span><span class="terminal-controls"><button type="button" data-window-action="minimize" aria-label="Minimize terminal"></button><button type="button" data-window-action="maximize" aria-label="Maximize terminal"></button><button type="button" data-window-action="shutdown" aria-label="Close terminal"></button></span></div>
+        <div class="terminal-titlebar"><span class="terminal-icon">&gt;_</span><span class="terminal-title">mustafa@portfolio:~$ <em>interactive session</em></span><span class="terminal-controls"><i></i><i></i><i></i></span></div>
         <div class="terminal-content">
           <main class="terminal-main">
-            <div class="session-bar"><span>SESSION_ID: <strong id="session-id">MA-0000</strong> // BUILD: <strong>branch-2-dark</strong></span><span class="live"><i class="live-dot"></i> NIGHT ONLINE</span></div>
+            <div class="session-bar"><span>SESSION_ID: <strong id="session-id">MA-0000</strong> // BUILD: <strong>branch-2</strong></span><span class="live"><i class="live-dot"></i> ONLINE</span></div>
             <div class="output-scroller" id="output-scroller" tabindex="0">
               <section class="view active" data-view="home" aria-labelledby="home-heading">
                 <p class="view-kicker">boot sequence complete // welcome, human</p>
@@ -248,7 +221,7 @@
                 <p class="home-subtitle">designer + developer making digital things with personality<span class="cursor"></span></p>
                 <ul class="boot-log"><li>loading strange ideas</li><li>mounting portfolio /dev/creative</li><li>checking for good vibes</li><li>no unnecessary gradients found</li></ul>
                 <p class="command-hint">type <code>help</code> to see available commands, or use a shortcut:</p>
-                <div class="shortcut-grid"><button class="shortcut" data-command="about" type="button">about</button><button class="shortcut" data-command="projects" type="button">projects</button><button class="shortcut" data-command="diary" type="button">diary</button><button class="shortcut" data-command="contact" type="button">contact</button><button class="shortcut" data-command="neofetch" type="button">neofetch</button><button class="shortcut" data-command="matrix" type="button">matrix</button></div>
+                <div class="shortcut-grid"><button class="shortcut" data-command="about" type="button">about</button><button class="shortcut" data-command="projects" type="button">projects</button><button class="shortcut" data-command="diary" type="button">diary</button><button class="shortcut" data-command="contact" type="button">contact</button><button class="shortcut" data-command="neofetch" type="button">neofetch</button></div>
               </section>
 
               <section class="view" data-view="about" aria-labelledby="about-heading"><p class="view-kicker">/usr/about // readme.txt</p><h2 id="about-heading" class="view-heading">about</h2><p class="view-copy">I’m Mustafa — a designer and developer who likes turning complicated ideas into <strong>useful, memorable experiences</strong>. I care about clear thinking, strong type, and work with a reason to exist. Especially when it feels a little unexpected.</p><div class="fact-grid"><div class="fact-box"><small>LOCATION</small><span>Illinois, USA</span></div><div class="fact-box"><small>ROLE</small><span>Designer / developer</span></div><div class="fact-box"><small>GOOD AT</small><span>Making the messy make sense</span></div></div><p class="ascii-divider">----------------------------------------</p><p class="view-copy">Outside the screen: good food, long walks, weird internet corners, and collecting things that make me smile.</p></section>
@@ -267,7 +240,7 @@
 
 <a href="mailto:hello@mustafaali.org">hello@mustafaali.org</a></div></div></section>
 
-              <section class="view" data-view="help" aria-labelledby="help-heading"><p class="view-kicker">/bin/help // available commands</p><h2 id="help-heading" class="view-heading">help</h2><p class="view-copy">Try one of these commands:</p><div class="diary-list"><div class="diary-row"><time>about</time><span>read the human.txt file</span></div><div class="diary-row"><time>projects</time><span>list selected work</span></div><div class="diary-row"><time>diary</time><span>open thoughts.log</span></div><div class="diary-row"><time>contact</time><span>establish a connection</span></div><div class="diary-row"><time>neofetch</time><span>print system information</span></div><div class="diary-row"><time>matrix</time><span>boost the background rain</span></div><div class="diary-row"><time>lights out</time><span>dim the whole session</span></div><div class="diary-row"><time>cat</time><span>obviously</span></div><div class="diary-row"><time>clear</time><span>return to the start screen</span></div></div></section>
+              <section class="view" data-view="help" aria-labelledby="help-heading"><p class="view-kicker">/bin/help // available commands</p><h2 id="help-heading" class="view-heading">help</h2><p class="view-copy">Try one of these commands:</p><div class="diary-list"><div class="diary-row"><time>about</time><span>read the human.txt file</span></div><div class="diary-row"><time>projects</time><span>list selected work</span></div><div class="diary-row"><time>diary</time><span>open thoughts.log</span></div><div class="diary-row"><time>contact</time><span>establish a connection</span></div><div class="diary-row"><time>neofetch</time><span>print system information</span></div><div class="diary-row"><time>cat</time><span>obviously</span></div><div class="diary-row"><time>clear</time><span>return to the start screen</span></div></div></section>
               <section class="view" data-view="neofetch" aria-labelledby="neofetch-heading"><p class="view-kicker">/usr/bin/neofetch // system report</p><h2 id="neofetch-heading" class="view-heading">neofetch</h2><div class="contact-grid"><div class="contact-ascii">      .-''''-.
     .'  .--.  '.
    /   /    \   \
@@ -279,13 +252,12 @@
       '-.__.-'</div><div class="view-copy"><p><strong>OS:</strong> MustafaOS 2.0</p><p><strong>Host:</strong> mustafaali.org</p><p><strong>Kernel:</strong> curiosity-6.9</p><p><strong>Shell:</strong> zsh / good-vibes</p><p><strong>Theme:</strong> terminal, but friendly</p><p><strong>Uptime:</strong> <span id="neofetch-uptime">00:00:00</span></p></div></div></section>
               <div class="transcript" id="transcript" aria-live="polite"></div>
             </div>
-            <div class="command-bar"><span class="prompt">mustafa@portfolio:~$</span><form class="command-form" id="command-form"><input class="command-input" id="command-input" list="command-options" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command" placeholder="type a command..." /></form><datalist id="command-options"><option value="help"></option><option value="about"></option><option value="projects"></option><option value="diary"></option><option value="contact"></option><option value="neofetch"></option><option value="matrix"></option><option value="lights out"></option><option value="sudo hire mustafa"></option></datalist></div>
+            <div class="command-bar"><span class="prompt">mustafa@portfolio:~$</span><form class="command-form" id="command-form"><input class="command-input" id="command-input" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command" placeholder="type a command..." /></form></div>
           </main>
-          <aside class="system-panel"><p class="system-label">system profile</p><div class="system-avatar">MA</div><h2 class="system-name">mustafa ali</h2><p class="system-role">designer / developer</p><div class="system-stats"><div class="stat-row"><span>status</span><strong>available</strong></div><div class="stat-row"><span>location</span><strong>illinois, usa</strong></div><div class="stat-row"><span>uptime</span><strong id="uptime">00:00:00</strong></div><div class="stat-row"><span>visitors</span><strong id="visitor-count">004237</strong></div></div><div class="signal-group"><div class="signal"><span>creativity</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div><div class="signal"><span>caffeine</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div><div class="signal"><span>free time</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div></div><div class="system-shortcuts"><button type="button" data-command="help">[?] command list</button><button type="button" data-command="cat">[+] pet the cat</button><button type="button" data-command="matrix">[~] boost matrix</button><button type="button" data-command="sudo hire mustafa">[!] dangerous option</button></div><p class="system-footer">all systems nominal<br />made with curiosity + too much coffee</p></aside>
+          <aside class="system-panel"><p class="system-label">system profile</p><div class="system-avatar">MA</div><h2 class="system-name">mustafa ali</h2><p class="system-role">designer / developer</p><div class="system-stats"><div class="stat-row"><span>status</span><strong>available</strong></div><div class="stat-row"><span>location</span><strong>illinois, usa</strong></div><div class="stat-row"><span>uptime</span><strong id="uptime">00:00:00</strong></div><div class="stat-row"><span>visitors</span><strong id="visitor-count">004237</strong></div></div><div class="signal-group"><div class="signal"><span>creativity</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div><div class="signal"><span>caffeine</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div><div class="signal"><span>free time</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div></div><div class="system-shortcuts"><button type="button" data-command="help">[?] command list</button><button type="button" data-command="cat">[+] pet the cat</button><button type="button" data-command="sudo hire mustafa">[!] dangerous option</button></div><p class="system-footer">all systems nominal<br />made with curiosity + too much coffee</p></aside>
         </div>
-        <div class="shutdown-screen"><div><strong>SESSION PAUSED</strong><p>the terminal has been safely closed.<br />nothing was lost. probably.</p><button type="button" data-window-action="reboot">reboot session ↗</button></div></div>
       </div>
-      <span class="site-mark">MA // midnight build</span>
+      <span class="site-mark">MA // build 2.0</span>
     </div>
     <div class="boot-overlay" aria-hidden="true"><p>initializing mustafa@portfolio</p></div>
 
@@ -298,76 +270,6 @@
       const history = [];
       let historyIndex = 0;
       const startedAt = Date.now();
-      const terminalWindow = document.querySelector('.terminal-window');
-      const visitorKey = 'mustafa-portfolio-visits';
-      const xpKey = 'mustafa-portfolio-xp';
-      const achievementKey = 'mustafa-portfolio-achievements';
-      let xp = Number(localStorage.getItem(xpKey) || 0);
-      const visitedViews = new Set(['home']);
-      let achievements = new Set();
-      try { achievements = new Set(JSON.parse(localStorage.getItem(achievementKey) || '[]')); } catch { achievements = new Set(); }
-
-      const xpBox = document.createElement('div');
-      xpBox.className = 'xp-box';
-      xpBox.innerHTML = '<div class="xp-label"><span>XP // NEXT LEVEL</span><strong><span id="xp-total">000</span> / 100</strong></div><div class="xp-track"><i class="xp-fill" id="xp-fill"></i></div><p class="xp-message" id="xp-message">achievement: session started</p>';
-      document.querySelector('.system-stats').after(xpBox);
-      const xpTotal = document.querySelector('#xp-total');
-      const xpFill = document.querySelector('#xp-fill');
-      const xpMessage = document.querySelector('#xp-message');
-      const toast = document.createElement('div');
-      toast.className = 'game-toast';
-      toast.setAttribute('role', 'status');
-      document.body.append(toast);
-      let toastTimer;
-
-      function showToast(message) {
-        toast.textContent = message;
-        toast.classList.add('show');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
-      }
-
-      function renderXP(message = xpMessage.textContent) {
-        const level = Math.floor(xp / 100) + 1;
-        xpTotal.textContent = String(xp % 100).padStart(3, '0');
-        xpFill.style.width = `${xp % 100}%`;
-        xpMessage.textContent = `level ${level} // ${message}`;
-        localStorage.setItem(xpKey, String(xp));
-      }
-
-      function unlock(id, label) {
-        if (achievements.has(id)) return;
-        achievements.add(id);
-        localStorage.setItem(achievementKey, JSON.stringify([...achievements]));
-        xp += 25;
-        renderXP(`achievement unlocked: ${label}`);
-        showToast(`★ ACHIEVEMENT UNLOCKED // ${label}`);
-      }
-
-      function awardXP(amount, reason) {
-        xp += amount;
-        renderXP(reason);
-        showToast(`+${amount} XP // ${reason}`);
-        if (xp >= 100) unlock('level-one', 'curious operator');
-      }
-
-      function registerView(name) {
-        if (name === 'home' || visitedViews.has(name)) return;
-        visitedViews.add(name);
-        awardXP(10, `explored: ${name}`);
-        if (visitedViews.size >= 5) unlock('explorer', 'full system tour');
-      }
-
-      views.filter((view) => view.dataset.view !== 'home').forEach((view) => {
-        const back = document.createElement('button');
-        back.className = 'back-button';
-        back.type = 'button';
-        back.dataset.command = 'home';
-        back.textContent = '← back to start';
-        view.querySelector('.view-kicker').append(back);
-      });
-
-      renderXP();
 
       const commands = {
         home: { view: 'home', result: 'returning to /home' },
@@ -380,7 +282,6 @@
       };
 
       function setView(name) {
-        registerView(name);
         views.forEach((view) => view.classList.toggle('active', view.dataset.view === name));
         outputScroller.scrollTop = 0;
         input.focus();
@@ -401,22 +302,9 @@
         } else if (command === 'clear' || command === 'cls') {
           transcript.replaceChildren();
           setView('home');
-        } else if (command === 'matrix') {
-          const boosted = matrix.classList.toggle('matrix-boost');
-          echoCommand(command, boosted ? 'rain intensity increased. nice.' : 'rain intensity returned to normal.');
-          awardXP(15, boosted ? 'matrix boost enabled' : 'matrix boost disabled');
-        } else if (command === 'lights out' || command === 'dim') {
-          const dimmed = document.body.classList.toggle('lights-out');
-          echoCommand(command, dimmed ? 'lights out. welcome to the void.' : 'lights restored.');
-          awardXP(10, dimmed ? 'lights-out mode enabled' : 'lights restored');
-        } else if (command === 'score' || command === 'quests' || command === 'achievements') {
-          setView('home');
-          echoCommand(command, `${xp} XP // ${achievements.size} achievements unlocked`);
-          showToast(`${xp} XP // ${achievements.size} achievements unlocked`);
         } else if (command === 'cat' || command === 'meow') {
           setView('home');
           echoCommand(command, 'meow. the cat approves of your curiosity.');
-          unlock('cat-person', 'cat person');
         } else if (command === 'sudo hire mustafa') {
           setView('contact');
           echoCommand(command, 'permission granted. smart move.');
@@ -431,39 +319,6 @@
 
       document.querySelector('#command-form').addEventListener('submit', (event) => { event.preventDefault(); runCommand(input.value); });
       document.querySelectorAll('[data-command]').forEach((button) => button.addEventListener('click', () => runCommand(button.dataset.command)));
-      document.querySelector('#command-options').append(new Option('score'), new Option('quests'), new Option('achievements'));
-
-      document.querySelectorAll('[data-window-action]').forEach((button) => button.addEventListener('click', () => {
-        const action = button.dataset.windowAction;
-        if (action === 'minimize') terminalWindow.classList.toggle('is-minimized');
-        if (action === 'maximize') terminalWindow.classList.toggle('is-maximized');
-        if (action === 'shutdown') { terminalWindow.classList.remove('is-minimized'); terminalWindow.classList.add('is-shutdown'); showToast('session paused // click reboot to return'); }
-        if (action === 'reboot') { terminalWindow.classList.remove('is-shutdown', 'is-minimized'); showToast('session rebooted // welcome back'); awardXP(5, 'session rebooted'); }
-      }));
-
-      document.querySelectorAll('.project-terminal-card').forEach((card) => {
-        card.addEventListener('pointermove', (event) => {
-          const rect = card.getBoundingClientRect();
-          const x = ((event.clientX - rect.left) / rect.width - .5) * 10;
-          const y = ((event.clientY - rect.top) / rect.height - .5) * -10;
-          card.style.setProperty('--card-x', `${x}deg`);
-          card.style.setProperty('--card-y', `${y}deg`);
-        });
-        card.addEventListener('pointerleave', () => { card.style.setProperty('--card-x', '0deg'); card.style.setProperty('--card-y', '0deg'); });
-        card.addEventListener('click', () => awardXP(20, 'project opened'));
-      });
-
-      app.addEventListener('pointerdown', (event) => {
-        if (event.target.closest('button, a, input, textarea')) return;
-        const ripple = document.createElement('span');
-        ripple.className = 'click-ripple';
-        ripple.textContent = ['✦', '+', '01', '♥'][Math.floor(Math.random() * 4)];
-        ripple.style.left = `${event.clientX}px`;
-        ripple.style.top = `${event.clientY}px`;
-        document.body.append(ripple);
-        ripple.addEventListener('animationend', () => ripple.remove());
-        awardXP(1, 'exploration click');
-      });
       input.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowUp') { event.preventDefault(); historyIndex = Math.max(0, historyIndex - 1); input.value = history[historyIndex] || ''; }
         if (event.key === 'ArrowDown') { event.preventDefault(); historyIndex = Math.min(history.length, historyIndex + 1); input.value = history[historyIndex] || ''; }
@@ -487,6 +342,7 @@
       document.querySelector('#session-id').textContent = `MA-${session}`;
       setInterval(() => { document.querySelector('#uptime').textContent = formatTime(); document.querySelector('#neofetch-uptime').textContent = formatTime(); }, 1000);
 
+      const visitorKey = 'mustafa-portfolio-visits';
       const visits = Math.max(4237, Number(localStorage.getItem(visitorKey) || 4237) + 1);
       localStorage.setItem(visitorKey, visits);
       document.querySelector('#visitor-count').textContent = String(visits).padStart(6, '0');
