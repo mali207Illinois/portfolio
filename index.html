@@ -292,7 +292,20 @@
       .desktop-task { margin-left: auto; color: #8fa7c2; letter-spacing: .02em; }
       .desktop-icons { position: fixed; z-index: 0; top: 28px; left: 24px; display: grid; gap: 18px; width: 68px; }
       .desktop-icon { display: grid; justify-items: center; gap: 5px; color: #d7e4f4; font: 9px var(--mono); text-align: center; text-shadow: 0 1px 3px #0b1320; }
-      .desktop-icon-art { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #a2b8d2; background: linear-gradient(145deg, rgba(199,218,240,.48), rgba(70,95,126,.58)); box-shadow: 2px 3px 0 rgba(5,11,20,.35), inset 1px 1px rgba(255,255,255,.3); color: #f0f6ff; font-size: 18px; }
+      .desktop-icon-art { position: relative; width: 34px; height: 34px; display: grid; place-items: center; overflow: hidden; border: 1px solid #a2b8d2; background: linear-gradient(145deg, rgba(199,218,240,.48), rgba(70,95,126,.58)); box-shadow: 2px 3px 0 rgba(5,11,20,.35), inset 1px 1px rgba(255,255,255,.3); color: #f0f6ff; font-size: 0; }
+      .desktop-icon-art.icon-home::before { content: "⌂"; color: #eef6ff; font: 25px/1 Arial, sans-serif; transform: translateY(-1px); }
+      .desktop-icon-art.icon-folder { background: linear-gradient(145deg, #efd17d, #9f7331); border-color: #f5e2a5; }
+      .desktop-icon-art.icon-folder::before { content: ""; width: 25px; height: 17px; background: #e5b952; border: 1px solid #765523; border-radius: 2px; clip-path: polygon(0 22%, 30% 22%, 38% 0, 100% 0, 100% 100%, 0 100%); }
+      .desktop-icon-art.icon-folder::after { content: ""; position: absolute; width: 25px; height: 11px; background: #f2ce6b; border-top: 1px solid #fff0aa; transform: translateY(4px); }
+      .desktop-icon-art.icon-terminal { background: #15251b; border-color: #9ed2a8; }
+      .desktop-icon-art.icon-terminal::before { content: ">_"; width: 26px; height: 18px; display: grid; place-items: center; border: 1px solid #8cc99a; color: #b8ffc0; font: 11px/1 var(--mono); }
+      .desktop-icon-art.icon-browser { border-radius: 5px; background: linear-gradient(145deg, #b8dcf4, #547c9f); }
+      .desktop-icon-art.icon-browser::before { content: "◎"; color: #f3fbff; font: 27px/1 Arial, sans-serif; }
+      .desktop-icon-art.icon-document { background: #d7e2ef; border-color: #f2f6fb; }
+      .desktop-icon-art.icon-document::before { content: "≡"; color: #657c96; font: 25px/1 Arial, sans-serif; transform: translateY(-2px); }
+      .desktop-icon-art.icon-trash { background: linear-gradient(145deg, #bfc9d6, #67778c); border-color: #e2e9f1; }
+      .desktop-icon-art.icon-trash::before { content: ""; width: 16px; height: 20px; border: 2px solid #eef4fb; border-top: 0; border-radius: 0 0 3px 3px; }
+      .desktop-icon-art.icon-trash::after { content: ""; position: absolute; width: 20px; height: 3px; top: 8px; background: #eef4fb; box-shadow: 0 -4px 0 -1px #eef4fb; }
       .terminal-app { z-index: 1; padding: clamp(18px, 4vw, 58px) clamp(18px, 4vw, 58px) clamp(48px, 5vw, 72px); }
       .terminal-window { width: min(1420px, 100%); border: 1px solid #526987; border-radius: 10px; box-shadow: 0 18px 45px rgba(4,10,20,.55), 0 0 0 1px rgba(214,231,250,.08); }
       @media (max-width: 780px) {
@@ -319,7 +332,7 @@
     </style>
   </head>
   <body>
-    <div class="desktop-icons" aria-hidden="true"><div class="desktop-icon"><span class="desktop-icon-art">⌂</span><span>home</span></div><div class="desktop-icon"><span class="desktop-icon-art">▤</span><span>projects</span></div><div class="desktop-icon"><span class="desktop-icon-art">♲</span><span>trash</span></div></div>
+    <div class="desktop-icons" aria-hidden="true"><div class="desktop-icon"><span class="desktop-icon-art icon-home"></span><span>home</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-folder"></span><span>projects</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-terminal"></span><span>terminal</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-browser"></span><span>browser</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-document"></span><span>notes.txt</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-trash"></span><span>trash</span></div></div>
     <div class="desktop-taskbar" aria-hidden="true"><span class="desktop-launcher">▣</span><span>mustafa desktop</span><span class="desktop-taskbar-app"><span>▣</span> terminal</span><span class="desktop-taskbar-app ghost"><span>▤</span> files</span><span class="desktop-task">▥ 100% &nbsp;|&nbsp; tty1 // active</span></div>
     <div class="terminal-app" id="app">
       <div class="ambient-glow"></div>
