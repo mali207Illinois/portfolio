@@ -77,18 +77,15 @@
       .home-logo .accent { color: var(--cyan); }
       .home-subtitle { max-width: 650px; margin: 22px 0 0; color: #d7e4ff; font: 18px/1.35 var(--pixel); letter-spacing: .03em; }
       .home-subtitle .cursor { display: inline-block; width: 9px; height: 18px; margin-left: 5px; background: var(--green); vertical-align: -2px; animation: blink 1s steps(2, end) infinite; }
-      .home-snapshot { display: grid; gap: 7px; margin-top: 35px; color: var(--muted); font-size: 10px; }
-      .home-snapshot span { opacity: 0; animation: log-in .45s ease-out forwards; }
-      .home-snapshot span:nth-child(2) { animation-delay: .1s; }
-      .home-snapshot span:nth-child(3) { animation-delay: .2s; }
-      .home-snapshot span::before { content: "~ "; color: var(--green-dim); }
-      .home-snapshot strong { color: var(--green); font-weight: 400; }
       .command-hint { margin: 32px 0 0; color: var(--muted); font-size: 11px; }
       .command-hint code { color: var(--amber); }
       .shortcut-grid { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 13px; }
       .shortcut { padding: 8px 12px; border: 1px solid var(--line); background: rgba(35,106,59,.12); color: var(--green); cursor: pointer; font-size: 10px; transition: background .2s, border-color .2s, transform .2s; }
       .shortcut::before { content: "./"; color: var(--muted); }
       .shortcut:hover, .shortcut:focus-visible { border-color: var(--green); background: rgba(140,255,158,.12); transform: translateY(-2px); outline: none; }
+      .view[data-view="home"] { text-align: center; }
+      .view[data-view="home"] .home-subtitle { margin-inline: auto; }
+      .view[data-view="home"] .shortcut-grid { justify-content: center; }
 
       .view-heading { margin: 0; color: var(--green); font: 400 clamp(50px, 8vw, 100px)/.72 var(--pixel); }
       .view-heading::before { content: "> "; color: var(--cyan); }
@@ -307,6 +304,7 @@
       .desktop-taskbar .desktop-icon-art.icon-folder::after { width: 18px; height: 8px; }
       .desktop-taskbar .desktop-icon-art.icon-terminal::before { width: 18px; height: 13px; font-size: 8px; }
       .desktop-taskbar .desktop-icon-art.icon-browser::before { font-size: 18px; }
+      .desktop-taskbar .desktop-icon-art.icon-cat::before { font-size: 7px; }
       .desktop-tray { display: flex; align-items: center; gap: 12px; margin-left: auto; color: #b4c2d6; }
       .desktop-tray-item { color: #a9c4e2; font-size: 11px; }
       .desktop-clock { min-width: 43px; padding-left: 11px; border-left: 1px solid rgba(188,211,238,.3); color: #d7e4f4; font-size: 9px; text-align: right; }
@@ -322,6 +320,8 @@
       .desktop-icon-art.icon-terminal::before { content: ">_"; width: 26px; height: 18px; display: grid; place-items: center; border: 1px solid #8cc99a; color: #b8ffc0; font: 11px/1 var(--mono); }
       .desktop-icon-art.icon-browser { border-radius: 5px; background: linear-gradient(145deg, #b8dcf4, #547c9f); }
       .desktop-icon-art.icon-browser::before { content: "◎"; color: #f3fbff; font: 27px/1 Arial, sans-serif; }
+      .desktop-icon-art.icon-cat { background: linear-gradient(145deg, #d8b8ee, #775d9b); border-color: #f0dcff; }
+      .desktop-icon-art.icon-cat::before { content: "=^.^="; color: #fff5ff; font: 9px/1 var(--mono); letter-spacing: -1px; transform: translateY(-1px); }
       .desktop-icon-art.icon-document { background: #d7e2ef; border-color: #f2f6fb; }
       .desktop-icon-art.icon-document::before { content: "≡"; color: #657c96; font: 25px/1 Arial, sans-serif; transform: translateY(-2px); }
       .desktop-icon-art.icon-trash { background: linear-gradient(145deg, #bfc9d6, #67778c); border-color: #e2e9f1; }
@@ -358,8 +358,8 @@
     </style>
   </head>
   <body>
-    <div class="desktop-icons" aria-hidden="true"><div class="desktop-icon"><span class="desktop-icon-art icon-home"></span><span>home</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-folder"></span><span>projects</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-terminal"></span><span>terminal</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-browser"></span><span>browser</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-document"></span><span>notes.txt</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-trash"></span><span>trash</span></div></div>
-    <div class="desktop-taskbar" aria-hidden="true"><span class="desktop-launcher"><span class="desktop-icon-art icon-home"></span></span><span class="desktop-workspace">1</span><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active"><span class="desktop-icon-art icon-terminal"></span> terminal</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-folder"></span> files</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-browser"></span> browser</span></span><span class="desktop-tray"><span class="desktop-tray-item">⌁</span><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
+    <div class="desktop-icons" aria-hidden="true"><div class="desktop-icon"><span class="desktop-icon-art icon-home"></span><span>home</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-folder"></span><span>projects</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-terminal"></span><span>terminal</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-browser"></span><span>browser</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-cat"></span><span>cat</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-document"></span><span>notes.txt</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-trash"></span><span>trash</span></div></div>
+    <div class="desktop-taskbar" aria-hidden="true"><span class="desktop-launcher"><span class="desktop-icon-art icon-home"></span></span><span class="desktop-workspace">1</span><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active"><span class="desktop-icon-art icon-terminal"></span> terminal</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-folder"></span> files</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-browser"></span> browser</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-cat"></span> cat</span></span><span class="desktop-tray"><span class="desktop-tray-item">⌁</span><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
     <div class="terminal-app" id="app">
       <div class="ambient-glow"></div>
       <div class="matrix-rain" aria-hidden="true"></div>
@@ -374,7 +374,6 @@
                 <p class="view-kicker">boot sequence complete // welcome, human</p>
                 <h1 id="home-heading" class="home-logo">MUSTAFA<span class="accent">.ALI</span></h1>
                 <p class="home-subtitle">UIUC student + builder<span class="cursor"></span></p>
-                <div class="home-snapshot" aria-label="Current focus"><span><strong>focus:</strong> thoughtful interfaces + tiny tools</span><span><strong>status:</strong> building in public</span><span><strong>next:</strong> shipping the next small thing</span></div>
                 <p class="command-hint">type <code>help</code> to see available commands, or use a shortcut:</p>
                 <div class="shortcut-grid"><button class="shortcut" data-command="about" type="button">about</button><button class="shortcut" data-command="projects" type="button">projects</button><button class="shortcut" data-command="diary" type="button">diary</button><button class="shortcut" data-command="contact" type="button">contact</button><button class="shortcut" data-command="neofetch" type="button">neofetch</button></div>
               </section>
