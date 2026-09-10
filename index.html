@@ -477,13 +477,13 @@
         if (reduceMotion) {
           landingTypeTargets.forEach((target) => { target.textContent = target.dataset.landingType; });
         } else {
-          await typeLandingText(kicker, 25);
-          await wait(120);
-          await Promise.all([typeLandingText(logo, 75), typeLandingText(logoAccent, 75)]);
-          await wait(130);
-          await typeLandingText(subtitle, 42);
-          await wait(180);
-          await typeLandingText(intro, 27);
+          await typeLandingText(kicker, 18);
+          await wait(80);
+          await Promise.all([typeLandingText(logo, 50), typeLandingText(logoAccent, 50)]);
+          await wait(90);
+          await typeLandingText(subtitle, 28);
+          await wait(100);
+          await typeLandingText(intro, 18);
         }
         landingRevealTargets.forEach((target) => target.classList.add('is-visible'));
         input.focus();
