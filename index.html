@@ -3,438 +3,365 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Mustafa Ali — designer and developer making digital things with personality." />
-    <title>mustafa-ali.exe — welcome :)</title>
+    <meta name="description" content="Mustafa Ali — a designer and developer making digital things with personality." />
+    <title>mustafa@portfolio:~$</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Mono:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Space+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet" />
     <style>
       :root {
-        --paper: #e8e1d2;
-        --paper-dark: #d4c9b8;
-        --ink: #101415;
-        --blue: #1957a6;
-        --blue-dark: #0a2c67;
-        --purple: #b9a1df;
-        --purple-dark: #685292;
+        --void: #050807;
+        --screen: #07100c;
+        --panel: #0b1711;
+        --panel-2: #0f2118;
+        --line: #245f3c;
         --green: #8cff9e;
-        --lime: #beff47;
-        --red: #e94b4b;
-        --type: "Space Mono", "DM Mono", monospace;
+        --green-dim: #4ba867;
+        --cyan: #76e5ef;
+        --amber: #ffd66b;
+        --pink: #ff83c8;
+        --muted: #749681;
+        --mono: "Space Mono", monospace;
+        --pixel: "VT323", monospace;
         --hand: "Caveat", cursive;
       }
 
       * { box-sizing: border-box; }
-      html { scroll-behavior: smooth; }
-      body { margin: 0; background: var(--paper-dark); color: var(--ink); font-family: var(--type); overflow-x: hidden; }
-      body::before { content: ""; position: fixed; z-index: 20; inset: 0; pointer-events: none; opacity: .1; background-image: repeating-linear-gradient(0deg, transparent 0 3px, #fff 4px 4px), repeating-linear-gradient(90deg, transparent 0 5px, #000 6px 6px); mix-blend-mode: multiply; }
-      body::after { content: ""; position: fixed; z-index: 19; inset: 0; pointer-events: none; opacity: 0; background: rgba(255,255,255,.05); animation: screen-flicker 9s infinite; }
+      html, body { width: 100%; height: 100%; }
+      html { background: var(--void); }
+      body { margin: 0; overflow: hidden; background: var(--void); color: var(--green); font-family: var(--mono); }
+      body::before { content: ""; position: fixed; z-index: 20; inset: 0; pointer-events: none; opacity: .11; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(140,255,158,.8) 4px 4px); mix-blend-mode: screen; }
+      body::after { content: ""; position: fixed; z-index: 19; inset: 0; pointer-events: none; opacity: .18; background: radial-gradient(circle at 50% 0, rgba(63,255,122,.15), transparent 47%), linear-gradient(90deg, transparent 0 49.8%, rgba(140,255,158,.03) 50%, transparent 50.2%); }
       a { color: inherit; text-decoration: none; }
       button, input, textarea { font: inherit; }
-      ::selection { background: var(--blue); color: #fff; }
+      button { color: inherit; }
+      ::selection { color: var(--void); background: var(--green); }
 
-      .site-shell { width: min(1480px, calc(100% - 44px)); margin: 22px auto 0; }
-      .site-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 13px 14px; font-size: 11px; }
-      .site-logo { font: 700 21px var(--hand); transform: rotate(-2deg); }
-      .top-status { display: flex; align-items: center; gap: 8px; color: #3d423d; }
-      .online-dot { width: 9px; height: 9px; background: #44c66a; border: 1px solid #2b7c44; border-radius: 50%; animation: pulse-dot 2s infinite; }
-      .top-links { display: flex; gap: 22px; text-transform: uppercase; }
-      .top-links a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; text-decoration-color: transparent; transition: text-decoration-color .2s; }
-      .top-links a:hover { text-decoration-color: currentColor; }
+      .terminal-app { --mx: 50%; --my: 30%; width: 100%; height: 100dvh; min-height: 560px; padding: clamp(12px, 2.5vw, 32px); display: flex; flex-direction: column; position: relative; isolation: isolate; }
+      .ambient-glow { position: absolute; z-index: -1; width: 40vw; height: 40vw; left: var(--mx); top: var(--my); translate: -50% -50%; border-radius: 50%; background: rgba(77,255,135,.07); filter: blur(85px); pointer-events: none; transition: left .25s ease-out, top .25s ease-out; }
+      .matrix-rain { position: absolute; z-index: -1; inset: 0; overflow: hidden; opacity: .16; pointer-events: none; }
+      .matrix-rain i { position: absolute; top: -12%; color: var(--green-dim); font: 15px var(--pixel); writing-mode: vertical-rl; animation: rain-fall linear infinite; }
+      .matrix-rain i:nth-child(3n) { color: var(--cyan); }
+      .matrix-rain i:nth-child(4n) { color: var(--pink); }
 
-      .window { position: relative; border: 2px solid #15191c; background: var(--paper); box-shadow: 7px 8px 0 rgba(26,27,28,.18); }
-      .titlebar { min-height: 36px; display: flex; align-items: center; gap: 10px; padding: 6px 8px; background: linear-gradient(#2d79c8, #123c84); color: #fff; border-bottom: 2px solid #111820; font-size: 11px; text-shadow: 1px 1px 0 #163467; }
-      .titlebar.dark { background: linear-gradient(#333b42, #0d1114); }
-      .titlebar.purple { background: linear-gradient(#aa87d9, #5b438e); }
-      .titlebar.green { background: linear-gradient(#3b7d57, #193c2a); }
-      .title-icon { width: 17px; height: 17px; display: grid; place-items: center; color: #fff; font-size: 12px; }
-      .window-title { flex: 1; font-weight: 700; letter-spacing: -.02em; }
-      .window-controls { display: flex; gap: 4px; }
-      .window-controls i { width: 18px; height: 17px; display: grid; place-items: center; background: #d7e2e7; color: #111; border: 1px solid #111; box-shadow: inset 1px 1px 0 #fff; font: 11px Arial, sans-serif; font-style: normal; }
-      .window-controls i:last-child { background: #ef7770; }
+      .terminal-window { width: min(1420px, 100%); flex: 1; min-height: 0; margin: auto; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--screen); box-shadow: 0 0 0 1px rgba(140,255,158,.05), 0 0 36px rgba(26,193,87,.15), 10px 12px 0 rgba(0,0,0,.25); }
+      .terminal-titlebar { flex: 0 0 39px; display: flex; align-items: center; gap: 10px; padding: 7px 12px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #12261a, #09140e); font: 12px var(--mono); }
+      .terminal-icon { width: 18px; height: 18px; display: grid; place-items: center; border: 1px solid var(--green-dim); color: var(--green); font-size: 12px; }
+      .terminal-title { flex: 1; color: var(--cyan); }
+      .terminal-title em { color: var(--muted); font-style: normal; }
+      .terminal-controls { display: flex; gap: 6px; }
+      .terminal-controls i { width: 12px; height: 12px; border: 1px solid var(--green-dim); border-radius: 50%; font-size: 0; }
+      .terminal-controls i:nth-child(1) { background: var(--amber); }
+      .terminal-controls i:nth-child(2) { background: var(--green); }
+      .terminal-controls i:nth-child(3) { background: var(--pink); }
 
-      .hero-window { min-height: 685px; display: grid; grid-template-columns: 177px 1fr 75px; }
-      .hero-window > .titlebar { grid-column: 1 / -1; }
-      .side-nav { padding: 22px 14px; border-right: 1px solid rgba(20,25,28,.32); }
-      .side-nav ul { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; }
-      .side-nav a { display: flex; align-items: center; gap: 11px; font-size: 12px; }
-      .nav-icon { width: 22px; font: 21px/1 Arial, sans-serif; filter: grayscale(1); }
-      .side-nav a:hover .nav-label { color: var(--blue); text-decoration: underline; }
-      .side-note { margin-top: 44px; font: 20px/1 var(--hand); transform: rotate(-5deg); }
-      .side-note::before { content: "↘"; display: block; margin-left: 42px; font: 30px var(--hand); }
-      .hero-main { min-width: 0; padding: 34px clamp(24px, 5vw, 76px) 34px 40px; position: relative; overflow: hidden; }
-      .hero-main::before { content: ""; position: absolute; inset: 0; opacity: .15; background-image: linear-gradient(rgba(40,40,40,.25) 1px, transparent 1px); background-size: 100% 5px; pointer-events: none; }
-      .hero-main > p, .hero-main > h1, .hero-main > a, .hero-main > .hero-collage { position: relative; z-index: 2; }
-      .pixel-decor { position: absolute; z-index: 1; display: block; pointer-events: none; image-rendering: pixelated; }
-      .pixel-star { width: 6px; height: 6px; background: currentColor; color: var(--blue); box-shadow: 6px 0 currentColor, -6px 0 currentColor, 0 6px currentColor, 0 -6px currentColor; animation: pixel-twinkle 2.2s steps(2, end) infinite; }
-      .pixel-star::before { content: ""; position: absolute; width: 6px; height: 6px; left: -6px; top: -6px; box-shadow: 12px 0 currentColor, 0 12px currentColor, 12px 12px currentColor; }
-      .hero-star-a { top: 73px; right: 17%; }
-      .hero-star-b { top: 184px; left: 7%; color: var(--red); transform: scale(.65); animation-delay: .8s; }
-      .pixel-mushroom { width: 40px; height: 22px; background: var(--red); clip-path: polygon(15% 0, 85% 0, 85% 12%, 100% 12%, 100% 58%, 85% 58%, 85% 100%, 15% 100%, 15% 58%, 0 58%, 0 12%, 15% 12%); animation: pixel-hop 3s steps(2, end) infinite; }
-      .pixel-mushroom::before { content: ""; position: absolute; width: 8px; height: 8px; left: 10px; top: 5px; background: #fff0d1; box-shadow: 14px 0 #fff0d1; }
-      .pixel-mushroom::after { content: ""; position: absolute; width: 15px; height: 9px; left: 13px; bottom: -2px; background: #f6e5c5; }
-      .hero-mushroom { right: 14%; bottom: 92px; transform: scale(.78); }
-      .hero-kicker { position: relative; margin: 4px 0 16px; color: var(--blue); font-size: 11px; }
-      .hero-title { position: relative; max-width: 570px; margin: 0; font: 600 clamp(75px, 8vw, 139px)/.68 var(--hand); letter-spacing: -.05em; transform: rotate(-2deg); }
-      .hero-title .smile { display: inline-block; font-family: Arial, sans-serif; font-size: .62em; transform: rotate(7deg); vertical-align: 16%; }
-      .hero-description { position: relative; max-width: 350px; margin: 33px 0 0 20%; font-size: 12px; line-height: 1.55; }
-      .hero-scroll { position: relative; display: inline-block; margin: 19px 0 0 20%; color: #1438ac; font-size: 11px; }
-      .hero-scroll::after { content: ""; display: block; width: 110%; height: 8px; border-bottom: 1px solid currentColor; border-radius: 50%; transform: rotate(-3deg); }
-      .hero-collage { position: relative; min-height: 388px; margin-top: 20px; }
-      .scrap { position: absolute; box-shadow: 4px 5px 0 rgba(0,0,0,.17); }
-      .desk-photo { width: 194px; height: 199px; left: 0; bottom: 5px; padding: 8px; background: #eee7d6; transform: rotate(-3deg); }
-      .desk-photo::before { content: ""; display: block; height: 148px; background: linear-gradient(180deg, #ae9884 0 22%, #354657 23% 55%, #1b2831 56% 100%); box-shadow: inset 0 0 0 7px #706458; }
-      .desk-photo::after { content: "same desk\A different day"; white-space: pre; position: absolute; left: -38px; bottom: 14px; font: 18px/1 var(--hand); transform: rotate(-12deg); }
-      .landscape-photo { width: 210px; height: 151px; top: 0; right: 6%; padding: 8px 8px 27px; background: #eee7d6; transform: rotate(-6deg); }
-      .landscape-photo::before { content: ""; display: block; height: 115px; background: linear-gradient(165deg, #9bb8bf 0 37%, #566c64 38% 64%, #233c35 65%); clip-path: polygon(0 51%, 20% 26%, 33% 48%, 57% 5%, 78% 46%, 100% 16%, 100% 100%, 0 100%); }
-      .landscape-photo::after { content: "somewhere in the mountains\A(2023)"; white-space: pre; position: absolute; left: 12px; bottom: 6px; font-size: 7px; }
-      .tape { position: absolute; z-index: 2; width: 72px; height: 20px; background: rgba(205,158,71,.68); transform: rotate(-5deg); }
-      .landscape-photo .tape { left: 42%; bottom: -8px; }
-      .pixel-person { position: absolute; z-index: 3; left: 47%; bottom: 16px; width: 72px; height: 95px; background: #202327; clip-path: polygon(26% 0, 70% 0, 84% 14%, 78% 38%, 100% 52%, 80% 100%, 22% 100%, 0 50%, 22% 38%, 14% 15%); filter: drop-shadow(7px 7px 0 rgba(0,0,0,.25)); animation: person-bob 3.4s ease-in-out infinite; }
-      .pixel-person::before { content: ""; position: absolute; width: 43px; height: 43px; left: 15px; top: 12px; background: #c98558; clip-path: polygon(15% 0, 82% 0, 100% 17%, 87% 92%, 16% 100%, 0 21%); box-shadow: inset 0 10px 0 #2d211b; }
-      .pixel-person::after { content: ""; position: absolute; width: 14px; height: 7px; left: 30px; top: 37px; background: #171717; box-shadow: 3px 0 0 #171717; }
-      .pixel-cat { position: absolute; z-index: 4; left: 60%; bottom: 19px; width: 70px; height: 40px; border-radius: 50% 50% 40% 40%; background: #202326; cursor: pointer; animation: cat-float 2.6s ease-in-out infinite; }
-      .pixel-cat::before { content: ""; position: absolute; width: 33px; height: 29px; left: 17px; top: -16px; background: #202326; clip-path: polygon(0 35%, 20% 0, 46% 28%, 73% 0, 100% 38%, 91% 100%, 12% 100%); }
-      .pixel-cat::after { content: ""; position: absolute; width: 5px; height: 5px; left: 25px; top: -3px; background: var(--lime); box-shadow: 15px 0 0 var(--lime); }
-      .pixel-cat:hover { filter: drop-shadow(0 0 7px var(--lime)); }
-      .cat-speech { position: absolute; z-index: 5; left: 67%; bottom: 100px; max-width: 118px; padding: 11px; background: var(--paper); border: 2px solid var(--ink); border-radius: 45%; font-size: 10px; transform: rotate(3deg); opacity: 0; pointer-events: none; transition: opacity .2s; }
-      .cat-speech::after { content: ""; position: absolute; bottom: -15px; left: 21px; width: 20px; height: 17px; border-left: 2px solid var(--ink); transform: rotate(-30deg); }
-      .cat-speech.show { opacity: 1; }
-      .hero-rail { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 10px; height: 35px; padding: 0 13px; background: var(--ink); color: #e9ece3; font-size: 10px; }
-      .rail-led { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); }
-      .rail-track { flex: 1; overflow: hidden; white-space: nowrap; }
-      .rail-marquee { display: inline-block; animation: marquee 13s linear infinite; }
-      .music-button { margin-left: auto; padding: 3px 7px; border: 1px solid var(--green); background: transparent; color: var(--green); cursor: pointer; font-size: 10px; }
-      .music-button:hover, .music-on .music-button { background: var(--green); color: var(--ink); }
-      .icon-dock { display: flex; flex-direction: column; align-items: center; gap: 19px; padding: 19px 9px; border-left: 1px solid rgba(20,25,28,.3); }
-      .dock-item { display: grid; justify-items: center; gap: 4px; color: var(--ink); font-size: 9px; text-align: center; }
-      .dock-emoji { font: 25px/1 Arial, sans-serif; filter: grayscale(.6); transition: transform .2s; }
-      .dock-item:hover .dock-emoji { transform: translateY(-4px) rotate(-7deg); }
+      .terminal-content { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 275px; }
+      .terminal-main { min-width: 0; min-height: 0; display: flex; flex-direction: column; padding: clamp(17px, 3vw, 38px); }
+      .session-bar { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-bottom: 15px; border-bottom: 1px dashed var(--line); color: var(--muted); font-size: 10px; }
+      .session-bar strong { color: var(--green); font-weight: 400; }
+      .session-bar .live { display: inline-flex; align-items: center; gap: 7px; color: var(--green); }
+      .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: blink 1.5s steps(2, end) infinite; }
+      .output-scroller { flex: 1; min-height: 0; overflow-y: auto; padding: 26px 7px 18px 0; scrollbar-color: var(--line) transparent; scrollbar-width: thin; }
+      .output-scroller::-webkit-scrollbar { width: 7px; }
+      .output-scroller::-webkit-scrollbar-thumb { background: var(--line); }
+      .view { display: none; }
+      .view.active { display: block; animation: command-in .35s ease-out both; }
+      .view-kicker { margin: 0 0 18px; color: var(--cyan); font-size: 11px; }
+      .home-logo { margin: 0; color: var(--green); font: 400 clamp(65px, 11vw, 160px)/.67 var(--pixel); letter-spacing: .03em; text-shadow: 0 0 16px rgba(140,255,158,.25); }
+      .home-logo .accent { color: var(--cyan); }
+      .home-subtitle { max-width: 650px; margin: 22px 0 0; color: #d0ead3; font: 18px/1.35 var(--pixel); letter-spacing: .03em; }
+      .home-subtitle .cursor { display: inline-block; width: 9px; height: 18px; margin-left: 5px; background: var(--green); vertical-align: -2px; animation: blink 1s steps(2, end) infinite; }
+      .boot-log { display: grid; gap: 6px; margin-top: 35px; color: var(--muted); font-size: 10px; }
+      .boot-log li { list-style: none; }
+      .boot-log li::before { content: "[ ok ] "; color: var(--green-dim); }
+      .boot-log li:nth-child(2)::before { content: "[ ok ] "; color: var(--cyan); }
+      .boot-log li:nth-child(3)::before { content: "[ ok ] "; color: var(--amber); }
+      .boot-log li:nth-child(4)::before { content: "[ ok ] "; color: var(--pink); }
+      .command-hint { margin: 32px 0 0; color: var(--muted); font-size: 11px; }
+      .command-hint code { color: var(--amber); }
+      .shortcut-grid { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 13px; }
+      .shortcut { padding: 8px 12px; border: 1px solid var(--line); background: rgba(35,106,59,.12); color: var(--green); cursor: pointer; font-size: 10px; transition: background .2s, border-color .2s, transform .2s; }
+      .shortcut::before { content: "./"; color: var(--muted); }
+      .shortcut:hover, .shortcut:focus-visible { border-color: var(--green); background: rgba(140,255,158,.12); transform: translateY(-2px); outline: none; }
 
-      .about-window { margin-top: 35px; background: #0d1113; color: #f2f1eb; }
-      .about-body { min-height: 584px; display: grid; grid-template-columns: 1fr 1.15fr .8fr; gap: 40px; padding: 52px clamp(24px, 6vw, 95px) 72px; position: relative; overflow: hidden; }
-      .about-copy, .about-photo, .random-facts { position: relative; z-index: 2; }
-      .about-star { top: 72px; left: 5%; color: var(--lime); transform: scale(.72); }
-      .pixel-plant { width: 13px; height: 56px; background: #3da752; clip-path: polygon(38% 0, 62% 0, 62% 65%, 100% 65%, 100% 100%, 0 100%, 0 65%, 38% 65%); }
-      .pixel-plant::before { content: ""; position: absolute; width: 22px; height: 19px; left: -17px; top: 11px; background: #57c45d; clip-path: polygon(54% 0, 100% 0, 100% 54%, 54% 54%, 54% 100%, 0 100%, 0 46%, 54% 46%); }
-      .pixel-plant::after { content: ""; position: absolute; width: 22px; height: 19px; right: -17px; top: 25px; background: #328d4b; clip-path: polygon(0 0, 46% 0, 46% 46%, 100% 46%, 100% 100%, 46% 100%, 46% 54%, 0 54%); }
-      .about-plant { right: 5%; bottom: 26px; transform: scale(1.1); }
-      .about-body::after { content: "✶"; position: absolute; right: 12%; bottom: 24px; font-size: 43px; color: #b1b5ac; transform: rotate(15deg); }
-      .about-heading { margin: 0; font: 600 clamp(60px, 8vw, 114px)/.72 var(--hand); letter-spacing: -.05em; }
-      .about-copy { padding-top: 24px; }
-      .about-copy p { max-width: 390px; margin: 41px 0 0; font-size: 12px; line-height: 1.7; }
-      .about-copy p + p { margin-top: 22px; }
-      .about-sign { display: inline-block; margin-top: 30px; font: 25px var(--hand); transform: rotate(-5deg); }
-      .about-photo { position: relative; width: min(100%, 280px); height: 278px; margin: 0 auto; padding: 13px; background: #e9e4d7; transform: rotate(4deg); box-shadow: 5px 7px 0 rgba(0,0,0,.38); }
-      .about-photo::before { content: ""; display: block; height: 222px; background: linear-gradient(145deg, #272728 0 22%, #9aa7a2 22% 46%, #171717 47%); }
-      .about-photo::after { content: "me ↙"; position: absolute; top: -25px; right: -28px; font: 22px var(--hand); transform: rotate(-7deg); }
-      .random-facts { align-self: center; margin-top: 74px; padding: 17px 19px; background: #e8e2d5; color: var(--ink); clip-path: polygon(2% 4%, 96% 0, 100% 94%, 77% 100%, 41% 96%, 4% 100%, 0 59%); transform: rotate(-2deg); font-size: 10px; line-height: 1.65; }
-      .random-facts strong { display: block; margin-bottom: 9px; text-decoration: underline; }
-      .random-facts ul { margin: 0; padding-left: 14px; list-style: "-  "; }
-      .about-note { position: absolute; left: 8%; bottom: 25px; font: 20px var(--hand); transform: rotate(-8deg); }
+      .view-heading { margin: 0; color: var(--green); font: 400 clamp(50px, 8vw, 100px)/.72 var(--pixel); }
+      .view-heading::before { content: "> "; color: var(--cyan); }
+      .view-copy { max-width: 700px; margin: 24px 0 0; color: #c6ddca; font-size: 12px; line-height: 1.8; }
+      .view-copy strong { color: var(--amber); font-weight: 400; }
+      .fact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 30px; }
+      .fact-box { padding: 14px; border: 1px solid var(--line); background: var(--panel); }
+      .fact-box small { display: block; margin-bottom: 8px; color: var(--muted); font-size: 9px; }
+      .fact-box span { color: var(--cyan); font-size: 11px; line-height: 1.5; }
+      .ascii-divider { margin: 30px 0; color: var(--line); white-space: nowrap; overflow: hidden; font-size: 10px; }
 
-      .section-window { margin-top: 35px; }
-      .projects-window { background: var(--purple); }
-      .projects-inner { min-height: 690px; padding: 30px clamp(23px, 5vw, 70px) 52px; position: relative; overflow: hidden; }
-      .window-section-heading, .project-grid, .project-more { position: relative; z-index: 2; }
-      .pixel-gameboy { width: 42px; height: 61px; right: 7%; top: 25px; background: #c9d1b7; border: 4px solid #24283a; border-radius: 5px; box-shadow: inset 0 0 0 4px #9da990, 4px 4px 0 rgba(53,36,82,.24); transform: rotate(8deg); }
-      .pixel-gameboy::before { content: ""; position: absolute; width: 24px; height: 19px; left: 5px; top: 8px; background: #294a45; border: 3px solid #515d4d; box-shadow: inset 0 0 0 2px #172b2a; }
-      .pixel-gameboy::after { content: "+  •"; position: absolute; left: 7px; bottom: 7px; color: #30364a; font: 11px/1 var(--type); letter-spacing: 3px; }
-      .project-spark { right: 24%; bottom: 67px; color: #3d2d76; transform: scale(.6); animation-delay: .4s; }
-      .window-section-heading { display: flex; justify-content: space-between; align-items: start; gap: 20px; }
-      .window-section-heading h2 { margin: 0; font: 600 65px/.75 var(--hand); transform: rotate(-3deg); }
-      .filter-tabs { display: flex; gap: 14px; margin-top: 13px; color: #382d75; font-size: 10px; }
-      .filter-tabs a:first-child { text-decoration: underline; }
-      .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 37px 22px; margin-top: 44px; }
-      .project-card { position: relative; display: block; }
-      .project-image { position: relative; height: 178px; overflow: hidden; border: 2px solid var(--ink); background: #233559; transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s; }
-      .project-card:hover .project-image { transform: translateY(-9px) rotate(2deg); box-shadow: 7px 8px 0 rgba(47,32,91,.34); }
-      .project-card:nth-child(1) .project-image { background: linear-gradient(#161b33 0 52%, #0b1527 53%); }
-      .project-card:nth-child(1) .project-image::before { content: ""; position: absolute; left: 0; right: 0; bottom: 27px; height: 54px; background: linear-gradient(160deg, transparent 0 15%, #e1b077 16% 19%, transparent 20% 39%, #b86742 40% 48%, transparent 49% 66%, #d6a374 67%); }
-      .project-card:nth-child(1) .project-image::after { content: "✦"; position: absolute; top: 15%; right: 20%; color: #fff6ca; font-size: 26px; }
-      .project-card:nth-child(2) .project-image { background: linear-gradient(135deg, #ed4e6d 0 28%, #f4d447 29% 55%, #2b8bdb 56%); }
-      .project-card:nth-child(2) .project-image::before { content: "archive\Aof nice\Athings"; white-space: pre; position: absolute; top: 24px; left: 18px; color: #fff; font: 29px/.8 var(--hand); transform: rotate(-8deg); }
-      .project-card:nth-child(2) .project-image::after { content: "✦"; position: absolute; right: 23px; bottom: 22px; color: #162349; font-size: 35px; }
-      .project-card:nth-child(3) .project-image { background: #081946; }
-      .project-card:nth-child(3) .project-image::before { content: ""; position: absolute; width: 87px; height: 92px; left: 42%; top: 25%; background: #f48c4c; clip-path: polygon(13% 0, 87% 0, 100% 15%, 88% 88%, 62% 100%, 26% 92%, 0 39%); box-shadow: inset 25px 0 0 #e24738; }
-      .project-card:nth-child(3) .project-image::after { content: "☻"; position: absolute; left: 47%; top: 39%; color: #10194f; font: 28px Arial; }
-      .project-card:nth-child(4) .project-image { background: linear-gradient(115deg, #4a592d, #a6c373 46%, #d5dec2 47%); }
-      .project-card:nth-child(4) .project-image::before { content: ""; position: absolute; width: 50px; height: 111px; left: 38%; top: 16%; background: #d9e0c7; border: 3px solid #445038; transform: rotate(17deg); }
-      .project-card:nth-child(4) .project-image::after { content: "☕"; position: absolute; left: 43%; top: 35%; font-size: 34px; }
-      .project-label { margin: 8px 0 0; font: 12px/1.25 var(--type); }
-      .project-label small { display: block; margin-top: 2px; font-size: 9px; }
-      .project-arrow { position: absolute; right: 3px; bottom: 2px; font: 25px var(--hand); }
-      .project-more { margin: 47px 0 0; font: 24px var(--hand); transform: rotate(-2deg); }
+      .project-terminal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
+      .project-terminal-card { min-height: 160px; display: flex; flex-direction: column; padding: 14px; border: 1px solid var(--line); background: linear-gradient(145deg, var(--panel), #08110c); transition: border-color .2s, transform .2s, box-shadow .2s; }
+      .project-terminal-card:hover { border-color: var(--cyan); transform: translateY(-4px); box-shadow: 0 0 18px rgba(118,229,239,.1); }
+      .project-terminal-card .card-top { display: flex; justify-content: space-between; color: var(--muted); font-size: 9px; }
+      .project-terminal-card .card-icon { min-height: 65px; display: grid; place-items: center; color: var(--cyan); font: 53px var(--pixel); text-shadow: 0 0 10px rgba(118,229,239,.25); }
+      .project-terminal-card:nth-child(2) .card-icon { color: var(--pink); }
+      .project-terminal-card:nth-child(3) .card-icon { color: var(--amber); }
+      .project-terminal-card h3 { margin: auto 0 3px; color: var(--green); font: 20px var(--pixel); font-weight: 400; }
+      .project-terminal-card p { margin: 0; color: var(--muted); font-size: 9px; line-height: 1.5; }
 
-      .diary-window { background-color: #f0eee5; background-image: linear-gradient(rgba(103,130,157,.16) 1px, transparent 1px), linear-gradient(90deg, rgba(103,130,157,.16) 1px, transparent 1px); background-size: 22px 22px; }
-      .diary-inner { min-height: 600px; display: grid; grid-template-columns: 145px 1fr; gap: 34px; padding: 34px clamp(22px, 5vw, 74px) 65px; position: relative; }
-      .diary-index, .diary-post { position: relative; z-index: 2; }
-      .diary-star { right: 7%; bottom: 68px; color: var(--red); transform: scale(.65); }
-      .pixel-heart { width: 28px; height: 22px; right: 16%; top: 42px; background: var(--red); clip-path: polygon(0 18%, 18% 18%, 18% 0, 42% 0, 42% 18%, 58% 18%, 58% 0, 82% 0, 82% 18%, 100% 18%, 100% 58%, 82% 58%, 82% 77%, 62% 77%, 62% 100%, 38% 100%, 38% 77%, 18% 77%, 18% 58%, 0 58%); animation: pixel-heartbeat 2.4s steps(2, end) infinite; }
-      .diary-index { font-size: 10px; }
-      .diary-index ul { display: grid; gap: 22px; margin: 0; padding: 0; list-style: none; }
-      .diary-index li { position: relative; padding-left: 3px; }
-      .diary-index li:first-child { color: var(--blue); }
-      .diary-index li:first-child::before { content: ""; position: absolute; left: -10px; top: -6px; width: 130px; height: 26px; border: 1px solid currentColor; border-radius: 50%; transform: rotate(-3deg); }
-      .diary-post { max-width: 620px; }
-      .diary-date { font-size: 10px; }
-      .diary-post h2 { margin: 8px 0 21px; font: 600 clamp(39px, 5vw, 74px)/.82 var(--hand); letter-spacing: -.03em; }
-      .diary-post p { max-width: 520px; font-size: 11px; line-height: 1.65; }
-      .coffee-photo { width: min(100%, 455px); height: 190px; margin-top: 22px; border: 7px solid #f6f1df; background: radial-gradient(ellipse at 55% 53%, #bee28e 0 15%, #866d51 16% 18%, #614a36 19% 36%, transparent 37%), linear-gradient(155deg, #aa8661, #654a33 45%, #bc9065); box-shadow: 0 2px 0 rgba(0,0,0,.32); transform: rotate(1deg); }
-      .coffee-photo::after { content: ""; display: block; width: 88px; height: 33px; margin: 81px auto 0; border-radius: 50%; border: 2px solid #58422d; }
-      .diary-note { position: absolute; right: 7%; top: 100px; max-width: 150px; font: 22px/1 var(--hand); transform: rotate(7deg); }
-      .diary-note::before { content: "↙"; display: block; padding-left: 25px; font: 34px var(--hand); }
-      .diary-link { display: inline-block; margin-top: 28px; color: #162da6; text-decoration: underline; font-size: 10px; }
-      .mug-doodle { position: absolute; right: 9%; top: 33px; font-size: 44px; transform: rotate(7deg); }
+      .diary-list { display: grid; gap: 9px; margin-top: 28px; }
+      .diary-row { display: grid; grid-template-columns: 100px 1fr; gap: 17px; padding: 12px; border-left: 2px solid var(--line); background: rgba(35,106,59,.1); }
+      .diary-row time { color: var(--amber); font-size: 10px; }
+      .diary-row span { color: #c6ddca; font-size: 11px; }
+      .diary-row span::before { content: "// "; color: var(--muted); }
 
-      .contact-window { background: #0a100d; color: #d9eadc; }
-      .contact-inner { min-height: 610px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 75px; padding: 47px clamp(22px, 6vw, 85px) 65px; position: relative; overflow: hidden; }
-      .contact-copy, .contact-aside, .contact-signoff { position: relative; z-index: 2; }
-      .contact-pixel-heart { top: 49px; left: 49%; color: var(--green); transform: scale(.65); }
-      .pixel-terrain { width: 150px; height: 48px; right: 7%; bottom: 27px; background: #2fbe4c; clip-path: polygon(0 100%, 0 74%, 8% 74%, 8% 57%, 16% 57%, 16% 35%, 24% 35%, 24% 57%, 32% 57%, 32% 20%, 40% 20%, 40% 46%, 48% 46%, 48% 4%, 56% 4%, 56% 42%, 65% 42%, 65% 66%, 73% 66%, 73% 31%, 82% 31%, 82% 55%, 91% 55%, 91% 18%, 100% 18%, 100% 100%); opacity: .8; }
-      .contact-inner::after { content: "░▒▓ ███ ▓▒░"; position: absolute; right: 8%; bottom: 27px; color: #2fbe4c; font-size: 31px; letter-spacing: -6px; transform: rotate(-3deg); }
-      .contact-heading { margin: 0; color: var(--green); font: 700 clamp(54px, 7vw, 99px)/.74 var(--type); text-shadow: 0 0 6px rgba(140,255,158,.3); }
-      .contact-heading .blink { animation: cursor-blink 1.1s steps(2) infinite; }
-      .contact-copy p { max-width: 370px; margin: 35px 0 0; font-size: 12px; line-height: 1.65; }
-      .contact-form { display: grid; gap: 15px; margin-top: 24px; }
-      .contact-form input, .contact-form textarea { width: 100%; padding: 10px; border: 1px solid #86a18b; outline: none; background: transparent; color: var(--green); font-size: 10px; }
-      .contact-form input:focus, .contact-form textarea:focus { border-color: var(--green); box-shadow: 0 0 5px rgba(140,255,158,.4); }
+      .contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(210px, .62fr); gap: 35px; margin-top: 29px; }
+      .contact-form { display: grid; gap: 10px; }
+      .contact-form label { display: grid; gap: 5px; color: var(--muted); font-size: 9px; }
+      .contact-form input, .contact-form textarea { width: 100%; padding: 10px; border: 1px solid var(--line); outline: none; background: #06100a; color: var(--green); font-size: 10px; }
+      .contact-form input:focus, .contact-form textarea:focus { border-color: var(--green); box-shadow: 0 0 10px rgba(140,255,158,.12); }
       .contact-form textarea { min-height: 85px; resize: vertical; }
-      .contact-form button { justify-self: end; padding: 9px 20px; border: 1px solid var(--green); background: transparent; color: var(--green); cursor: pointer; font-size: 10px; transition: background .2s, color .2s; }
-      .contact-form button:hover { background: var(--green); color: var(--ink); }
-      .form-status { min-height: 17px; color: var(--green); font-size: 9px; }
-      .contact-aside { padding-top: 35px; }
-      .mini-window { border: 1px solid #a9b8a9; background: #b7b3a7; color: #111; transform: rotate(3deg); }
-      .mini-bar { display: flex; justify-content: space-between; padding: 5px 7px; background: #d7e0d1; border-bottom: 1px solid #111; font-size: 9px; }
-      .mini-screen { min-height: 100px; display: grid; place-items: center; background: #101614; color: #e2e3df; font: 31px var(--hand); }
-      .taped-photo { position: relative; width: 192px; height: 145px; margin: 49px auto 0; padding: 8px; background: #efe8d7; color: #111; transform: rotate(-6deg); box-shadow: 5px 6px 0 rgba(0,0,0,.28); }
-      .taped-photo::before { content: ""; display: block; height: 96px; background: linear-gradient(145deg, #63849b 0 42%, #d3dbbd 43% 58%, #4d6c58 59%); }
-      .taped-photo::after { content: "looking forward to\Ahearing from you!"; white-space: pre; display: block; margin: 5px 0 0 9px; font: 15px/1 var(--hand); }
-      .taped-photo .tape { top: -11px; left: 52px; transform: rotate(-4deg); }
-      .social-links { display: grid; gap: 10px; margin-top: 38px; font-size: 11px; }
-      .social-links a:hover { color: var(--green); }
-      .contact-signoff { position: absolute; right: 8%; bottom: 34px; color: var(--green); font: 19px var(--hand); transform: rotate(4deg); }
+      .terminal-button { justify-self: start; padding: 10px 15px; border: 1px solid var(--green); background: transparent; color: var(--green); cursor: pointer; font-size: 10px; transition: background .2s, color .2s; }
+      .terminal-button:hover { background: var(--green); color: var(--void); }
+      .contact-ascii { align-self: center; color: var(--cyan); font: 17px/1.15 var(--pixel); white-space: pre; }
+      .contact-ascii strong { color: var(--green); font-weight: 400; }
+      .contact-ascii a { color: var(--amber); text-decoration: underline; text-underline-offset: 3px; }
+      .form-status { min-height: 18px; color: var(--green); font-size: 9px; }
 
-      .site-footer { display: flex; justify-content: space-between; gap: 20px; padding: 18px 6px 28px; color: #4b5049; font-size: 10px; }
-      .site-footer a { text-decoration: underline; text-underline-offset: 3px; }
-      .cursor-spark { position: fixed; z-index: 30; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); pointer-events: none; animation: spark-pop .55s ease-out forwards; }
-      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .75s ease, transform .75s ease; }
-      .reveal.is-visible { opacity: 1; transform: translateY(0); }
+      .transcript { display: grid; gap: 5px; margin-top: 25px; color: var(--muted); font-size: 10px; }
+      .transcript:empty { display: none; }
+      .transcript .command-echo { color: var(--cyan); }
+      .transcript .command-echo::before { content: "mustafa@portfolio:~$ "; color: var(--green-dim); }
+      .transcript .command-result { color: var(--amber); }
+      .command-bar { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; padding-top: 14px; border-top: 1px dashed var(--line); }
+      .prompt { color: var(--green); font-size: 11px; white-space: nowrap; }
+      .command-form { flex: 1; display: flex; align-items: center; }
+      .command-input { width: 100%; border: 0; outline: 0; background: transparent; color: #f0fff0; caret-color: var(--green); font-size: 11px; }
+      .command-input::placeholder { color: #467557; }
 
-      @keyframes pulse-dot { 0%, 100% { box-shadow: 0 0 0 0 rgba(68,198,106,.4); } 50% { box-shadow: 0 0 0 5px rgba(68,198,106,0); } }
-      @keyframes person-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-      @keyframes cat-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px) rotate(-3deg); } }
-      @keyframes pixel-twinkle { 0%, 100% { opacity: .45; transform: scale(1); } 50% { opacity: 1; transform: scale(1.35); } }
-      @keyframes pixel-hop { 0%, 76%, 100% { transform: translateY(0); } 80% { transform: translateY(-4px); } 87% { transform: translateY(0); } }
-      @keyframes pixel-heartbeat { 0%, 75%, 100% { transform: scale(1); } 80% { transform: scale(1.12); } 86% { transform: scale(1); } }
-      @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-      @keyframes cursor-blink { 50% { opacity: 0; } }
-      @keyframes screen-flicker { 0%, 95%, 100% { opacity: 0; } 96% { opacity: .35; } 97% { opacity: .05; } }
-      @keyframes spark-pop { from { opacity: .9; transform: translate(-50%, -50%) scale(1); } to { opacity: 0; transform: translate(-50%, -50%) scale(4); } }
-      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+      .system-panel { min-width: 0; display: flex; flex-direction: column; padding: 24px 18px; border-left: 1px solid var(--line); background: rgba(5,16,10,.62); }
+      .system-label { margin: 0 0 15px; color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
+      .system-label::before { content: "/* "; color: var(--line); }
+      .system-label::after { content: " */"; color: var(--line); }
+      .system-avatar { width: 82px; height: 82px; display: grid; place-items: center; margin: 3px auto 19px; border: 1px solid var(--green-dim); border-radius: 50%; color: var(--green); font: 54px var(--pixel); box-shadow: 0 0 20px rgba(140,255,158,.13); animation: avatar-float 4s ease-in-out infinite; }
+      .system-name { margin: 0; color: var(--green); font: 28px var(--pixel); text-align: center; }
+      .system-role { margin: 3px 0 24px; color: var(--cyan); font-size: 9px; text-align: center; }
+      .system-stats { display: grid; gap: 13px; padding: 17px 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); font-size: 9px; }
+      .stat-row { display: flex; justify-content: space-between; gap: 10px; }
+      .stat-row span { color: var(--muted); }
+      .stat-row strong { color: var(--green); font-weight: 400; text-align: right; }
+      .signal-group { display: grid; gap: 10px; margin-top: 22px; }
+      .signal { display: grid; grid-template-columns: 76px 1fr; align-items: center; gap: 8px; color: var(--muted); font-size: 9px; }
+      .signal-bar { height: 7px; display: flex; gap: 2px; }
+      .signal-bar i { flex: 1; background: var(--line); }
+      .signal-bar i.on { background: var(--green-dim); box-shadow: 0 0 5px rgba(140,255,158,.15); }
+      .system-shortcuts { display: grid; gap: 8px; margin-top: auto; padding-top: 25px; }
+      .system-shortcuts button { padding: 6px 8px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; text-align: left; font-size: 9px; }
+      .system-shortcuts button:hover { border-color: var(--green); color: var(--green); }
+      .system-footer { margin-top: 18px; color: var(--line); font-size: 8px; line-height: 1.5; text-align: center; }
 
-      @media (max-width: 920px) {
-        .site-shell { width: min(100% - 26px, 680px); margin-top: 13px; }
-        .site-header { padding-inline: 4px; }
-        .top-status { display: none; }
-        .hero-window { grid-template-columns: 120px 1fr 58px; }
-        .side-nav { padding-inline: 9px; }
-        .side-nav ul { gap: 18px; }
-        .side-nav a { font-size: 10px; }
-        .nav-icon { width: 18px; font-size: 18px; }
-        .hero-main { padding-inline: 24px; }
-        .hero-title { font-size: clamp(68px, 12vw, 110px); }
-        .about-body { grid-template-columns: .8fr 1.2fr; gap: 30px; }
-        .about-photo { grid-column: 1; grid-row: 1; }
-        .random-facts { grid-column: 2; grid-row: 1; }
-        .about-copy { grid-column: 1 / -1; grid-row: 2; }
-        .project-grid { gap: 28px 15px; }
-        .contact-inner { gap: 35px; }
+      .boot-overlay { position: fixed; z-index: 50; inset: 0; display: grid; place-items: center; background: var(--void); color: var(--green); font: 13px var(--mono); animation: boot-away .55s 2.1s forwards; pointer-events: none; }
+      .boot-overlay p { animation: boot-pulse .7s infinite alternate; }
+      .boot-overlay p::after { content: "_"; animation: blink 1s steps(2, end) infinite; }
+      .site-mark { position: fixed; right: 19px; bottom: 14px; color: var(--line); font-size: 9px; pointer-events: none; }
+
+      @keyframes blink { 50% { opacity: 0; } }
+      @keyframes command-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes rain-fall { from { transform: translateY(-8vh); } to { transform: translateY(118vh); } }
+      @keyframes avatar-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+      @keyframes boot-pulse { from { opacity: .45; } to { opacity: 1; } }
+      @keyframes boot-away { to { opacity: 0; visibility: hidden; } }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+
+      @media (max-width: 780px) {
+        .terminal-app { min-height: 520px; padding: 9px; }
+        .terminal-content { grid-template-columns: 1fr; }
+        .system-panel { display: grid; grid-template-columns: 90px 1fr; gap: 0 15px; padding: 13px 16px; border-top: 1px solid var(--line); border-left: 0; }
+        .system-label, .system-avatar { grid-row: span 2; }
+        .system-label { margin: 4px 0 0; }
+        .system-avatar { width: 58px; height: 58px; margin: 8px auto 0; font-size: 38px; }
+        .system-name { align-self: end; text-align: left; font-size: 21px; }
+        .system-role { align-self: start; margin: 2px 0 0; text-align: left; }
+        .system-stats, .signal-group, .system-shortcuts, .system-footer { display: none; }
+        .home-logo { font-size: clamp(62px, 18vw, 110px); }
+        .home-subtitle { font-size: 16px; }
+        .fact-grid, .project-terminal-grid { grid-template-columns: 1fr 1fr; }
+        .contact-grid { grid-template-columns: 1fr; }
+        .contact-ascii { display: none; }
       }
 
-      @media (max-width: 600px) {
-        .site-header { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
-        .site-logo { font-size: 19px; }
-        .top-links { gap: 11px; font-size: 9px; }
-        .hero-window { display: block; }
-        .hero-window > .titlebar { display: flex; }
-        .side-nav { display: block; padding: 13px; border-right: 0; border-bottom: 1px solid rgba(20,25,28,.3); }
-        .side-nav ul { display: flex; justify-content: space-between; gap: 7px; }
-        .side-nav a { display: grid; justify-items: center; gap: 4px; font-size: 8px; }
-        .side-note { display: none; }
-        .icon-dock { display: none; }
-        .hero-main { padding: 31px 18px 54px; }
-        .hero-kicker { font-size: 9px; }
-        .hero-title { font-size: clamp(69px, 20vw, 105px); }
-        .hero-description, .hero-scroll { margin-left: 5%; }
-        .hero-collage { min-height: 315px; transform: scale(.82); transform-origin: top left; width: 123%; margin-bottom: -57px; }
-        .desk-photo { left: 0; }
-        .landscape-photo { right: 0; }
-        .pixel-person { left: 44%; }
-        .pixel-cat { left: 61%; }
-        .cat-speech { left: 58%; }
-        .hero-rail { position: relative; margin: 0 -18px -54px; width: calc(100% + 36px); }
-        .music-button { padding-inline: 4px; }
-        .about-body { display: block; padding: 38px 18px 63px; }
-        .about-photo { margin: 0 0 55px 12%; }
-        .random-facts { margin: 0 12% 0 20%; }
-        .about-copy { margin-top: 61px; }
-        .about-heading { font-size: 83px; }
-        .about-note { left: 9%; bottom: 22px; }
-        .projects-inner { padding-inline: 16px; }
-        .window-section-heading { display: block; }
-        .window-section-heading h2 { font-size: 61px; }
-        .filter-tabs { margin-top: 25px; justify-content: end; }
-        .project-grid { grid-template-columns: 1fr 1fr; gap: 25px 10px; margin-top: 34px; }
-        .project-image { height: 132px; }
-        .project-label { font-size: 10px; }
-        .project-label small { font-size: 8px; }
-        .project-more { margin-top: 33px; }
-        .diary-inner { display: block; padding-inline: 18px; }
-        .diary-index { margin-bottom: 38px; }
-        .diary-index ul { display: flex; gap: 18px; overflow-x: auto; }
-        .diary-index li { min-width: max-content; }
-        .diary-index li:first-child::before { width: calc(100% + 14px); }
-        .diary-post h2 { font-size: 57px; }
-        .diary-note { right: 4%; top: 218px; font-size: 17px; }
-        .mug-doodle { right: 7%; top: 20px; font-size: 35px; }
-        .contact-inner { display: block; padding: 38px 18px 67px; }
-        .contact-heading { font-size: 58px; }
-        .contact-aside { padding-top: 57px; }
-        .social-links { margin-top: 38px; }
-        .contact-signoff { right: 10%; bottom: 20px; }
-        .site-footer { display: grid; gap: 8px; line-height: 1.5; }
+      @media (max-width: 470px) {
+        .terminal-titlebar { padding-inline: 8px; font-size: 9px; }
+        .terminal-title em { display: none; }
+        .terminal-main { padding: 14px; }
+        .session-bar { font-size: 8px; }
+        .session-bar > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .home-logo { font-size: 72px; }
+        .home-subtitle { font-size: 14px; }
+        .boot-log { font-size: 8px; }
+        .view-heading { font-size: 61px; }
+        .fact-grid, .project-terminal-grid { grid-template-columns: 1fr; }
+        .project-terminal-card { min-height: 130px; }
+        .diary-row { grid-template-columns: 83px 1fr; gap: 10px; font-size: 8px; }
+        .prompt { font-size: 9px; }
+        .command-input { font-size: 10px; }
+        .shortcut { font-size: 9px; }
+        .site-mark { display: none; }
       }
     </style>
   </head>
   <body>
-    <div class="site-shell">
-      <main>
-        <section id="home" class="window hero-window reveal" aria-labelledby="hero-heading">
-          <div class="titlebar"><span class="title-icon">🌐</span><span class="window-title">mustafa-ali.exe</span><span class="window-controls"><i>−</i><i>□</i><i>×</i></span></div>
-          <aside class="side-nav">
-            <ul>
-              <li><a href="#home"><span class="nav-icon">⌂</span><span class="nav-label">home</span></a></li>
-              <li><a href="#about"><span class="nav-icon">☺</span><span class="nav-label">about</span></a></li>
-              <li><a href="#projects"><span class="nav-icon">▱</span><span class="nav-label">projects</span></a></li>
-              <li><a href="#diary"><span class="nav-icon">▤</span><span class="nav-label">diary</span></a></li>
-              <li><a href="#contact"><span class="nav-icon">✉</span><span class="nav-label">contact</span></a></li>
-            </ul>
-            <p class="side-note">good things<br />take time</p>
-          </aside>
-          <div class="hero-main">
-            <span class="pixel-decor pixel-star hero-star-a" aria-hidden="true"></span><span class="pixel-decor pixel-star hero-star-b" aria-hidden="true"></span>
-            <p class="hero-kicker">welcome to my corner of the internet ↘</p>
-            <h1 id="hero-heading" class="hero-title">hey, i’m<br />Mustafa <span class="smile">☺</span></h1>
-            <p class="hero-description">I make stuff — mostly digital, sometimes physical. This is my little corner of the internet where I dump projects, thoughts, and things I like.</p>
-            <a class="hero-scroll" href="#about">→ scroll around (or don’t)</a>
-            <div class="hero-collage" aria-label="A handmade collage of a workspace, landscape, and pixel characters">
-              <div class="scrap desk-photo"></div><div class="scrap landscape-photo"><i class="tape"></i></div><div class="pixel-person"></div><button class="pixel-cat" aria-label="Pet the cat"></button><div class="cat-speech" aria-live="polite">you found the right place :)</div><span class="pixel-decor pixel-mushroom hero-mushroom" aria-hidden="true"></span>
+    <div class="terminal-app" id="app">
+      <div class="ambient-glow"></div>
+      <div class="matrix-rain" aria-hidden="true"></div>
+      <div class="terminal-window">
+        <div class="terminal-titlebar"><span class="terminal-icon">&gt;_</span><span class="terminal-title">mustafa@portfolio:~$ <em>interactive session</em></span><span class="terminal-controls"><i></i><i></i><i></i></span></div>
+        <div class="terminal-content">
+          <main class="terminal-main">
+            <div class="session-bar"><span>SESSION_ID: <strong id="session-id">MA-0000</strong> // BUILD: <strong>branch-2</strong></span><span class="live"><i class="live-dot"></i> ONLINE</span></div>
+            <div class="output-scroller" id="output-scroller" tabindex="0">
+              <section class="view active" data-view="home" aria-labelledby="home-heading">
+                <p class="view-kicker">boot sequence complete // welcome, human</p>
+                <h1 id="home-heading" class="home-logo">MUSTAFA<span class="accent">.ALI</span></h1>
+                <p class="home-subtitle">designer + developer making digital things with personality<span class="cursor"></span></p>
+                <ul class="boot-log"><li>loading strange ideas</li><li>mounting portfolio /dev/creative</li><li>checking for good vibes</li><li>no unnecessary gradients found</li></ul>
+                <p class="command-hint">type <code>help</code> to see available commands, or use a shortcut:</p>
+                <div class="shortcut-grid"><button class="shortcut" data-command="about" type="button">about</button><button class="shortcut" data-command="projects" type="button">projects</button><button class="shortcut" data-command="diary" type="button">diary</button><button class="shortcut" data-command="contact" type="button">contact</button><button class="shortcut" data-command="neofetch" type="button">neofetch</button></div>
+              </section>
+
+              <section class="view" data-view="about" aria-labelledby="about-heading"><p class="view-kicker">/usr/about // readme.txt</p><h2 id="about-heading" class="view-heading">about</h2><p class="view-copy">I’m Mustafa — a designer and developer who likes turning complicated ideas into <strong>useful, memorable experiences</strong>. I care about clear thinking, strong type, and work with a reason to exist. Especially when it feels a little unexpected.</p><div class="fact-grid"><div class="fact-box"><small>LOCATION</small><span>Illinois, USA</span></div><div class="fact-box"><small>ROLE</small><span>Designer / developer</span></div><div class="fact-box"><small>GOOD AT</small><span>Making the messy make sense</span></div></div><p class="ascii-divider">----------------------------------------</p><p class="view-copy">Outside the screen: good food, long walks, weird internet corners, and collecting things that make me smile.</p></section>
+
+              <section class="view" data-view="projects" aria-labelledby="projects-heading"><p class="view-kicker">/home/mustafa/projects // ls -la</p><h2 id="projects-heading" class="view-heading">projects</h2><div class="project-terminal-grid"><a class="project-terminal-card" href="mailto:hello@mustafaali.org"><div class="card-top"><span>01</span><span>BRAND / WEB</span></div><div class="card-icon">[◈]</div><h3>Fluid Forms</h3><p>Playful digital home for a creative studio.</p></a><a class="project-terminal-card" href="mailto:hello@mustafaali.org"><div class="card-top"><span>02</span><span>IDENTITY</span></div><div class="card-icon">[✦]</div><h3>Greenroom</h3><p>Identity and launch kit for a fresh idea.</p></a><a class="project-terminal-card" href="mailto:hello@mustafaali.org"><div class="card-top"><span>03</span><span>DIGITAL</span></div><div class="card-icon">[☻]</div><h3>Field Notes</h3><p>Editorial world for curious people.</p></a></div><p class="command-hint">more files incoming. type <code>contact</code> to request the full reel.</p></section>
+
+              <section class="view" data-view="diary" aria-labelledby="diary-heading"><p class="view-kicker">/home/mustafa/diary // tail -f thoughts.log</p><h2 id="diary-heading" class="view-heading">diary</h2><div class="diary-list"><div class="diary-row"><time>04.12.24</time><span>the best coffee in portland???</span></div><div class="diary-row"><time>04.05.24</time><span>tiny moments that feel big</span></div><div class="diary-row"><time>03.28.24</time><span>a very long walk</span></div><div class="diary-row"><time>03.14.24</time><span>things I’m into right now</span></div><div class="diary-row"><time>02.27.24</time><span>the process is the point</span></div></div><p class="view-copy">This is the low-stakes corner: notes about coffee, process, ideas, and whatever else is currently taking up too much space in my brain.</p></section>
+
+              <section class="view" data-view="contact" aria-labelledby="contact-heading"><p class="view-kicker">/usr/bin/contact // establish connection</p><h2 id="contact-heading" class="view-heading">contact</h2><div class="contact-grid"><form class="contact-form" id="contact-form"><label>name<input name="name" autocomplete="name" required /></label><label>email<input type="email" name="email" autocomplete="email" required /></label><label>message<textarea name="message" required></textarea></label><button class="terminal-button" type="submit">send_message --now ↗</button><div class="form-status" role="status"></div></form><div class="contact-ascii">  ╭────────────╮
+  │  SAY HELLO │
+  ╰─────┬──────╯
+        │
+  .─────┴─────.
+  │  <strong>READY</strong>      │
+  '────────────'
+
+<a href="mailto:hello@mustafaali.org">hello@mustafaali.org</a></div></div></section>
+
+              <section class="view" data-view="help" aria-labelledby="help-heading"><p class="view-kicker">/bin/help // available commands</p><h2 id="help-heading" class="view-heading">help</h2><p class="view-copy">Try one of these commands:</p><div class="diary-list"><div class="diary-row"><time>about</time><span>read the human.txt file</span></div><div class="diary-row"><time>projects</time><span>list selected work</span></div><div class="diary-row"><time>diary</time><span>open thoughts.log</span></div><div class="diary-row"><time>contact</time><span>establish a connection</span></div><div class="diary-row"><time>neofetch</time><span>print system information</span></div><div class="diary-row"><time>cat</time><span>obviously</span></div><div class="diary-row"><time>clear</time><span>return to the start screen</span></div></div></section>
+              <section class="view" data-view="neofetch" aria-labelledby="neofetch-heading"><p class="view-kicker">/usr/bin/neofetch // system report</p><h2 id="neofetch-heading" class="view-heading">neofetch</h2><div class="contact-grid"><div class="contact-ascii">      .-''''-.
+    .'  .--.  '.
+   /   /    \   \
+  ;   ;  ()  ;   ;
+  |   |      |   |
+  ;   ;  /\  ;   ;
+   \   \____/   /
+    '.        .'
+      '-.__.-'</div><div class="view-copy"><p><strong>OS:</strong> MustafaOS 2.0</p><p><strong>Host:</strong> mustafaali.org</p><p><strong>Kernel:</strong> curiosity-6.9</p><p><strong>Shell:</strong> zsh / good-vibes</p><p><strong>Theme:</strong> terminal, but friendly</p><p><strong>Uptime:</strong> <span id="neofetch-uptime">00:00:00</span></p></div></div></section>
+              <div class="transcript" id="transcript" aria-live="polite"></div>
             </div>
-            <div class="hero-rail"><i class="rail-led"></i><span class="rail-track"><span class="rail-marquee">currently listening: the 1975 — fallingforyou　 ▮▮　♪　 currently listening: the 1975 — fallingforyou　 ▮▮　♪　</span></span><button class="music-button" type="button" aria-pressed="false">music: off</button></div>
-          </div>
-          <aside class="icon-dock" aria-label="Things Mustafa likes"><a class="dock-item" href="#diary"><span class="dock-emoji">♫</span><span>music</span></a><a class="dock-item" href="#projects"><span class="dock-emoji">🎮</span><span>games</span></a><a class="dock-item" href="#about"><span class="dock-emoji">▥</span><span>books</span></a><a class="dock-item" href="#diary"><span class="dock-emoji">🍕</span><span>food</span></a><a class="dock-item" href="#contact"><span class="dock-emoji">☺</span><span>hello</span></a></aside>
-        </section>
-
-        <section id="about" class="window about-window section-window reveal" aria-labelledby="about-heading">
-          <div class="titlebar dark"><span class="title-icon">◈</span><span class="window-title">about_me.html</span><span class="window-controls"><i>↗</i><i>□</i><i>×</i></span></div>
-          <div class="about-body">
-            <span class="pixel-decor pixel-star about-star" aria-hidden="true"></span><span class="pixel-decor pixel-plant about-plant" aria-hidden="true"></span>
-            <div class="about-copy"><h2 id="about-heading" class="about-heading">a little<br />about me...</h2><p>I’m Mustafa. I’m a designer and developer who likes turning ideas into interactive experiences — especially when they feel a little unexpected.</p><p>I care a lot about making things that feel human. Weird internet stuff, analog textures, good food, and long walks (short ones, also fine).</p><span class="about-sign">— Mustafa :)</span></div>
-            <div class="about-photo"><i class="tape"></i></div>
-            <div class="random-facts"><strong>random facts:</strong><ul><li>I have a cat (obviously)</li><li>I make a very good coffee</li><li>I used to play guitar</li><li>I collect cool internet corners</li><li>I’m working on a few things...</li></ul></div>
-            <span class="about-note">my supervisor ↙</span>
-          </div>
-        </section>
-
-        <section id="projects" class="window projects-window section-window reveal" aria-labelledby="projects-heading">
-          <div class="titlebar purple"><span class="title-icon">📁</span><span class="window-title">projects.exe</span><span class="window-controls"><i>−</i><i>□</i><i>×</i></span></div>
-          <div class="projects-inner">
-            <span class="pixel-decor pixel-gameboy" aria-hidden="true"></span><span class="pixel-decor pixel-star project-spark" aria-hidden="true"></span>
-            <div class="window-section-heading"><h2 id="projects-heading">my<br />projects:</h2><div class="filter-tabs"><a href="#projects">all</a><a href="#projects">/ digital</a><a href="#projects">/ physical</a><a href="#projects">/ misc</a></div></div>
-            <div class="project-grid">
-              <a class="project-card reveal" href="#contact"><div class="project-image"></div><p class="project-label">night drives<small>a photo series (2025)</small></p><span class="project-arrow">↗</span></a>
-              <a class="project-card reveal" href="#contact"><div class="project-image"></div><p class="project-label">scraps<small>collage + digital (2024)</small></p><span class="project-arrow">↗</span></a>
-              <a class="project-card reveal" href="#contact"><div class="project-image"></div><p class="project-label">little game<small>a tiny game (2024)</small></p><span class="project-arrow">↗</span></a>
-              <a class="project-card reveal" href="#contact"><div class="project-image"></div><p class="project-label">poster series<small>print design (2023)</small></p><span class="project-arrow">↗</span></a>
-              <a class="project-card reveal" href="#contact"><div class="project-image"></div><p class="project-label">ceramic stuff<small>handmade (2022)</small></p><span class="project-arrow">↗</span></a>
-              <a class="project-card reveal" href="#contact"><div class="project-image"></div><p class="project-label">website v1<small>experimental (2021)</small></p><span class="project-arrow">↗</span></a>
-            </div>
-            <p class="project-more">more coming soon... ☺</p>
-          </div>
-        </section>
-
-        <section id="diary" class="window diary-window section-window reveal" aria-labelledby="diary-heading">
-          <div class="titlebar"><span class="title-icon">🌐</span><span class="window-title">diary.html</span><span class="window-controls"><i>−</i><i>□</i><i>×</i></span></div>
-          <div class="diary-inner">
-            <span class="pixel-decor pixel-heart" aria-hidden="true"></span><span class="pixel-decor pixel-star diary-star" aria-hidden="true"></span>
-            <nav class="diary-index" aria-label="Diary posts"><ul><li>04.12.2024<br />the best coffee<br />in portland???</li><li>04.05.2024<br />tiny moments<br />that feel big</li><li>03.28.2024<br />a very long<br />walk</li><li>03.14.2024<br />things i’m<br />into right now</li><li>02.27.2024<br />the process<br />is the point</li></ul></nav>
-            <article class="diary-post"><span class="diary-date">04.12.2024 / food</span><h2 id="diary-heading">the best coffee<br />in portland???</h2><p>So I finally found this little coffee shop on 12th and it’s honestly life changing. The matcha is unreal, and they have these weird little bookshelf zines and stuff. 10/10.</p><div class="coffee-photo" role="img" aria-label="A stylized photo of a cup of coffee"></div><a class="diary-link" href="#contact">← back to all posts</a></article>
-            <span class="mug-doodle">☕</span><p class="diary-note">go here<br />if you’re<br />in portland</p>
-          </div>
-        </section>
-
-        <section id="contact" class="window contact-window section-window reveal" aria-labelledby="contact-heading">
-          <div class="titlebar green"><span class="title-icon">◉</span><span class="window-title">contact.exe</span><span class="window-controls"><i>−</i><i>□</i><i>×</i></span></div>
-          <div class="contact-inner">
-            <span class="pixel-decor pixel-star contact-pixel-heart" aria-hidden="true"></span><span class="pixel-decor pixel-terrain" aria-hidden="true"></span>
-            <div class="contact-copy"><h2 id="contact-heading" class="contact-heading">Let’s<br />connect <span class="blink">_</span></h2><p>Want to work together? Have a question? Or just wanna say hi? Hit me up.</p><form class="contact-form" id="contact-form"><input name="name" aria-label="Name" placeholder="name" required /><input type="email" name="email" aria-label="Email" placeholder="email" required /><textarea name="message" aria-label="Message" placeholder="message" required></textarea><button type="submit">send →</button><div class="form-status" role="status"></div></form></div>
-            <aside class="contact-aside"><div class="mini-window"><div class="mini-bar"><span>cat.exe</span><span>×</span></div><div class="mini-screen">meow</div></div><div class="taped-photo"><i class="tape"></i></div><div class="social-links"><a href="mailto:hello@mustafaali.org">◎ email</a><a href="https://github.com/mali207Illinois/portfolio" target="_blank" rel="noreferrer">◈ github</a><a href="#home">♫ currently online</a></div></aside><span class="contact-signoff">thanks for visiting &lt;3</span>
-          </div>
-        </section>
-      </main>
-
-      <footer class="site-footer"><span>© 2026 Mustafa Ali</span><span>made with curiosity + too much coffee</span><a href="#home">↑ back to top</a></footer>
+            <div class="command-bar"><span class="prompt">mustafa@portfolio:~$</span><form class="command-form" id="command-form"><input class="command-input" id="command-input" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command" placeholder="type a command..." /></form></div>
+          </main>
+          <aside class="system-panel"><p class="system-label">system profile</p><div class="system-avatar">MA</div><h2 class="system-name">mustafa ali</h2><p class="system-role">designer / developer</p><div class="system-stats"><div class="stat-row"><span>status</span><strong>available</strong></div><div class="stat-row"><span>location</span><strong>illinois, usa</strong></div><div class="stat-row"><span>uptime</span><strong id="uptime">00:00:00</strong></div><div class="stat-row"><span>visitors</span><strong id="visitor-count">004237</strong></div></div><div class="signal-group"><div class="signal"><span>creativity</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div><div class="signal"><span>caffeine</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div><div class="signal"><span>free time</span><span class="signal-bar"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div></div><div class="system-shortcuts"><button type="button" data-command="help">[?] command list</button><button type="button" data-command="cat">[+] pet the cat</button><button type="button" data-command="sudo hire mustafa">[!] dangerous option</button></div><p class="system-footer">all systems nominal<br />made with curiosity + too much coffee</p></aside>
+        </div>
+      </div>
+      <span class="site-mark">MA // build 2.0</span>
     </div>
+    <div class="boot-overlay" aria-hidden="true"><p>initializing mustafa@portfolio</p></div>
 
     <script>
-      const revealItems = document.querySelectorAll('.reveal');
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: .1 });
-      revealItems.forEach((item, index) => {
-        item.style.transitionDelay = `${Math.min(index * 35, 300)}ms`;
-        revealObserver.observe(item);
-      });
+      const app = document.querySelector('#app');
+      const input = document.querySelector('#command-input');
+      const outputScroller = document.querySelector('#output-scroller');
+      const transcript = document.querySelector('#transcript');
+      const views = [...document.querySelectorAll('.view')];
+      const history = [];
+      let historyIndex = 0;
+      const startedAt = Date.now();
 
-      const cat = document.querySelector('.pixel-cat');
-      const catSpeech = document.querySelector('.cat-speech');
-      cat.addEventListener('click', () => {
-        catSpeech.textContent = catSpeech.classList.contains('show') ? 'meow.' : 'you found the right place :)';
-        catSpeech.classList.toggle('show');
-      });
+      const commands = {
+        home: { view: 'home', result: 'returning to /home' },
+        about: { view: 'about', result: 'opening human.txt' },
+        projects: { view: 'projects', result: 'scanning /home/mustafa/projects' },
+        diary: { view: 'diary', result: 'tailing thoughts.log' },
+        contact: { view: 'contact', result: 'opening secure channel' },
+        help: { view: 'help', result: 'printing available commands' },
+        neofetch: { view: 'neofetch', result: 'collecting system information' }
+      };
 
-      const musicButton = document.querySelector('.music-button');
-      musicButton.addEventListener('click', () => {
-        const isOn = document.body.classList.toggle('music-on');
-        musicButton.textContent = isOn ? 'music: on' : 'music: off';
-        musicButton.setAttribute('aria-pressed', String(isOn));
+      function setView(name) {
+        views.forEach((view) => view.classList.toggle('active', view.dataset.view === name));
+        outputScroller.scrollTop = 0;
+        input.focus();
+      }
+
+      function echoCommand(command, result) {
+        transcript.innerHTML = `<span class="command-echo">${command.replaceAll('<', '&lt;')}</span><span class="command-result">${result}</span>`;
+      }
+
+      function runCommand(raw) {
+        const command = raw.trim().toLowerCase();
+        if (!command) return;
+        history.push(command);
+        historyIndex = history.length;
+        if (commands[command]) {
+          setView(commands[command].view);
+          echoCommand(command, commands[command].result);
+        } else if (command === 'clear' || command === 'cls') {
+          transcript.replaceChildren();
+          setView('home');
+        } else if (command === 'cat' || command === 'meow') {
+          setView('home');
+          echoCommand(command, 'meow. the cat approves of your curiosity.');
+        } else if (command === 'sudo hire mustafa') {
+          setView('contact');
+          echoCommand(command, 'permission granted. smart move.');
+        } else if (command === 'whoami') {
+          setView('about');
+          echoCommand(command, 'you are curious. mustafa is a designer / developer.');
+        } else {
+          echoCommand(command, `command not found: ${command}. try "help".`);
+        }
+        input.value = '';
+      }
+
+      document.querySelector('#command-form').addEventListener('submit', (event) => { event.preventDefault(); runCommand(input.value); });
+      document.querySelectorAll('[data-command]').forEach((button) => button.addEventListener('click', () => runCommand(button.dataset.command)));
+      input.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowUp') { event.preventDefault(); historyIndex = Math.max(0, historyIndex - 1); input.value = history[historyIndex] || ''; }
+        if (event.key === 'ArrowDown') { event.preventDefault(); historyIndex = Math.min(history.length, historyIndex + 1); input.value = history[historyIndex] || ''; }
       });
 
       document.querySelector('#contact-form').addEventListener('submit', (event) => {
         event.preventDefault();
         const status = event.currentTarget.querySelector('.form-status');
-        status.textContent = 'message queued :) email me directly at hello@mustafaali.org';
+        status.textContent = 'message prepared. email hello@mustafaali.org directly to send it.';
         event.currentTarget.reset();
       });
 
-      let lastSpark = 0;
-      window.addEventListener('pointermove', (event) => {
-        const now = Date.now();
-        if (now - lastSpark < 85 || window.matchMedia('(pointer: coarse)').matches) return;
-        lastSpark = now;
-        const spark = document.createElement('i');
-        spark.className = 'cursor-spark';
-        spark.style.left = `${event.clientX}px`;
-        spark.style.top = `${event.clientY}px`;
-        document.body.appendChild(spark);
-        spark.addEventListener('animationend', () => spark.remove());
-      });
+      function formatTime() {
+        const seconds = Math.floor((Date.now() - startedAt) / 1000);
+        const h = String(Math.floor(seconds / 3600)).padStart(2, '0');
+        const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+        const s = String(seconds % 60).padStart(2, '0');
+        return `${h}:${m}:${s}`;
+      }
+      const session = `${Math.random().toString(36).slice(2, 6).toUpperCase()}-${String(Date.now()).slice(-4)}`;
+      document.querySelector('#session-id').textContent = `MA-${session}`;
+      setInterval(() => { document.querySelector('#uptime').textContent = formatTime(); document.querySelector('#neofetch-uptime').textContent = formatTime(); }, 1000);
+
+      const visitorKey = 'mustafa-portfolio-visits';
+      const visits = Math.max(4237, Number(localStorage.getItem(visitorKey) || 4237) + 1);
+      localStorage.setItem(visitorKey, visits);
+      document.querySelector('#visitor-count').textContent = String(visits).padStart(6, '0');
+
+      const matrix = document.querySelector('.matrix-rain');
+      const glyphs = '01アイウエオ<>[]{}';
+      for (let index = 0; index < 28; index += 1) {
+        const stream = document.createElement('i');
+        stream.textContent = Array.from({ length: 7 + Math.floor(Math.random() * 9) }, () => glyphs[Math.floor(Math.random() * glyphs.length)]).join('');
+        stream.style.left = `${Math.random() * 100}%`;
+        stream.style.animationDuration = `${9 + Math.random() * 15}s`;
+        stream.style.animationDelay = `${Math.random() * -18}s`;
+        stream.style.fontSize = `${10 + Math.random() * 8}px`;
+        matrix.appendChild(stream);
+      }
+
+      window.addEventListener('pointermove', (event) => { app.style.setProperty('--mx', `${event.clientX}px`); app.style.setProperty('--my', `${event.clientY}px`); });
+      window.addEventListener('keydown', (event) => { if (event.key === '/' && document.activeElement !== input) { event.preventDefault(); input.focus(); } });
+      window.setTimeout(() => input.focus(), 2500);
     </script>
   </body>
 </html>
