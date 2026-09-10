@@ -65,10 +65,6 @@
       .output-scroller::-webkit-scrollbar-thumb { background: var(--line); }
       .view { display: none; }
       .view.active { display: block; animation: command-in .35s ease-out both; }
-      .view.active .boot-log li { animation: log-in .45s ease-out both; }
-      .view.active .boot-log li:nth-child(2) { animation-delay: .08s; }
-      .view.active .boot-log li:nth-child(3) { animation-delay: .16s; }
-      .view.active .boot-log li:nth-child(4) { animation-delay: .24s; }
       .view.active .shortcut { animation: shortcut-rise .45s ease-out both; }
       .view.active .shortcut:nth-child(2) { animation-delay: .08s; }
       .view.active .shortcut:nth-child(3) { animation-delay: .16s; }
@@ -81,12 +77,12 @@
       .home-logo .accent { color: var(--cyan); }
       .home-subtitle { max-width: 650px; margin: 22px 0 0; color: #d7e4ff; font: 18px/1.35 var(--pixel); letter-spacing: .03em; }
       .home-subtitle .cursor { display: inline-block; width: 9px; height: 18px; margin-left: 5px; background: var(--green); vertical-align: -2px; animation: blink 1s steps(2, end) infinite; }
-      .boot-log { display: grid; gap: 6px; margin-top: 35px; color: var(--muted); font-size: 10px; }
-      .boot-log li { list-style: none; }
-      .boot-log li::before { content: "[ ok ] "; color: var(--green-dim); }
-      .boot-log li:nth-child(2)::before { content: "[ ok ] "; color: var(--cyan); }
-      .boot-log li:nth-child(3)::before { content: "[ ok ] "; color: var(--amber); }
-      .boot-log li:nth-child(4)::before { content: "[ ok ] "; color: var(--pink); }
+      .home-snapshot { display: grid; gap: 7px; margin-top: 35px; color: var(--muted); font-size: 10px; }
+      .home-snapshot span { opacity: 0; animation: log-in .45s ease-out forwards; }
+      .home-snapshot span:nth-child(2) { animation-delay: .1s; }
+      .home-snapshot span:nth-child(3) { animation-delay: .2s; }
+      .home-snapshot span::before { content: "~ "; color: var(--green-dim); }
+      .home-snapshot strong { color: var(--green); font-weight: 400; }
       .command-hint { margin: 32px 0 0; color: var(--muted); font-size: 11px; }
       .command-hint code { color: var(--amber); }
       .shortcut-grid { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 13px; }
@@ -228,7 +224,6 @@
         .session-bar > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .home-logo { font-size: 72px; }
         .home-subtitle { font-size: 14px; }
-        .boot-log { font-size: 8px; }
         .view-heading { font-size: 61px; }
         .fact-grid, .project-terminal-grid { grid-template-columns: 1fr; }
         .project-terminal-card { min-height: 130px; }
@@ -374,7 +369,7 @@
                 <p class="view-kicker">boot sequence complete // welcome, human</p>
                 <h1 id="home-heading" class="home-logo">MUSTAFA<span class="accent">.ALI</span></h1>
                 <p class="home-subtitle">UIUC student + builder<span class="cursor"></span></p>
-                <ul class="boot-log"><li>loading strange ideas</li><li>mounting portfolio /dev/creative</li><li>checking for good vibes</li><li>no unnecessary gradients found</li></ul>
+                <div class="home-snapshot" aria-label="Current focus"><span><strong>focus:</strong> thoughtful interfaces + tiny tools</span><span><strong>status:</strong> building in public</span><span><strong>next:</strong> shipping the next small thing</span></div>
                 <p class="command-hint">type <code>help</code> to see available commands, or use a shortcut:</p>
                 <div class="shortcut-grid"><button class="shortcut" data-command="about" type="button">about</button><button class="shortcut" data-command="projects" type="button">projects</button><button class="shortcut" data-command="diary" type="button">diary</button><button class="shortcut" data-command="contact" type="button">contact</button><button class="shortcut" data-command="neofetch" type="button">neofetch</button></div>
               </section>
