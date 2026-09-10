@@ -293,8 +293,7 @@
       body::before { opacity: .08; background: linear-gradient(135deg, transparent 0 48%, rgba(190,214,242,.15) 49%, transparent 50%), linear-gradient(45deg, transparent 0 48%, rgba(190,214,242,.1) 49%, transparent 50%); background-size: 150px 150px; }
       body::after { opacity: .16; background: radial-gradient(circle at 75% 22%, rgba(113,149,197,.22), transparent 25%), linear-gradient(90deg, transparent 0 49.8%, rgba(190,214,242,.035) 50%, transparent 50.2%); }
       .desktop-taskbar { position: fixed; z-index: 0; right: 0; bottom: 0; left: 0; height: 42px; display: flex; align-items: center; gap: 8px; padding: 0 14px; border-top: 1px solid rgba(188,211,238,.3); background: rgba(11,18,30,.86); backdrop-filter: blur(14px); box-shadow: 0 -8px 24px rgba(6,12,22,.3); color: #b4c2d6; font: 10px var(--mono); }
-      .desktop-launcher { width: 30px; height: 28px; display: grid; place-items: center; border: 1px solid #90a9c6; background: rgba(101,127,160,.28); color: #d7e4f4; font-size: 15px; }
-      .desktop-taskbar-brand { color: #d7e4f4; font-size: 9px; }
+      .desktop-launcher { width: 30px; height: 28px; display: grid; place-items: center; border: 1px solid #e0efff; background: linear-gradient(145deg, #d8eafa, #7799bd); color: #172536; font-size: 15px; box-shadow: inset 1px 1px rgba(255,255,255,.65), 1px 2px 0 rgba(4,10,20,.35); }
       .desktop-workspace { width: 20px; height: 20px; display: grid; place-items: center; margin-left: 5px; border: 1px solid #90a9c6; color: #b8ffc0; font-size: 9px; }
       .desktop-taskbar-apps { display: flex; align-items: center; gap: 5px; height: 100%; margin-left: 3px; }
       .desktop-taskbar-app { min-width: 108px; display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 10px; border: 1px solid rgba(188,211,238,.3); background: rgba(101,127,160,.24); color: #d7e4f4; }
@@ -327,7 +326,7 @@
       @media (max-width: 780px) {
         .desktop-icons { display: none; }
         .desktop-taskbar { height: 29px; padding-inline: 8px; font-size: 8px; }
-        .desktop-taskbar-brand, .desktop-workspace, .desktop-taskbar-app.ghost { display: none; }
+        .desktop-workspace, .desktop-taskbar-app.ghost { display: none; }
         .desktop-taskbar-apps { margin-left: 0; }
         .desktop-taskbar-app { min-width: 30px; width: 30px; justify-content: center; padding: 0; font-size: 0; }
         .desktop-taskbar-app > span { font-size: 12px; }
@@ -354,7 +353,7 @@
   </head>
   <body>
     <div class="desktop-icons" aria-hidden="true"><div class="desktop-icon"><span class="desktop-icon-art icon-home"></span><span>home</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-folder"></span><span>projects</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-terminal"></span><span>terminal</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-browser"></span><span>browser</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-document"></span><span>notes.txt</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-trash"></span><span>trash</span></div></div>
-    <div class="desktop-taskbar" aria-hidden="true"><span class="desktop-launcher">▦</span><span class="desktop-taskbar-brand">mustafa desktop</span><span class="desktop-workspace">1</span><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active"><span>▣</span> terminal</span><span class="desktop-taskbar-app ghost"><span>▤</span> files</span><span class="desktop-taskbar-app ghost"><span>◎</span> browser</span></span><span class="desktop-tray"><span class="desktop-tray-item">⌁</span><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
+    <div class="desktop-taskbar" aria-hidden="true"><span class="desktop-launcher">⌂</span><span class="desktop-workspace">1</span><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active"><span>▣</span> terminal</span><span class="desktop-taskbar-app ghost"><span>▤</span> files</span><span class="desktop-taskbar-app ghost"><span>◎</span> browser</span></span><span class="desktop-tray"><span class="desktop-tray-item">⌁</span><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
     <div class="terminal-app" id="app">
       <div class="ambient-glow"></div>
       <div class="matrix-rain" aria-hidden="true"></div>
