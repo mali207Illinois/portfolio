@@ -493,7 +493,7 @@
         if (reduceMotion) {
           landingTypeTargets.forEach((target) => { target.textContent = target.dataset.landingType; });
         } else {
-          await Promise.all([typeLandingText(logo, 50), typeLandingText(logoAccent, 50)]);
+          await Promise.all([typeLandingText(logo, 28), typeLandingText(logoAccent, 28)]);
           await wait(90);
           await typeLandingText(subtitle, 28);
           await wait(35);
