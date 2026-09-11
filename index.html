@@ -103,6 +103,7 @@
       .home-typewriter .home-intro-panel.landing-reveal.is-visible { animation: card-rise .55s ease-out both; }
       .home-typewriter .command-hint.landing-reveal.is-visible { animation: command-in .35s ease-out both; }
       .home-typewriter .shortcut-grid.landing-reveal.is-visible { animation: command-in .4s .08s ease-out both; }
+      .home-typewriter .shortcut-grid.landing-reveal.is-visible .shortcut { animation: shortcut-rise .45s ease-out both, shortcut-pulse 4.8s ease-in-out 1s infinite; }
 
       .view-heading { margin: 0; color: var(--green); font: 400 clamp(50px, 8vw, 100px)/.72 var(--pixel); }
       .view-heading::before { content: "> "; color: var(--cyan); }
@@ -188,6 +189,7 @@
       @keyframes icon-pulse { 0%, 100% { box-shadow: 0 0 0 rgba(140,255,158,0); } 50% { box-shadow: 0 0 12px rgba(140,255,158,.25); } }
       @keyframes log-in { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
       @keyframes shortcut-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes shortcut-pulse { 0%, 100% { border-color: var(--line); box-shadow: 0 0 0 rgba(184,255,192,0); } 50% { border-color: rgba(184,255,192,.42); box-shadow: 0 0 7px rgba(184,255,192,.12); } }
       @keyframes card-rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
       @keyframes row-in { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
       @keyframes command-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
