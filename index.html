@@ -497,9 +497,9 @@
           await wait(90);
           await typeLandingText(subtitle, 28);
           await wait(35);
-          await typeLandingText(intro, 9);
         }
         landingRevealTargets.forEach((target) => target.classList.add('is-visible'));
+        if (!reduceMotion) await typeLandingText(intro, 7);
         input.focus();
       }
 
