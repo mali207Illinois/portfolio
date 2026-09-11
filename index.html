@@ -154,6 +154,7 @@
       .transcript .command-echo { color: var(--cyan); }
       .transcript .command-echo::before { content: "mustafa@portfolio:~$ "; color: var(--green-dim); }
       .transcript .command-result { color: var(--amber); }
+      .transcript .cat-art { margin: 6px 0 0; color: var(--green); font: 14px/1.1 var(--mono); white-space: pre; }
       .command-bar { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; padding-top: 14px; border-top: 1px dashed var(--line); }
       .prompt { color: var(--green); font-size: 11px; white-space: nowrap; }
       .command-form { flex: 1; display: flex; align-items: center; }
@@ -386,12 +387,10 @@
                 <p class="view-kicker"><span data-landing-type="boot sequence complete">boot sequence complete</span></p>
                 <h1 id="home-heading" class="home-logo"><span data-landing-type="MUSTAFA">MUSTAFA</span><span class="accent" data-landing-type=".ALI">.ALI</span></h1>
                 <p class="home-subtitle"><span data-landing-type="UIUC student + builder">UIUC student + builder</span><span class="cursor"></span></p>
-                <div class="home-intro-panel landing-reveal" aria-label="Welcome note"><div class="home-intro-head"><span>~/welcome.txt</span><span>read-only</span></div><p><span data-landing-type="Building small things with big personality.">Building small things with big personality.</span></p><div class="home-intro-tags"><span>interfaces</span><span>experiments</span><span>good ideas</span></div></div>
+                <div class="home-intro-panel landing-reveal" aria-label="Welcome note"><div class="home-intro-head"><span>~/welcome.txt</span><span>read-only</span></div><p><span data-landing-type="I’m Mustafa — a designer and developer who likes turning complicated ideas into useful, memorable experiences.">I’m Mustafa — a designer and developer who likes turning complicated ideas into useful, memorable experiences.</span></p><div class="home-intro-tags"><span>interfaces</span><span>experiments</span><span>good ideas</span></div></div>
                 <p class="command-hint landing-reveal">type <code>help</code> to see available commands, or use a shortcut:</p>
-                <div class="shortcut-grid landing-reveal"><button class="shortcut" data-command="about" type="button">about</button><button class="shortcut" data-command="projects" type="button">projects</button><button class="shortcut" data-command="diary" type="button">diary</button><button class="shortcut" data-command="contact" type="button">contact</button><button class="shortcut" data-command="cat" type="button">cat</button></div>
+                <div class="shortcut-grid landing-reveal"><button class="shortcut" data-command="projects" type="button">projects</button><button class="shortcut" data-command="diary" type="button">diary</button><button class="shortcut" data-command="contact" type="button">contact</button><button class="shortcut" data-command="cat" type="button">cat</button></div>
               </section>
-
-              <section class="view" data-view="about" aria-labelledby="about-heading"><button class="view-back" data-command="home" type="button">← back to home</button><p class="view-kicker">/usr/about // readme.txt</p><h2 id="about-heading" class="view-heading">about</h2><p class="view-copy">I’m Mustafa — a designer and developer who likes turning complicated ideas into <strong>useful, memorable experiences</strong>. I care about clear thinking, strong type, and work with a reason to exist. Especially when it feels a little unexpected.</p><div class="fact-grid"><div class="fact-box"><small>LOCATION</small><span>Illinois, USA</span></div><div class="fact-box"><small>ROLE</small><span>Designer / developer</span></div><div class="fact-box"><small>GOOD AT</small><span>Making the messy make sense</span></div></div><p class="ascii-divider">----------------------------------------</p><p class="view-copy">Outside the screen: good food, long walks, weird internet corners, and collecting things that make me smile.</p></section>
 
               <section class="view" data-view="projects" aria-labelledby="projects-heading"><button class="view-back" data-command="home" type="button">← back to home</button><p class="view-kicker">/home/mustafa/projects // ls -la</p><h2 id="projects-heading" class="view-heading">projects</h2><div class="project-terminal-grid"><a class="project-terminal-card" href="mailto:hello@mustafaali.org"><div class="card-top"><span>01</span><span>PLACEHOLDER / WEB</span></div><div class="card-icon">[◈]</div><h3>Lorem Ipsum</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></a><a class="project-terminal-card" href="mailto:hello@mustafaali.org"><div class="card-top"><span>02</span><span>PLACEHOLDER / IDENTITY</span></div><div class="card-icon">[✦]</div><h3>Dolor Sit Amet</h3><p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></a><a class="project-terminal-card" href="mailto:hello@mustafaali.org"><div class="card-top"><span>03</span><span>PLACEHOLDER / DIGITAL</span></div><div class="card-icon">[☻]</div><h3>Consectetur Adipiscing</h3><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p></a></div><p class="command-hint">placeholder files loaded. type <code>contact</code> to request the full reel.</p></section>
 
@@ -407,7 +406,7 @@
 
 <a href="mailto:hello@mustafaali.org">hello@mustafaali.org</a></div></div></section>
 
-              <section class="view" data-view="help" aria-labelledby="help-heading"><button class="view-back" data-command="home" type="button">← back to home</button><p class="view-kicker">/bin/help // available commands</p><h2 id="help-heading" class="view-heading">help</h2><p class="view-copy">Try one of these commands:</p><div class="diary-list"><div class="diary-row"><time>about</time><span>read the human.txt file</span></div><div class="diary-row"><time>projects</time><span>list selected work</span></div><div class="diary-row"><time>diary</time><span>open thoughts.log</span></div><div class="diary-row"><time>contact</time><span>establish a connection</span></div><div class="diary-row"><time>cat</time><span>obviously</span></div><div class="diary-row"><time>clear</time><span>return to the start screen</span></div></div></section>
+              <section class="view" data-view="help" aria-labelledby="help-heading"><button class="view-back" data-command="home" type="button">← back to home</button><p class="view-kicker">/bin/help // available commands</p><h2 id="help-heading" class="view-heading">help</h2><p class="view-copy">Try one of these commands:</p><div class="diary-list"><div class="diary-row"><time>projects</time><span>list selected work</span></div><div class="diary-row"><time>diary</time><span>open thoughts.log</span></div><div class="diary-row"><time>contact</time><span>establish a connection</span></div><div class="diary-row"><time>cat</time><span>obviously</span></div><div class="diary-row"><time>clear</time><span>return to the start screen</span></div></div></section>
               <div class="transcript" id="transcript" aria-live="polite"></div>
             </div>
             <div class="command-bar"><span class="prompt">mustafa@portfolio:~$</span><form class="command-form" id="command-form"><input class="command-input" id="command-input" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command" placeholder="type a command..." /></form></div>
@@ -433,6 +432,35 @@
         'a mysterious tail flicks across the terminal.',
         'the cat requests snacks before approving the next command.',
         'meow detected. deploying one virtual head scratch.'
+      ];
+      const catArt = [
+        String.raw` /\_/\\
+( o.o )
+ > ^ <`,
+        String.raw` /\     /\\
+{  o   o  }
+(   =^=   )`,
+        String.raw` /\_/\\
+(=^.^=)
+(")_(")`,
+        String.raw`  |\__/,|   (\
+  |o o  |__ _)
+ _.( T   )  /
+(_/  '---'\_ )`,
+        String.raw` /\_/\\
+( -.- )
+ o_(")(")`,
+        String.raw`  /\_/\\
+=( o.o )=
+  > ^ <`,
+        String.raw`    /\_/\\
+   (  o.o  )
+    >  ^  <
+  __/     \__`,
+        String.raw` /\_/\\
+(  =^=  )
+ (       )
+  "     "`
       ];
       let catMessageIndex = 0;
       let historyIndex = 0;
@@ -482,7 +510,6 @@
 
       const commands = {
         home: { view: 'home', result: 'returning to /home' },
-        about: { view: 'about', result: 'opening human.txt' },
         projects: { view: 'projects', result: 'scanning /home/mustafa/projects' },
         diary: { view: 'diary', result: 'tailing thoughts.log' },
         contact: { view: 'contact', result: 'opening secure channel' },
@@ -499,6 +526,20 @@
         transcript.innerHTML = `<span class="command-echo">${command.replaceAll('<', '&lt;')}</span><span class="command-result">${result}</span>`;
       }
 
+      function echoCat(command, result, art) {
+        transcript.replaceChildren();
+        const commandLine = document.createElement('span');
+        commandLine.className = 'command-echo';
+        commandLine.textContent = command;
+        const resultLine = document.createElement('span');
+        resultLine.className = 'command-result';
+        resultLine.textContent = result;
+        const artLine = document.createElement('pre');
+        artLine.className = 'cat-art';
+        artLine.textContent = art;
+        transcript.append(commandLine, resultLine, artLine);
+      }
+
       function runCommand(raw) {
         const command = raw.trim().toLowerCase();
         if (!command) return;
@@ -512,11 +553,9 @@
           setView('home');
         } else if (command === 'cat' || command === 'meow') {
           setView('home');
-          echoCommand(command, catMessages[catMessageIndex % catMessages.length]);
+          const catIndex = catMessageIndex % catMessages.length;
+          echoCat(command, catMessages[catIndex], catArt[catIndex % catArt.length]);
           catMessageIndex += 1;
-        } else if (command === 'whoami') {
-          setView('about');
-          echoCommand(command, 'you are curious. mustafa is a designer / developer.');
         } else {
           echoCommand(command, `command not found: ${command}. try "help".`);
         }
