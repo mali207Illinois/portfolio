@@ -382,7 +382,6 @@
             <div class="session-bar"><span>SESSION_ID: <strong id="session-id">MA-0000</strong> // BUILD: <strong>branch-terminal-version</strong></span></div>
             <div class="output-scroller" id="output-scroller" tabindex="0">
               <section class="view active home-typewriter" data-view="home" aria-labelledby="home-heading">
-                <p class="view-kicker"><span data-landing-type="boot sequence complete">boot sequence complete</span></p>
                 <h1 id="home-heading" class="home-logo"><span data-landing-type="MUSTAFA">MUSTAFA</span><span class="accent" data-landing-type=".ALI">.ALI</span></h1>
                 <p class="home-subtitle"><span data-landing-type="UIUC student + builder">UIUC student + builder</span><span class="cursor"></span></p>
                 <div class="home-intro-panel landing-reveal" aria-label="Welcome note"><div class="home-intro-head"><span>~/welcome.txt</span><span>read-only</span></div><p><span data-landing-type="I’m Mustafa — a designer and developer who likes turning complicated ideas into useful, memorable experiences.">I’m Mustafa — a designer and developer who likes turning complicated ideas into useful, memorable experiences.</span></p></div>
@@ -489,13 +488,11 @@
       async function startLandingTypewriter() {
         if (landingView.dataset.landingReady === 'true') return;
         landingView.dataset.landingReady = 'true';
-        const [kicker, logo, logoAccent, subtitle, intro] = landingTypeTargets;
+        const [logo, logoAccent, subtitle, intro] = landingTypeTargets;
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (reduceMotion) {
           landingTypeTargets.forEach((target) => { target.textContent = target.dataset.landingType; });
         } else {
-          await typeLandingText(kicker, 18);
-          await wait(80);
           await Promise.all([typeLandingText(logo, 50), typeLandingText(logoAccent, 50)]);
           await wait(90);
           await typeLandingText(subtitle, 28);
