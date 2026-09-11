@@ -180,22 +180,6 @@
       .system-shortcuts button:hover { border-color: var(--green); color: var(--green); }
       .system-footer { margin-top: 18px; color: var(--line); font-size: 8px; line-height: 1.5; text-align: center; }
 
-      .boot-overlay { position: fixed; z-index: 50; inset: 0; display: flex; align-items: flex-start; justify-content: flex-start; padding: 12vh clamp(22px, 8vw, 140px); background: #020302; color: var(--green); font: 12px/1.5 var(--mono); animation: boot-away .6s 4.5s forwards; pointer-events: none; }
-      .boot-console { width: min(760px, 100%); }
-      .boot-prompt { margin: 0 0 18px; color: var(--green); opacity: 0; animation: boot-line .25s .1s ease-out forwards; }
-      .boot-prompt::after { content: "_"; margin-left: 4px; animation: blink 1s steps(2, end) infinite; }
-      .boot-lines { display: grid; gap: 7px; overflow: hidden; }
-      .boot-line { margin: 0; color: var(--muted); opacity: 0; transform: translateY(10px); animation: boot-line .3s ease-out forwards; }
-      .boot-line:nth-child(1) { animation-delay: .45s; }
-      .boot-line:nth-child(2) { animation-delay: .8s; }
-      .boot-line:nth-child(3) { animation-delay: 1.15s; }
-      .boot-line:nth-child(4) { animation-delay: 1.5s; }
-      .boot-line:nth-child(5) { animation-delay: 1.85s; }
-      .boot-line:nth-child(6) { animation-delay: 2.2s; }
-      .boot-line:nth-child(7) { animation-delay: 2.55s; }
-      .boot-line strong, .boot-complete strong { color: var(--green-dim); font-weight: 400; }
-      .boot-complete { margin: 22px 0 0; color: var(--green); opacity: 0; animation: boot-line .3s 3.1s ease-out forwards; }
-      .boot-cursor { display: inline-block; width: 8px; height: 15px; margin-left: 5px; background: var(--green); vertical-align: -2px; animation: blink 1s steps(2, end) infinite; }
       .site-mark { position: fixed; right: 19px; bottom: 14px; color: var(--line); font-size: 9px; pointer-events: none; }
 
       @keyframes blink { 50% { opacity: 0; } }
@@ -210,8 +194,6 @@
       @keyframes command-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
       @keyframes rain-fall { from { transform: translateY(-8vh); } to { transform: translateY(118vh); } }
       @keyframes avatar-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-      @keyframes boot-line { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-      @keyframes boot-away { to { opacity: 0; visibility: hidden; } }
       @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 
       @media (max-width: 780px) {
@@ -325,7 +307,6 @@
       .desktop-tray { display: flex; align-items: center; gap: 12px; margin-left: auto; color: #b4c2d6; }
       .desktop-tray-item { color: #a9c4e2; font-size: 11px; }
       .desktop-clock { min-width: 43px; padding-left: 11px; border-left: 1px solid rgba(188,211,238,.3); color: #d7e4f4; font-size: 9px; text-align: right; }
-      .boot-overlay { position: absolute; z-index: 10; inset: 34px 0 0; padding: 10% clamp(22px, 8vw, 140px); }
       .desktop-icons { position: fixed; z-index: 0; top: 28px; left: 12px; display: grid; gap: 14px; width: 50px; }
       .desktop-icon { width: 50px; display: grid; justify-items: center; gap: 5px; color: #d7e4f4; font: 8px var(--mono); text-align: center; text-shadow: 0 1px 3px #0b1320; }
       .desktop-icon-art { position: relative; width: 30px; height: 30px; display: grid; place-items: center; overflow: hidden; border: 1px solid #a2b8d2; background: linear-gradient(145deg, rgba(199,218,240,.48), rgba(70,95,126,.58)); box-shadow: 2px 3px 0 rgba(5,11,20,.35), inset 1px 1px rgba(255,255,255,.3); color: #f0f6ff; font-size: 0; }
@@ -380,7 +361,6 @@
       <div class="matrix-rain" aria-hidden="true"></div>
       <div class="terminal-window">
         <div class="terminal-titlebar"><span class="terminal-icon">&gt;_</span><span class="terminal-title">mustafa@portfolio:~$ <em>tty1 // bash</em></span><span class="terminal-controls" aria-label="Window controls"><button type="button" aria-label="Minimize window"></button><button type="button" aria-label="Expand window"></button><button type="button" aria-label="Close window"></button></span></div>
-        <div class="boot-overlay" aria-hidden="true"><div class="boot-console"><p class="boot-prompt">mustafa@installer:~$ ./boot-mustafa-desktop</p><div class="boot-lines"><p class="boot-line"><strong>[  OK  ]</strong> Linux version 6.9.0-mustafa</p><p class="boot-line"><strong>[  OK  ]</strong> Mounting /dev/creative</p><p class="boot-line"><strong>[  OK  ]</strong> Loading personality modules</p><p class="boot-line"><strong>[  OK  ]</strong> Checking for good ideas</p><p class="boot-line"><strong>[  OK  ]</strong> Starting portfolio compositor</p><p class="boot-line"><strong>[  OK  ]</strong> Connecting to mustafa@portfolio</p><p class="boot-line"><strong>[  OK  ]</strong> Bringing up desktop environment</p></div><p class="boot-complete"><strong>[  OK  ]</strong> desktop ready // launching mustafa@portfolio<span class="boot-cursor"></span></p></div></div>
         <div class="terminal-content">
           <main class="terminal-main">
             <div class="session-bar"><span>SESSION_ID: <strong id="session-id">MA-0000</strong> // BUILD: <strong>branch-terminal-version</strong></span></div>
@@ -583,7 +563,7 @@
 
       window.addEventListener('pointermove', (event) => { app.style.setProperty('--mx', `${event.clientX}px`); app.style.setProperty('--my', `${event.clientY}px`); });
       window.addEventListener('keydown', (event) => { if (event.key === '/' && document.activeElement !== input) { event.preventDefault(); input.focus(); } });
-      window.setTimeout(startLandingReveal, 4700);
+      startLandingReveal();
     </script>
   </body>
 </html>
