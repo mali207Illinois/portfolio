@@ -370,12 +370,10 @@
                 <p class="home-subtitle">UIUC student + builder<span class="cursor"></span></p>
                 <div class="home-intro-panel landing-reveal" aria-label="Welcome note"><div class="home-intro-head"><span>~/welcome.txt</span><span>read-only</span></div><p>I’m Mustafa — a designer and developer who likes turning complicated ideas into useful, memorable experiences.</p></div>
                 <p class="command-hint landing-reveal">type <code>help</code> to see available commands, or use a shortcut:</p>
-                <div class="shortcut-grid landing-reveal"><button class="shortcut" data-command="projects" type="button">projects</button><button class="shortcut" data-command="diary" type="button">diary</button><button class="shortcut" data-command="contact" type="button">contact</button><button class="shortcut" data-command="cat" type="button">cat</button></div>
+                <div class="shortcut-grid landing-reveal"><button class="shortcut" data-command="projects" type="button">projects</button><button class="shortcut" data-command="contact" type="button">contact</button><button class="shortcut" data-command="cat" type="button">cat</button></div>
               </section>
 
               <section class="view" data-view="projects" aria-labelledby="projects-heading"><button class="view-back" data-command="home" type="button">← back to home</button><p class="view-kicker">/home/mustafa/projects // ls -la</p><h2 id="projects-heading" class="view-heading">projects</h2><div class="project-terminal-grid"><a class="project-terminal-card" href="mailto:hello@mustafaali.org"><div class="card-top"><span>01</span><span>PLACEHOLDER / WEB</span></div><div class="card-icon">[◈]</div><h3>Lorem Ipsum</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></a><a class="project-terminal-card" href="mailto:hello@mustafaali.org"><div class="card-top"><span>02</span><span>PLACEHOLDER / IDENTITY</span></div><div class="card-icon">[✦]</div><h3>Dolor Sit Amet</h3><p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></a><a class="project-terminal-card" href="mailto:hello@mustafaali.org"><div class="card-top"><span>03</span><span>PLACEHOLDER / DIGITAL</span></div><div class="card-icon">[☻]</div><h3>Consectetur Adipiscing</h3><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p></a></div><p class="command-hint">placeholder files loaded. type <code>contact</code> to request the full reel.</p></section>
-
-              <section class="view" data-view="diary" aria-labelledby="diary-heading"><button class="view-back" data-command="home" type="button">← back to home</button><p class="view-kicker">/home/mustafa/diary // tail -f thoughts.log</p><h2 id="diary-heading" class="view-heading">diary</h2><div class="diary-list"><div class="diary-row"><time>09.10.26</time><span>hello world</span></div></div></section>
 
               <section class="view" data-view="contact" aria-labelledby="contact-heading"><button class="view-back" data-command="home" type="button">← back to home</button><p class="view-kicker">/usr/bin/contact // establish connection</p><h2 id="contact-heading" class="view-heading">contact</h2><div class="contact-grid"><form class="contact-form" id="contact-form"><label>name<input name="name" autocomplete="name" required /></label><label>email<input type="email" name="email" autocomplete="email" required /></label><label>message<textarea name="message" required></textarea></label><button class="terminal-button" type="submit">send_message --now ↗</button><div class="form-status" role="status"></div></form><div class="contact-ascii">  ╭────────────╮
   │  SAY HELLO │
@@ -387,7 +385,7 @@
 
 <a href="mailto:hello@mustafaali.org">hello@mustafaali.org</a></div></div></section>
 
-              <section class="view" data-view="help" aria-labelledby="help-heading"><button class="view-back" data-command="home" type="button">← back to home</button><p class="view-kicker">/bin/help // available commands</p><h2 id="help-heading" class="view-heading">help</h2><p class="view-copy">Try one of these commands:</p><div class="diary-list"><div class="diary-row"><time>projects</time><span>list selected work</span></div><div class="diary-row"><time>diary</time><span>open thoughts.log</span></div><div class="diary-row"><time>contact</time><span>establish a connection</span></div><div class="diary-row"><time>cat</time><span>obviously</span></div><div class="diary-row"><time>clear</time><span>return to the start screen</span></div></div></section>
+              <section class="view" data-view="help" aria-labelledby="help-heading"><button class="view-back" data-command="home" type="button">← back to home</button><p class="view-kicker">/bin/help // available commands</p><h2 id="help-heading" class="view-heading">help</h2><p class="view-copy">Try one of these commands:</p><div class="diary-list"><div class="diary-row"><time>projects</time><span>list selected work</span></div><div class="diary-row"><time>contact</time><span>establish a connection</span></div><div class="diary-row"><time>cat</time><span>obviously</span></div><div class="diary-row"><time>clear</time><span>return to the start screen</span></div></div></section>
               <div class="transcript" id="transcript" aria-live="polite"></div>
             </div>
             <div class="command-bar"><span class="prompt">mustafa@portfolio:~$</span><form class="command-form" id="command-form"><input class="command-input" id="command-input" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command" placeholder="type a command..." /></form></div>
@@ -465,7 +463,6 @@
       const commands = {
         home: { view: 'home', result: 'returning to /home' },
         projects: { view: 'projects', result: 'scanning /home/mustafa/projects' },
-        diary: { view: 'diary', result: 'tailing thoughts.log' },
         contact: { view: 'contact', result: 'opening secure channel' },
         help: { view: 'help', result: 'printing available commands' },
       };
