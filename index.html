@@ -180,7 +180,6 @@
       .system-shortcuts button:hover { border-color: var(--green); color: var(--green); }
       .system-footer { margin-top: 18px; color: var(--line); font-size: 8px; line-height: 1.5; text-align: center; }
 
-      .site-mark { position: fixed; right: 19px; bottom: 14px; color: var(--line); font-size: 9px; pointer-events: none; }
 
       @keyframes blink { 50% { opacity: 0; } }
       @keyframes window-open { from { opacity: 0; transform: translateY(14px) scale(.985); filter: brightness(1.35); } to { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1); } }
@@ -228,7 +227,6 @@
         .prompt { font-size: 9px; }
         .command-input { font-size: 10px; }
         .shortcut { font-size: 9px; }
-        .site-mark { display: none; }
       }
 
       /* terminal-version: a focused, full-screen shell layout */
@@ -283,7 +281,6 @@
       .contact-form input, .contact-form textarea { border: 0; border-bottom: 1px solid var(--line); background: transparent; }
       .command-bar { padding-top: 10px; border-top-color: var(--line); }
       .command-input { border-bottom: 1px solid #1c3520; padding-bottom: 3px; }
-      .site-mark { right: 14px; bottom: 42px; color: #8fa7c2; }
 
       /* desktop environment behind the terminal window */
       body { background: radial-gradient(circle at 18% 12%, rgba(93,121,158,.45), transparent 32%), linear-gradient(145deg, #2d3a4f 0%, #1c293b 52%, #101a2a 100%); }
@@ -355,7 +352,7 @@
   </head>
   <body>
     <div class="desktop-icons" aria-hidden="true"><div class="desktop-icon"><span class="desktop-icon-art icon-home"></span><span>home</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-folder"></span><span>projects</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-terminal"></span><span>terminal</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-browser"></span><span>browser</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-document"></span><span>notes.txt</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-trash"></span><span>trash</span></div></div>
-    <div class="desktop-taskbar" aria-hidden="true"><span class="desktop-launcher"><span class="desktop-icon-art icon-home"></span></span><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active"><span class="desktop-icon-art icon-terminal"></span> terminal</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-folder"></span> files</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-browser"></span> browser</span></span><span class="desktop-tray"><span class="desktop-tray-item">⌁</span><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
+    <div class="desktop-taskbar" aria-hidden="true"><span class="desktop-launcher"><span class="desktop-icon-art icon-home"></span></span><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active"><span class="desktop-icon-art icon-terminal"></span> terminal</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-folder"></span> files</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-browser"></span> browser</span></span><span class="desktop-tray"><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
     <div class="terminal-app" id="app">
       <div class="ambient-glow"></div>
       <div class="matrix-rain" aria-hidden="true"></div>
@@ -393,7 +390,6 @@
           <aside class="system-panel"><p class="system-label">system profile</p><div class="system-avatar"><img src="assets/profile-pixel.png" alt="Pixel art portrait of Mustafa Ali" /></div><h2 class="system-name">mustafa ali</h2><p class="system-role">designer / developer</p><div class="system-stats"><div class="stat-row"><span>status</span><strong>available</strong></div><div class="stat-row"><span>location</span><strong>illinois, usa</strong></div><div class="stat-row"><span>uptime</span><strong id="uptime">00:00:00</strong></div><div class="stat-row"><span>visitors</span><strong id="visitor-count">004237</strong></div></div><div class="system-shortcuts"><button type="button" data-command="help">[?] command list</button><button type="button" data-command="cat">[+] pet the cat</button></div><p class="system-footer">all systems nominal<br />made with curiosity + too much coffee</p></aside>
         </div>
       </div>
-      <span class="site-mark">tty1 // terminal-version</span>
     </div>
     <script>
       const app = document.querySelector('#app');
