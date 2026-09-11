@@ -475,7 +475,11 @@
         landingView.classList.add('landing-started');
         landingRevealTargets.forEach((target) => target.classList.add('is-visible'));
         window.setTimeout(() => landingView.classList.add('landing-complete'), 650);
-        input.focus();
+        focusCommandInputIfDesktop();
+      }
+
+      function focusCommandInputIfDesktop() {
+        if (window.matchMedia('(pointer: fine)').matches) input.focus();
       }
 
       const commands = {
@@ -490,7 +494,7 @@
         views.forEach((view) => view.classList.toggle('active', view.dataset.view === name));
         if (name === 'home' && landingView.dataset.landingReady === 'true') landingView.classList.add('landing-complete');
         outputScroller.scrollTop = 0;
-        input.focus();
+        focusCommandInputIfDesktop();
       }
 
       function echoCommand(command, result) {
