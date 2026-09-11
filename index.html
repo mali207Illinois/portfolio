@@ -93,6 +93,9 @@
       .home-intro-panel p { margin: 11px 0 0; color: #d7e4ff; font-size: 11px; line-height: 1.6; }
       .home-intro-panel p::before { content: "> "; color: var(--green); }
       .home-intro-panel + .command-hint { margin-top: 25px; }
+      .home-typewriter .home-logo, .home-typewriter .home-subtitle { opacity: 0; }
+      .home-typewriter.landing-started .home-logo { animation: command-in .45s ease-out both; }
+      .home-typewriter.landing-started .home-subtitle { animation: command-in .45s .08s ease-out both; }
       .home-typewriter .landing-reveal { opacity: 0; visibility: hidden; }
       .home-typewriter .landing-reveal.is-visible { opacity: 1; visibility: visible; }
       .home-typewriter .home-intro-panel.landing-reveal { animation: none; }
@@ -382,8 +385,8 @@
             <div class="session-bar"><span>SESSION_ID: <strong id="session-id">MA-0000</strong> // BUILD: <strong>branch-terminal-version</strong></span></div>
             <div class="output-scroller" id="output-scroller" tabindex="0">
               <section class="view active home-typewriter" data-view="home" aria-labelledby="home-heading">
-                <h1 id="home-heading" class="home-logo"><span data-landing-type="MUSTAFA">MUSTAFA</span><span class="accent" data-landing-type=".ALI">.ALI</span></h1>
-                <p class="home-subtitle"><span data-landing-type="UIUC student + builder">UIUC student + builder</span><span class="cursor"></span></p>
+                <h1 id="home-heading" class="home-logo">MUSTAFA<span class="accent">.ALI</span></h1>
+                <p class="home-subtitle">UIUC student + builder<span class="cursor"></span></p>
                 <div class="home-intro-panel landing-reveal" aria-label="Welcome note"><div class="home-intro-head"><span>~/welcome.txt</span><span>read-only</span></div><p>I’m Mustafa — a designer and developer who likes turning complicated ideas into useful, memorable experiences.</p></div>
                 <p class="command-hint landing-reveal">type <code>help</code> to see available commands, or use a shortcut:</p>
                 <div class="shortcut-grid landing-reveal"><button class="shortcut" data-command="projects" type="button">projects</button><button class="shortcut" data-command="diary" type="button">diary</button><button class="shortcut" data-command="contact" type="button">contact</button><button class="shortcut" data-command="cat" type="button">cat</button></div>
@@ -463,41 +466,12 @@
       let historyIndex = 0;
       const startedAt = Date.now();
       const landingView = document.querySelector('[data-view="home"]');
-      const landingTypeTargets = [...landingView.querySelectorAll('[data-landing-type]')];
       const landingRevealTargets = [...landingView.querySelectorAll('.landing-reveal')];
 
-      landingTypeTargets.forEach((target) => { target.textContent = ''; });
-
-      function wait(milliseconds) { return new Promise((resolve) => window.setTimeout(resolve, milliseconds)); }
-
-      function typeLandingText(target, speed) {
-        const text = target.dataset.landingType;
-        target.textContent = '';
-        return new Promise((resolve) => {
-          let index = 0;
-          function writeNextCharacter() {
-            target.textContent = text.slice(0, index + 1);
-            index += 1;
-            if (index < text.length) window.setTimeout(writeNextCharacter, speed);
-            else resolve();
-          }
-          writeNextCharacter();
-        });
-      }
-
-      async function startLandingTypewriter() {
+      function startLandingReveal() {
         if (landingView.dataset.landingReady === 'true') return;
         landingView.dataset.landingReady = 'true';
-        const [logo, logoAccent, subtitle] = landingTypeTargets;
-        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (reduceMotion) {
-          landingTypeTargets.forEach((target) => { target.textContent = target.dataset.landingType; });
-        } else {
-          await Promise.all([typeLandingText(logo, 28), typeLandingText(logoAccent, 28)]);
-          await wait(90);
-          await typeLandingText(subtitle, 28);
-          await wait(35);
-        }
+        landingView.classList.add('landing-started');
         landingRevealTargets.forEach((target) => target.classList.add('is-visible'));
         input.focus();
       }
@@ -602,7 +576,7 @@
 
       window.addEventListener('pointermove', (event) => { app.style.setProperty('--mx', `${event.clientX}px`); app.style.setProperty('--my', `${event.clientY}px`); });
       window.addEventListener('keydown', (event) => { if (event.key === '/' && document.activeElement !== input) { event.preventDefault(); input.focus(); } });
-      window.setTimeout(startLandingTypewriter, 4700);
+      window.setTimeout(startLandingReveal, 4700);
     </script>
   </body>
 </html>
