@@ -105,13 +105,14 @@
       .home-typewriter .shortcut-grid.landing-reveal.is-visible { animation: command-in .4s .08s ease-out both; }
       .home-typewriter .shortcut-grid.landing-reveal.is-visible .shortcut { animation: shortcut-rise .45s ease-out both, shortcut-pulse 4.8s ease-in-out 1s infinite; }
 
-      .intro-sequence { --click-x: 36px; --click-y: 159px; --pointer-start-x: 72vw; --pointer-start-y: 12vh; --pointer-dx: calc(36px - 72vw); --pointer-dy: calc(159px - 12vh); position: fixed; z-index: 60; inset: 0; pointer-events: none; }
+      .intro-sequence { --click-x: 36px; --click-y: 159px; position: fixed; z-index: 60; inset: 0; pointer-events: none; }
       .intro-sequence.is-complete { opacity: 0; visibility: hidden; transition: opacity .35s ease-out, visibility 0s .35s; }
-      .intro-pointer { position: absolute; top: var(--pointer-start-y); left: var(--pointer-start-x); color: #f4fff7; font: 30px/1 Arial, sans-serif; text-shadow: 2px 2px 0 #101820, 0 0 8px rgba(184,255,192,.55); transform-origin: 2px 2px; animation: pointer-to-terminal 3.1s cubic-bezier(.2,.8,.2,1) both; }
+      .intro-pointer { position: absolute; top: 0; left: 0; width: 25px; height: 32px; overflow: visible; opacity: 0; filter: drop-shadow(2px 3px 0 #101820) drop-shadow(0 0 7px rgba(184,255,192,.55)); transform-origin: 1px 1px; }
+      .intro-pointer path { fill: #ffffff; stroke: #101820; stroke-width: 1.5; stroke-linejoin: round; }
       .intro-click { position: absolute; left: var(--click-x); top: var(--click-y); width: 20px; height: 20px; border: 1px solid var(--green); border-radius: 50%; box-shadow: 0 0 12px rgba(184,255,192,.45); opacity: 0; }
       .intro-click-one { animation: click-ripple-one 3.1s ease-out both; }
       .intro-click-two { animation: click-ripple-two 3.1s ease-out both; }
-      .terminal-window { opacity: 0; animation: terminal-open .75s 2.25s cubic-bezier(.2,.8,.2,1) both; }
+      .terminal-window { opacity: 0; animation: terminal-open .75s 2.68s cubic-bezier(.2,.8,.2,1) both; }
 
       .view-heading { margin: 0; color: var(--green); font: 400 clamp(50px, 8vw, 100px)/.72 var(--pixel); }
       .view-heading::before { content: "> "; color: var(--cyan); }
@@ -198,7 +199,6 @@
       @keyframes log-in { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
       @keyframes shortcut-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
       @keyframes shortcut-pulse { 0%, 100% { border-color: var(--line); background-color: rgba(35,106,59,.05); box-shadow: 0 0 0 rgba(184,255,192,0); } 50% { border-color: rgba(184,255,192,.72); background-color: rgba(35,106,59,.24); box-shadow: 0 0 12px rgba(184,255,192,.24); } }
-      @keyframes pointer-to-terminal { 0% { opacity: 0; transform: translate(0, 0) scale(.8) rotate(-8deg); } 10% { opacity: 1; } 22% { transform: translate(-5vw, 7vh) scale(1) rotate(-13deg); } 35% { transform: translate(-17vw, 16vh) scale(1) rotate(-5deg); } 49% { transform: translate(-29vw, 11vh) scale(1) rotate(-11deg); } 62% { transform: translate(-47vw, 15vh) scale(1) rotate(-6deg); } 70% { opacity: 1; transform: translate(var(--pointer-dx), var(--pointer-dy)) scale(1) rotate(-8deg); } 76% { transform: translate(var(--pointer-dx), var(--pointer-dy)) scale(.78) rotate(-8deg); } 82% { transform: translate(var(--pointer-dx), var(--pointer-dy)) scale(1) rotate(-8deg); } 100% { opacity: 0; transform: translate(var(--pointer-dx), var(--pointer-dy)) scale(1) rotate(-8deg); } }
       @keyframes click-ripple-one { 0%, 68% { opacity: 0; transform: scale(.35); } 71% { opacity: .95; transform: scale(.65); } 78%, 100% { opacity: 0; transform: scale(1.7); } }
       @keyframes click-ripple-two { 0%, 76% { opacity: 0; transform: scale(.35); } 79% { opacity: .95; transform: scale(.65); } 86%, 100% { opacity: 0; transform: scale(1.7); } }
       @keyframes terminal-open { 0% { opacity: 0; transform: translateY(16px) scale(.96); filter: brightness(1.35); border-color: transparent; box-shadow: 0 0 0 transparent; } 18% { opacity: 1; border-color: #ffffff; box-shadow: 0 0 0 3px rgba(255,255,255,.75), 0 0 32px rgba(184,255,192,.45); } 62% { border-color: #ffffff; box-shadow: 0 0 0 2px rgba(255,255,255,.32), 0 18px 45px rgba(4,10,20,.55); } 100% { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1); border-color: #526987; box-shadow: 0 18px 45px rgba(4,10,20,.55), 0 0 0 1px rgba(214,231,250,.08); } }
@@ -337,7 +337,7 @@
       .terminal-app { z-index: 1; padding: clamp(18px, 4vw, 58px) clamp(18px, 4vw, 58px) clamp(48px, 5vw, 72px) clamp(72px, 8vw, 120px); }
       .terminal-window { position: relative; width: min(1420px, 100%); border: 1px solid #526987; border-radius: 10px; box-shadow: 0 18px 45px rgba(4,10,20,.55), 0 0 0 1px rgba(214,231,250,.08); }
       @media (max-width: 780px) {
-        .intro-sequence { --click-x: 36px; --click-y: 159px; --pointer-start-x: 72vw; --pointer-start-y: 12vh; --pointer-dx: calc(36px - 72vw); --pointer-dy: calc(159px - 12vh); }
+        .intro-sequence { --click-x: 36px; --click-y: 159px; }
         .desktop-icons { display: none; }
         .desktop-taskbar { height: 29px; padding-inline: 8px; font-size: 8px; }
         .desktop-workspace, .desktop-taskbar-app.ghost { display: none; }
@@ -366,7 +366,7 @@
     </style>
   </head>
   <body>
-    <div class="intro-sequence" id="intro-sequence" aria-hidden="true"><span class="intro-pointer">➤</span><span class="intro-click intro-click-one"></span><span class="intro-click intro-click-two"></span></div>
+    <div class="intro-sequence" id="intro-sequence" aria-hidden="true"><svg class="intro-pointer" viewBox="0 0 24 31" aria-hidden="true"><path d="M2 1.5 21.5 20.2 12.2 20.8 16.3 29.1 12.1 31 7.7 22.7 2 28.8Z"></path></svg><span class="intro-click intro-click-one"></span><span class="intro-click intro-click-two"></span></div>
     <div class="desktop-icons" aria-hidden="true"><div class="desktop-icon"><span class="desktop-icon-art icon-home"></span><span>home</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-folder"></span><span>projects</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-terminal"></span><span>terminal</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-browser"></span><span>browser</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-document"></span><span>notes.txt</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-trash"></span><span>trash</span></div></div>
     <div class="desktop-taskbar" aria-hidden="true"><span class="desktop-launcher"><span class="desktop-icon-art icon-home"></span></span><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active"><span class="desktop-icon-art icon-terminal"></span> terminal</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-folder"></span> files</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-browser"></span> browser</span></span><span class="desktop-tray"><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
     <div class="terminal-app" id="app">
@@ -458,6 +458,7 @@
       const startedAt = Date.now();
       const landingView = document.querySelector('[data-view="home"]');
       const introSequence = document.querySelector('#intro-sequence');
+      const introPointer = document.querySelector('.intro-pointer');
       const landingRevealTargets = [...landingView.querySelectorAll('.landing-reveal')];
 
       function startLandingReveal() {
@@ -573,6 +574,14 @@
 
       window.addEventListener('pointermove', (event) => { app.style.setProperty('--mx', `${event.clientX}px`); app.style.setProperty('--my', `${event.clientY}px`); });
       window.addEventListener('keydown', (event) => { if (event.key === '/' && document.activeElement !== input) { event.preventDefault(); input.focus(); } });
+      function cubicPoint(start, controlOne, controlTwo, end, progress) {
+        const inverse = 1 - progress;
+        return {
+          x: (inverse ** 3 * start.x) + (3 * inverse ** 2 * progress * controlOne.x) + (3 * inverse * progress ** 2 * controlTwo.x) + (progress ** 3 * end.x),
+          y: (inverse ** 3 * start.y) + (3 * inverse ** 2 * progress * controlOne.y) + (3 * inverse * progress ** 2 * controlTwo.y) + (progress ** 3 * end.y),
+        };
+      }
+
       function playIntroSequence() {
         const isCompactDevice = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 780;
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || isCompactDevice) {
@@ -580,8 +589,48 @@
           startLandingReveal();
           return;
         }
-        window.setTimeout(startLandingReveal, 3050);
-        window.setTimeout(() => introSequence.classList.add('is-complete'), 3450);
+
+        const terminalIcon = document.querySelector('.desktop-icon-art.icon-terminal');
+        const terminalIconRect = terminalIcon.getBoundingClientRect();
+        const target = { x: terminalIconRect.left + (terminalIconRect.width / 2), y: terminalIconRect.top + (terminalIconRect.height / 2) };
+        const start = { x: window.innerWidth * .72, y: window.innerHeight * .12 };
+        const controlOne = { x: window.innerWidth * .61, y: window.innerHeight * .05 };
+        const controlTwo = { x: window.innerWidth * .18, y: window.innerHeight * .36 };
+        const travelDuration = 2150;
+        const sequenceStartedAt = performance.now();
+        introSequence.style.setProperty('--click-x', `${target.x - 10}px`);
+        introSequence.style.setProperty('--click-y', `${target.y - 10}px`);
+
+        function animatePointer(now) {
+          const elapsed = now - sequenceStartedAt;
+          const travelProgress = Math.min(1, elapsed / travelDuration);
+          const easedProgress = travelProgress * travelProgress * (3 - (2 * travelProgress));
+          const point = cubicPoint(start, controlOne, controlTwo, target, easedProgress);
+          const driftAmount = 1 - travelProgress;
+          const driftX = Math.sin(travelProgress * Math.PI * 6) * 1.8 * driftAmount;
+          const driftY = Math.cos(travelProgress * Math.PI * 4) * 1.2 * driftAmount;
+          const settleElapsed = Math.max(0, elapsed - travelDuration);
+          const settleAmount = Math.max(0, 1 - (settleElapsed / 650));
+          const settleX = Math.sin(settleElapsed / 55) * .8 * settleAmount;
+          const settleY = Math.cos(settleElapsed / 67) * .55 * settleAmount;
+          const pressOne = Math.max(0, Math.min(1, (elapsed - 2080) / 95));
+          const releaseOne = Math.max(0, Math.min(1, (elapsed - 2175) / 180));
+          const pressTwo = Math.max(0, Math.min(1, (elapsed - 2370) / 95));
+          const releaseTwo = Math.max(0, Math.min(1, (elapsed - 2465) / 180));
+          let scale = 1 - (0.2 * (pressOne * (1 - releaseOne)));
+          scale -= 0.2 * (pressTwo * (1 - releaseTwo));
+          const opacity = elapsed < 170 ? elapsed / 170 : Math.max(0, 1 - Math.max(0, elapsed - 2860) / 260);
+
+          introPointer.style.left = `${point.x + driftX + settleX - 2}px`;
+          introPointer.style.top = `${point.y + driftY + settleY - 1.5}px`;
+          introPointer.style.opacity = String(Math.min(1, opacity));
+          introPointer.style.transform = `scale(${scale})`;
+          if (elapsed < 3150) window.requestAnimationFrame(animatePointer);
+        }
+
+        window.requestAnimationFrame(animatePointer);
+        window.setTimeout(startLandingReveal, 3500);
+        window.setTimeout(() => introSequence.classList.add('is-complete'), 3900);
       }
 
       playIntroSequence();
