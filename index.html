@@ -322,6 +322,8 @@
       .desktop-clock { min-width: 43px; padding-left: 11px; border-left: 1px solid rgba(188,211,238,.3); color: #d7e4f4; font-size: 9px; text-align: right; }
       .desktop-icons { position: fixed; z-index: 0; top: 28px; left: 12px; display: grid; gap: 14px; width: 50px; }
       .desktop-icon { width: 50px; display: grid; justify-items: center; gap: 5px; color: #d7e4f4; font: 8px var(--mono); text-align: center; text-shadow: 0 1px 3px #0b1320; }
+      .desktop-icon.is-selected .desktop-icon-art { outline: 2px solid rgba(125,148,208,.9); outline-offset: 2px; box-shadow: 2px 3px 0 rgba(5,11,20,.35), 0 0 14px rgba(125,148,208,.28), inset 1px 1px rgba(255,255,255,.3); }
+      .desktop-icon.is-selected > span:last-child { padding: 2px 4px; border-radius: 4px; background: #7183b8; color: #ffffff; text-shadow: none; }
       .desktop-icon-art { position: relative; width: 30px; height: 30px; display: grid; place-items: center; overflow: hidden; border: 1px solid #a2b8d2; background: linear-gradient(145deg, rgba(199,218,240,.48), rgba(70,95,126,.58)); box-shadow: 2px 3px 0 rgba(5,11,20,.35), inset 1px 1px rgba(255,255,255,.3); color: #f0f6ff; font-size: 0; }
       .desktop-icon-art.icon-home::before { content: "⌂"; color: #eef6ff; font: 25px/1 Arial, sans-serif; transform: translateY(-1px); }
       .desktop-icon-art.icon-folder { background: linear-gradient(145deg, #efd17d, #9f7331); border-color: #f5e2a5; }
@@ -462,6 +464,7 @@
       const landingView = document.querySelector('[data-view="home"]');
       const introSequence = document.querySelector('#intro-sequence');
       const introPointer = document.querySelector('.intro-pointer');
+      const desktopTerminal = document.querySelector('.desktop-icon-art.icon-terminal').closest('.desktop-icon');
       const taskbarTerminal = document.querySelector('.desktop-taskbar-app.active');
       const landingRevealTargets = [...landingView.querySelectorAll('.landing-reveal')];
 
@@ -636,6 +639,7 @@
         }
 
         window.requestAnimationFrame(animatePointer);
+        window.setTimeout(() => desktopTerminal.classList.add('is-selected'), 2080);
         window.setTimeout(() => taskbarTerminal.classList.add('is-running'), 2680);
         window.setTimeout(startLandingReveal, 3500);
         window.setTimeout(() => introSequence.classList.add('is-complete'), 3900);
