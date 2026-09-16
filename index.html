@@ -113,6 +113,7 @@
       .intro-click-one { animation: click-ripple-one 3.1s ease-out both; }
       .intro-click-two { animation: click-ripple-two 3.1s ease-out both; }
       .terminal-window { opacity: 0; animation: terminal-open .75s 2.68s cubic-bezier(.2,.8,.2,1) both; }
+      .intro-skip .terminal-window { animation: none; opacity: 1; transform: none; filter: none; }
 
       .view-heading { margin: 0; color: var(--green); font: 400 clamp(50px, 8vw, 100px)/.72 var(--pixel); }
       .view-heading::before { content: "> "; color: var(--cyan); }
@@ -338,7 +339,7 @@
       .terminal-app { z-index: 1; padding: clamp(18px, 4vw, 58px) clamp(18px, 4vw, 58px) clamp(48px, 5vw, 72px) clamp(72px, 8vw, 120px); }
       .terminal-window { position: relative; width: min(1420px, 100%); border: 1px solid #526987; border-radius: 10px; box-shadow: 0 18px 45px rgba(4,10,20,.55), 0 0 0 1px rgba(214,231,250,.08); }
       @media (max-width: 780px) {
-        .intro-sequence { --click-x: 36px; --click-y: 159px; }
+        .intro-sequence { display: none; }
         .desktop-icons { display: none; }
         .desktop-taskbar { height: 29px; padding-inline: 8px; font-size: 8px; }
         .desktop-workspace, .desktop-taskbar-app.ghost { display: none; }
@@ -348,6 +349,7 @@
         .desktop-tray { gap: 7px; }
         .desktop-clock { min-width: 38px; padding-left: 7px; }
         .terminal-app { padding-left: 18px; }
+        .terminal-window { animation: none; opacity: 1; transform: none; filter: none; }
       }
 
       /* classic desktop-program chrome */
@@ -587,9 +589,11 @@
       function playIntroSequence() {
         const isCompactDevice = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 780;
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || isCompactDevice) {
+          document.body.classList.add('intro-skip');
           taskbarTerminal.classList.add('is-running');
           introSequence.classList.add('is-complete');
           startLandingReveal();
+          landingView.classList.add('landing-complete');
           return;
         }
 
