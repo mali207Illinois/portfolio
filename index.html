@@ -411,6 +411,7 @@
       .folder-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
       .folder-item { min-height: 175px; display: flex; flex-direction: column; padding: 12px; border: 1px solid transparent; border-radius: 5px; background: rgba(255,255,255,.32); color: #28394f; cursor: default; transition: background .16s, border-color .16s, transform .16s, box-shadow .16s; }
       .folder-item:hover, .folder-item:focus-within { border-color: #8ca5c0; background: rgba(255,255,255,.72); box-shadow: 0 5px 12px rgba(50,72,98,.14); transform: translateY(-2px); }
+      .folder-item.is-selected { border-color: #6386aa; background: rgba(255,255,255,.82); box-shadow: 0 0 0 2px rgba(99,134,170,.18), 0 5px 12px rgba(50,72,98,.14); }
       .folder-item-icon { height: 68px; display: grid; place-items: center; color: #54779b; font: 45px var(--pixel); }
       .folder-item:nth-child(2) .folder-item-icon { color: #8b6d9e; }
       .folder-item:nth-child(3) .folder-item-icon { color: #b47d48; }
@@ -455,7 +456,7 @@
     <div class="desktop-app-window folder-window" id="projects-window" data-desktop-window="projects" aria-hidden="true">
       <div class="desktop-app-titlebar"><span class="desktop-icon-art icon-folder desktop-app-title-icon"></span><span class="desktop-app-title">projects — file manager</span><span class="desktop-app-meta">3 items</span><span class="desktop-app-controls"><button type="button" aria-label="Minimize projects"></button><button type="button" aria-label="Maximize projects"></button><button type="button" aria-label="Close projects"></button></span></div>
       <div class="desktop-app-toolbar"><span>⌂</span><span class="toolbar-path">/home/mustafa/projects</span><span class="toolbar-spacer">sort: name ▾</span></div>
-      <div class="folder-content"><div class="folder-grid"><article class="folder-item"><div class="folder-item-icon">[◈]</div><small>01 / WEB</small><h3>Lorem Ipsum</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></article><article class="folder-item"><div class="folder-item-icon">[✦]</div><small>02 / IDENTITY</small><h3>Dolor Sit Amet</h3><p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></article><article class="folder-item"><div class="folder-item-icon">[☻]</div><small>03 / DIGITAL</small><h3>Consectetur</h3><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p></article></div><p class="folder-status">3 items · portfolio/projects · read-only</p></div>
+      <div class="folder-content"><div class="folder-grid"><article class="folder-item" tabindex="0"><div class="folder-item-icon">[◈]</div><small>01 / WEB</small><h3>Lorem Ipsum</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></article><article class="folder-item" tabindex="0"><div class="folder-item-icon">[✦]</div><small>02 / IDENTITY</small><h3>Dolor Sit Amet</h3><p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></article><article class="folder-item" tabindex="0"><div class="folder-item-icon">[☻]</div><small>03 / DIGITAL</small><h3>Consectetur Adipiscing</h3><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p></article></div><p class="folder-status">3 items · portfolio/projects · read-only</p></div>
       <span class="terminal-resize-handle" aria-hidden="true"></span>
     </div>
     <div class="desktop-app-window mail-window" id="contact-window" data-desktop-window="contact" aria-hidden="true">
@@ -922,9 +923,16 @@
       desktopIcons.forEach((icon) => {
         icon.addEventListener('click', () => {
           desktopIcons.forEach((otherIcon) => otherIcon.classList.toggle('is-selected', otherIcon === icon));
+          if (icon.dataset.desktopOpen) openDesktopApp(icon.dataset.desktopOpen);
         });
-        icon.addEventListener('dblclick', () => { if (icon.dataset.desktopOpen) openDesktopApp(icon.dataset.desktopOpen); });
         icon.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); if (icon.dataset.desktopOpen) openDesktopApp(icon.dataset.desktopOpen); } });
+      });
+
+      document.querySelectorAll('.folder-item').forEach((item) => {
+        item.addEventListener('click', () => {
+          document.querySelectorAll('.folder-item').forEach((otherItem) => otherItem.classList.toggle('is-selected', otherItem === item));
+        });
+        item.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); item.click(); } });
       });
 
       document.querySelectorAll('.desktop-taskbar-app[data-desktop-open]').forEach((taskbarApp) => {
