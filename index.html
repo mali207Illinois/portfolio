@@ -103,6 +103,7 @@
       .home-intro-panel p { margin: 11px 0 0; color: #d7e4ff; font-size: 11px; line-height: 1.6; }
       .home-intro-panel p::before { content: "> "; color: var(--green); }
       .welcome-copy-mobile { display: none; }
+      .command-hint-mobile { display: none; }
       .home-intro-panel + .command-hint { margin-top: 25px; }
       .home-typewriter .home-logo, .home-typewriter .home-subtitle { opacity: 0; }
       .home-typewriter.landing-started .home-logo { animation: command-in .45s ease-out both; }
@@ -333,9 +334,17 @@
       .desktop-tray { display: flex; align-items: center; gap: 12px; margin-left: auto; color: #b4c2d6; }
       .desktop-tray-item { color: #a9c4e2; font-size: 11px; }
       .desktop-clock { min-width: 43px; padding-left: 11px; border-left: 1px solid rgba(188,211,238,.3); color: #d7e4f4; font-size: 9px; text-align: right; }
-      .desktop-icons { position: fixed; z-index: 0; top: 28px; left: 12px; display: grid; gap: 16px; width: 62px; }
-      .desktop-icon { width: 62px; display: grid; justify-items: center; gap: 6px; padding: 0; border: 0; background: transparent; color: #d7e4f4; cursor: var(--portfolio-cursor); font: 8px var(--mono); text-align: center; text-shadow: 0 1px 3px #0b1320; }
-      .desktop-icons .desktop-icon-art { width: 36px; height: 36px; }
+      .desktop-icons { position: fixed; z-index: 0; top: 28px; left: 12px; display: grid; gap: 17px; width: 72px; }
+      .desktop-icon { width: 72px; display: grid; justify-items: center; gap: 7px; padding: 0; border: 0; background: transparent; color: #d7e4f4; cursor: var(--portfolio-cursor); font: 9px var(--mono); text-align: center; text-shadow: 0 1px 3px #0b1320; }
+      .desktop-icons .desktop-icon-art { width: 44px; height: 44px; }
+      .desktop-icons .icon-folder::before { width: 31px; height: 21px; }
+      .desktop-icons .icon-folder::after { width: 31px; height: 13px; }
+      .desktop-icons .icon-terminal::before { width: 32px; height: 21px; font-size: 13px; }
+      .desktop-icons .icon-mail::before { font-size: 28px; }
+      .desktop-icons .icon-browser::before { font-size: 31px; }
+      .desktop-icons .icon-document::before { font-size: 31px; }
+      .desktop-icons .icon-trash::before { width: 20px; height: 24px; }
+      .desktop-icons .icon-trash::after { width: 25px; }
       .desktop-icon.is-selected .desktop-icon-art { outline: 2px solid rgba(125,148,208,.9); outline-offset: 2px; box-shadow: 2px 3px 0 rgba(5,11,20,.35), 0 0 14px rgba(125,148,208,.28), inset 1px 1px rgba(255,255,255,.3); }
       .desktop-icon.is-selected > span:last-child { padding: 2px 4px; border-radius: 4px; background: #7183b8; color: #ffffff; text-shadow: none; }
       .desktop-icon-art { position: relative; width: 30px; height: 30px; display: grid; place-items: center; overflow: hidden; border: 1px solid #a2b8d2; background: linear-gradient(145deg, rgba(199,218,240,.48), rgba(70,95,126,.58)); box-shadow: 2px 3px 0 rgba(5,11,20,.35), inset 1px 1px rgba(255,255,255,.3); color: #f0f6ff; font-size: 0; }
@@ -483,6 +492,8 @@
         .system-panel { display: none; }
         .welcome-copy-desktop { display: none; }
         .welcome-copy-mobile { display: block; }
+        .command-hint-desktop { display: none; }
+        .command-hint-mobile { display: block; }
         .terminal-main { padding: clamp(14px, 4vw, 32px); }
         .terminal-resize-handle { display: none; }
       }
@@ -544,7 +555,7 @@
                 <h1 id="home-heading" class="home-logo">MUSTAFA<span class="accent">.ALI</span></h1>
                 <p class="home-subtitle">UIUC student + builder<span class="cursor"></span></p>
                 <div class="home-intro-panel landing-reveal" aria-label="Welcome note"><div class="home-intro-head"><span>~/welcome.txt</span><span>read-only</span></div><p class="welcome-copy-desktop">Hi — welcome to my portfolio. Use this desktop like a real computer: double-click icons to open apps, drag windows around, and use the taskbar to switch between them.</p><p class="welcome-copy-mobile">I’m Mustafa, a designer and developer focused on transforming complex ideas into clear, useful, and memorable digital experiences.</p></div>
-                <p class="command-hint landing-reveal">type <code>help</code> to see available commands, or use a shortcut:</p>
+                <p class="command-hint command-hint-desktop landing-reveal">alternatively, use these shortcuts:</p><p class="command-hint command-hint-mobile landing-reveal">type <code>help</code> to see available commands, or use a shortcut:</p>
                 <div class="shortcut-grid landing-reveal"><button class="shortcut" data-command="projects" type="button">projects</button><button class="shortcut" data-command="contact" type="button">contact</button><button class="shortcut" data-command="cat" type="button">cat</button></div>
               </section>
 
