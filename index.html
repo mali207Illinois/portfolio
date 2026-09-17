@@ -102,6 +102,7 @@
       .home-intro-head span:first-child { color: var(--cyan); }
       .home-intro-panel p { margin: 11px 0 0; color: #d7e4ff; font-size: 11px; line-height: 1.6; }
       .home-intro-panel p::before { content: "> "; color: var(--green); }
+      .welcome-copy-mobile { display: none; }
       .home-intro-panel + .command-hint { margin-top: 25px; }
       .home-typewriter .home-logo, .home-typewriter .home-subtitle { opacity: 0; }
       .home-typewriter.landing-started .home-logo { animation: command-in .45s ease-out both; }
@@ -316,7 +317,8 @@
       .desktop-launcher:hover, .desktop-launcher:focus-visible { background: linear-gradient(145deg, #eef7ff, #91b0d1); outline: 1px solid #fff; }
       .desktop-workspace { width: 20px; height: 20px; display: grid; place-items: center; margin-left: 5px; border: 1px solid #90a9c6; color: #b8ffc0; font-size: 9px; }
       .desktop-taskbar-apps { display: flex; align-items: center; gap: 5px; height: 100%; margin-left: 3px; }
-      .desktop-taskbar-app { min-width: 108px; display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 10px; border: 1px solid rgba(188,211,238,.3); background: rgba(101,127,160,.24); color: #d7e4f4; }
+      .desktop-taskbar-app { width: 34px; min-width: 34px; display: inline-flex; align-items: center; justify-content: center; gap: 0; height: 28px; padding: 0; border: 1px solid rgba(188,211,238,.3); background: rgba(101,127,160,.24); color: #d7e4f4; }
+      .desktop-taskbar-label { display: none; }
       .desktop-taskbar-app.ghost { background: transparent; color: #8fa7c2; }
       .desktop-taskbar-app.active { border-color: rgba(188,211,238,.3); background: rgba(101,127,160,.24); color: #d7e4f4; box-shadow: none; }
       .desktop-taskbar-app.active.is-running { border-color: #d6e5f5; background: rgba(194,220,245,.38); color: #ffffff; box-shadow: inset 0 -2px #b8ffc0; }
@@ -331,8 +333,9 @@
       .desktop-tray { display: flex; align-items: center; gap: 12px; margin-left: auto; color: #b4c2d6; }
       .desktop-tray-item { color: #a9c4e2; font-size: 11px; }
       .desktop-clock { min-width: 43px; padding-left: 11px; border-left: 1px solid rgba(188,211,238,.3); color: #d7e4f4; font-size: 9px; text-align: right; }
-      .desktop-icons { position: fixed; z-index: 0; top: 28px; left: 12px; display: grid; gap: 14px; width: 50px; }
-      .desktop-icon { width: 50px; display: grid; justify-items: center; gap: 5px; padding: 0; border: 0; background: transparent; color: #d7e4f4; cursor: var(--portfolio-cursor); font: 8px var(--mono); text-align: center; text-shadow: 0 1px 3px #0b1320; }
+      .desktop-icons { position: fixed; z-index: 0; top: 28px; left: 12px; display: grid; gap: 16px; width: 62px; }
+      .desktop-icon { width: 62px; display: grid; justify-items: center; gap: 6px; padding: 0; border: 0; background: transparent; color: #d7e4f4; cursor: var(--portfolio-cursor); font: 8px var(--mono); text-align: center; text-shadow: 0 1px 3px #0b1320; }
+      .desktop-icons .desktop-icon-art { width: 36px; height: 36px; }
       .desktop-icon.is-selected .desktop-icon-art { outline: 2px solid rgba(125,148,208,.9); outline-offset: 2px; box-shadow: 2px 3px 0 rgba(5,11,20,.35), 0 0 14px rgba(125,148,208,.28), inset 1px 1px rgba(255,255,255,.3); }
       .desktop-icon.is-selected > span:last-child { padding: 2px 4px; border-radius: 4px; background: #7183b8; color: #ffffff; text-shadow: none; }
       .desktop-icon-art { position: relative; width: 30px; height: 30px; display: grid; place-items: center; overflow: hidden; border: 1px solid #a2b8d2; background: linear-gradient(145deg, rgba(199,218,240,.48), rgba(70,95,126,.58)); box-shadow: 2px 3px 0 rgba(5,11,20,.35), inset 1px 1px rgba(255,255,255,.3); color: #f0f6ff; font-size: 0; }
@@ -393,6 +396,7 @@
       .desktop-app-window.is-focused { box-shadow: 0 20px 46px rgba(4,10,20,.62), 0 0 0 2px rgba(214,231,250,.35); }
       .desktop-app-window.folder-window { width: min(720px, calc(100vw - 190px)); height: min(465px, calc(100vh - 150px)); }
       .desktop-app-window.mail-window { width: min(640px, calc(100vw - 220px)); height: min(460px, calc(100vh - 155px)); }
+      .desktop-app-window.document-window { width: min(620px, calc(100vw - 220px)); height: min(650px, calc(100vh - 95px)); }
       .desktop-app-titlebar { flex: 0 0 32px; display: flex; align-items: center; gap: 8px; padding: 5px 8px; border-bottom: 1px solid #8293a6; background: linear-gradient(#f7fafc, #c4cfdb); color: #233246; font: 10px var(--mono); cursor: grab; user-select: none; touch-action: none; }
       .desktop-app-titlebar:active, .desktop-app-titlebar.is-dragging { cursor: grabbing; }
       .desktop-app-titlebar > * { cursor: inherit; }
@@ -435,6 +439,17 @@
       .mail-send { justify-self: start; padding: 8px 14px; border: 1px solid #4c7399; border-radius: 3px; background: linear-gradient(#8eb3d1, #5d86ad); color: #fff; cursor: pointer; font: 10px var(--mono); text-shadow: 0 1px rgba(24,50,77,.4); box-shadow: inset 1px 1px rgba(255,255,255,.35); }
       .mail-send:hover { background: linear-gradient(#a2c4df, #6e98bd); }
       .mail-status { min-height: 16px; color: #42734f; font: 9px var(--mono); }
+      .document-toolbar { flex: 0 0 31px; display: flex; align-items: center; gap: 18px; padding: 5px 12px; border-bottom: 1px solid #c4cbd3; background: #eef1f4; color: #596777; font: 9px Arial, sans-serif; }
+      .document-toolbar span:first-child { color: #274a70; font-weight: 700; }
+      .document-content { flex: 1; min-height: 0; overflow: auto; padding: 18px; background: #c8d0d9; }
+      .document-page { min-height: 680px; margin-bottom: 18px; padding: 58px 54px 48px; background: #fff; color: #252b33; box-shadow: 0 2px 7px rgba(45,56,68,.24); font: 12px/1.55 Arial, sans-serif; }
+      .document-page:last-child { margin-bottom: 0; }
+      .cat-document-title { display: block; width: 100%; margin: 0 0 28px; color: #252b33; font: 18px/1.2 Arial, sans-serif; }
+      .cat-photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; align-items: start; clear: both; }
+      .cat-photo-card { min-width: 0; margin: 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
+      .cat-photo-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: transparent; }
+      .cat-photo-card figcaption { display: none; }
+      .document-status { flex: 0 0 23px; padding: 5px 10px; border-top: 1px solid #adb7c2; background: #dce3ea; color: #697786; font: 8px var(--mono); }
       .desktop-taskbar-app.is-running { border-color: #d6e5f5; background: rgba(194,220,245,.38); color: #fff; box-shadow: inset 0 -2px #b8ffc0; }
       .desktop-start-menu { position: fixed; z-index: 20; left: 14px; bottom: 52px; width: 248px; overflow: hidden; border: 1px solid #647b95; border-radius: 6px; background: rgba(228,237,246,.97); color: #253a53; box-shadow: 0 18px 35px rgba(4,10,20,.5), inset 1px 1px rgba(255,255,255,.75); }
       .desktop-start-menu:not(.is-open) { display: none; }
@@ -448,13 +463,36 @@
       .desktop-toast { position: fixed; z-index: 30; right: 18px; bottom: 55px; max-width: 320px; padding: 10px 13px; border: 1px solid #7790a9; border-radius: 4px; background: rgba(230,239,247,.97); color: #2e465f; box-shadow: 0 10px 24px rgba(4,10,20,.35); font: 9px/1.5 var(--mono); opacity: 0; transform: translateY(8px); pointer-events: none; transition: opacity .2s, transform .2s; }
       .desktop-toast.is-visible { opacity: 1; transform: translateY(0); }
       @keyframes app-window-open { from { opacity: 0; transform: translateY(9px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+      @media (max-width: 760px) { .desktop-app-window.document-window { width: calc(100vw - 24px); height: calc(100vh - 90px); } .cat-photo-grid { grid-template-columns: 1fr; } .document-page { padding-inline: 22px; } }
+
+      /* mobile stays a focused terminal; the desktop environment is pointer-only */
+      @media (max-width: 780px) {
+        body { background: var(--screen); }
+        body::before { opacity: .06; background: repeating-linear-gradient(0deg, transparent 0 4px, rgba(184,255,192,.55) 5px 5px); }
+        body::after { opacity: .08; background: radial-gradient(circle at 50% 0, rgba(76,151,82,.16), transparent 48%); }
+        .intro-sequence, .desktop-icons, .desktop-taskbar, .desktop-start-menu, .desktop-toast, .desktop-app-window { display: none !important; }
+        .terminal-app { z-index: 1; width: 100%; height: 100dvh; min-height: 520px; padding: 0; }
+        .terminal-window { width: 100%; height: 100%; min-height: 0; border: 0; border-radius: 0; box-shadow: none; animation: none; opacity: 1; transform: none; filter: none; }
+        .terminal-titlebar { flex-basis: 32px; padding: 5px 12px; border-bottom-color: var(--line); background: #0a100b; font-size: 11px; cursor: default; }
+        .terminal-titlebar::after { display: none; }
+        .terminal-icon { width: auto; height: auto; border: 0; background: transparent; color: var(--green); font-size: 11px; animation: none; }
+        .terminal-title { color: var(--green); text-shadow: none; }
+        .terminal-title em { color: var(--muted); }
+        .terminal-controls { display: none; }
+        .terminal-content { grid-template-columns: 1fr; }
+        .system-panel { display: none; }
+        .welcome-copy-desktop { display: none; }
+        .welcome-copy-mobile { display: block; }
+        .terminal-main { padding: clamp(14px, 4vw, 32px); }
+        .terminal-resize-handle { display: none; }
+      }
     </style>
   </head>
   <body>
     <div class="intro-sequence" id="intro-sequence" aria-hidden="true"><svg class="intro-pointer" viewBox="0 0 24 31" shape-rendering="crispEdges" aria-hidden="true"><path d="M2 1L22 19H14L18 28L13 31L9 21L2 28Z"></path></svg><span class="intro-click intro-click-one"></span><span class="intro-click intro-click-two"></span></div>
-    <div class="desktop-icons"><button class="desktop-icon" data-desktop-open="projects" type="button" aria-label="Open projects folder"><span class="desktop-icon-art icon-folder"></span><span>projects</span></button><button class="desktop-icon" data-desktop-open="terminal" type="button" aria-label="Open terminal"><span class="desktop-icon-art icon-terminal"></span><span>terminal</span></button><button class="desktop-icon" data-desktop-open="contact" type="button" aria-label="Open mail"><span class="desktop-icon-art icon-mail"></span><span>mail</span></button><button class="desktop-icon" data-desktop-open="notes" type="button" aria-label="Open welcome notes"><span class="desktop-icon-art icon-document"></span><span>notes.txt</span></button><button class="desktop-icon" data-desktop-open="trash" type="button" aria-label="Open trash"><span class="desktop-icon-art icon-trash"></span><span>trash</span></button></div>
-    <div class="desktop-taskbar"><button class="desktop-launcher" id="desktop-launcher" type="button" aria-label="Open application menu" aria-expanded="false"><span class="desktop-icon-art icon-home"></span></button><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active" role="button" tabindex="0" aria-label="Open terminal" data-desktop-open="terminal"><span class="desktop-icon-art icon-terminal"></span> terminal</span><span class="desktop-taskbar-app ghost" role="button" tabindex="0" aria-label="Open projects" data-desktop-open="projects"><span class="desktop-icon-art icon-folder"></span> projects</span><span class="desktop-taskbar-app ghost" role="button" tabindex="0" aria-label="Open contact" data-desktop-open="contact"><span class="desktop-icon-art icon-mail"></span> contact</span></span><span class="desktop-tray"><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
-    <div class="desktop-start-menu" id="desktop-start-menu" aria-hidden="true"><div class="start-menu-header">MUSTAFA OS<small>portfolio workspace · session active</small></div><div class="start-menu-apps"><button class="start-menu-app" type="button" data-desktop-open="terminal"><span class="desktop-icon-art icon-terminal"></span><span>Terminal<br /><small>mustafa@portfolio:~$</small></span></button><button class="start-menu-app" type="button" data-desktop-open="projects"><span class="desktop-icon-art icon-folder"></span><span>Projects<br /><small>/home/mustafa/projects</small></span></button><button class="start-menu-app" type="button" data-desktop-open="contact"><span class="desktop-icon-art icon-mail"></span><span>Contact<br /><small>secure channel</small></span></button></div><div class="start-menu-footer">double-click desktop icons to open</div></div>
+    <div class="desktop-icons"><button class="desktop-icon" data-desktop-open="projects" type="button" aria-label="Open projects folder"><span class="desktop-icon-art icon-folder"></span><span>projects</span></button><button class="desktop-icon" data-desktop-open="terminal" type="button" aria-label="Open terminal"><span class="desktop-icon-art icon-terminal"></span><span>terminal</span></button><button class="desktop-icon" data-desktop-open="contact" type="button" aria-label="Open mail"><span class="desktop-icon-art icon-mail"></span><span>mail</span></button><button class="desktop-icon" data-desktop-open="cats" type="button" aria-label="Open cats text document"><span class="desktop-icon-art icon-document"></span><span>cats.txt</span></button><button class="desktop-icon" data-desktop-open="trash" type="button" aria-label="Open trash"><span class="desktop-icon-art icon-trash"></span><span>trash</span></button></div>
+    <div class="desktop-taskbar"><button class="desktop-launcher" id="desktop-launcher" type="button" aria-label="Open application menu" aria-expanded="false"><span class="desktop-icon-art icon-home"></span></button><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active" role="button" tabindex="0" aria-label="Open terminal" data-desktop-open="terminal"><span class="desktop-icon-art icon-terminal"></span><span class="desktop-taskbar-label">terminal</span></span><span class="desktop-taskbar-app ghost" role="button" tabindex="0" aria-label="Open projects" data-desktop-open="projects"><span class="desktop-icon-art icon-folder"></span><span class="desktop-taskbar-label">projects</span></span><span class="desktop-taskbar-app ghost" role="button" tabindex="0" aria-label="Open contact" data-desktop-open="contact"><span class="desktop-icon-art icon-mail"></span><span class="desktop-taskbar-label">contact</span></span><span class="desktop-taskbar-app ghost" role="button" tabindex="0" aria-label="Open cats text" data-desktop-open="cats"><span class="desktop-icon-art icon-document"></span><span class="desktop-taskbar-label">cats.txt</span></span></span><span class="desktop-tray"><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
+    <div class="desktop-start-menu" id="desktop-start-menu" aria-hidden="true"><div class="start-menu-header">MUSTAFA OS<small>portfolio workspace · session active</small></div><div class="start-menu-apps"><button class="start-menu-app" type="button" data-desktop-open="terminal"><span class="desktop-icon-art icon-terminal"></span><span>Terminal<br /><small>mustafa@portfolio:~$</small></span></button><button class="start-menu-app" type="button" data-desktop-open="projects"><span class="desktop-icon-art icon-folder"></span><span>Projects<br /><small>/home/mustafa/projects</small></span></button><button class="start-menu-app" type="button" data-desktop-open="contact"><span class="desktop-icon-art icon-mail"></span><span>Contact<br /><small>secure channel</small></span></button><button class="start-menu-app" type="button" data-desktop-open="cats"><span class="desktop-icon-art icon-document"></span><span>Cats.txt<br /><small>ASCII document</small></span></button></div><div class="start-menu-footer">double-click desktop icons to open</div></div>
     <div class="desktop-app-window folder-window" id="projects-window" data-desktop-window="projects" aria-hidden="true">
       <div class="desktop-app-titlebar"><span class="desktop-icon-art icon-folder desktop-app-title-icon"></span><span class="desktop-app-title">projects — file manager</span><span class="desktop-app-meta">3 items</span><span class="desktop-app-controls"><button type="button" aria-label="Minimize projects"></button><button type="button" aria-label="Maximize projects"></button><button type="button" aria-label="Close projects"></button></span></div>
       <div class="desktop-app-toolbar"><span>⌂</span><span class="toolbar-path">/home/mustafa/projects</span><span class="toolbar-spacer">sort: name ▾</span></div>
@@ -465,6 +503,32 @@
       <div class="desktop-app-titlebar"><span class="desktop-icon-art icon-mail desktop-app-title-icon"></span><span class="desktop-app-title">contact — mail</span><span class="desktop-app-meta">new message</span><span class="desktop-app-controls"><button type="button" aria-label="Minimize contact"></button><button type="button" aria-label="Maximize contact"></button><button type="button" aria-label="Close contact"></button></span></div>
       <div class="desktop-app-toolbar"><span>✉</span><span class="toolbar-path">/usr/bin/contact</span><span class="toolbar-spacer">secure channel</span></div>
       <div class="mail-content"><aside class="mail-sidebar"><strong>mailbox</strong><p class="active">✦ compose</p><p>▸ sent</p><p>▸ drafts</p></aside><form class="mail-form" id="desktop-contact-form"><h2>say hello</h2><label>name<input name="name" autocomplete="name" required /></label><label>email<input type="email" name="email" autocomplete="email" required /></label><label>message<textarea name="message" required></textarea></label><button class="mail-send" type="submit">send message ↗</button><div class="mail-status" role="status"></div></form></div>
+      <span class="terminal-resize-handle" aria-hidden="true"></span>
+    </div>
+    <div class="desktop-app-window document-window" id="cats-window" data-desktop-window="cats" aria-hidden="true">
+      <div class="desktop-app-titlebar"><span class="desktop-icon-art icon-document desktop-app-title-icon"></span><span class="desktop-app-title">cats.txt — word processor</span><span class="desktop-app-meta">read-only</span><span class="desktop-app-controls"><button type="button" aria-label="Minimize cats document"></button><button type="button" aria-label="Maximize cats document"></button><button type="button" aria-label="Close cats document"></button></span></div>
+      <div class="document-toolbar"><span>FILE</span><span>EDIT</span><span>VIEW</span><span>FORMAT</span><span class="toolbar-spacer">100% · monospaced</span></div>
+      <div class="document-content">
+        <article class="document-page">
+          <div class="cat-document-title">i like cats</div>
+          <div class="cat-photo-grid">
+            <figure class="cat-photo-card"><img src="assets/cats/cat-01.jpg" alt="White and gray cat looking toward the camera" loading="eager" /></figure>
+            <figure class="cat-photo-card"><img src="assets/cats/cat-02.jpg" alt="Orange cat sitting against a pale background" loading="eager" /></figure>
+          </div>
+        </article>
+        <article class="document-page">
+          <div class="cat-photo-grid">
+            <figure class="cat-photo-card"><img src="assets/cats/cat-03.jpg" alt="Gray tabby cat resting on a soft surface" loading="lazy" /></figure>
+            <figure class="cat-photo-card"><img src="assets/cats/cat-04.jpg" alt="Black and white cat resting indoors" loading="lazy" /></figure>
+          </div>
+        </article>
+        <article class="document-page">
+          <div class="cat-photo-grid">
+            <figure class="cat-photo-card"><img src="assets/cats/cat-05.jpg" alt="Cat sitting beside a window" loading="lazy" /></figure>
+            <figure class="cat-photo-card"><img src="assets/cats/cat-06.jpg" alt="Fluffy cat with bright eyes" loading="lazy" /></figure>
+          </div>
+        </article>
+      </div>
       <span class="terminal-resize-handle" aria-hidden="true"></span>
     </div>
     <div class="terminal-app" id="app">
@@ -479,7 +543,7 @@
               <section class="view active home-typewriter" data-view="home" aria-labelledby="home-heading">
                 <h1 id="home-heading" class="home-logo">MUSTAFA<span class="accent">.ALI</span></h1>
                 <p class="home-subtitle">UIUC student + builder<span class="cursor"></span></p>
-                <div class="home-intro-panel landing-reveal" aria-label="Welcome note"><div class="home-intro-head"><span>~/welcome.txt</span><span>read-only</span></div><p>I’m Mustafa, a designer and developer focused on transforming complex ideas into clear, useful, and memorable digital experiences.</p></div>
+                <div class="home-intro-panel landing-reveal" aria-label="Welcome note"><div class="home-intro-head"><span>~/welcome.txt</span><span>read-only</span></div><p class="welcome-copy-desktop">Hi — welcome to my portfolio. Use this desktop like a real computer: double-click icons to open apps, drag windows around, and use the taskbar to switch between them.</p><p class="welcome-copy-mobile">I’m Mustafa, a designer and developer focused on transforming complex ideas into clear, useful, and memorable digital experiences.</p></div>
                 <p class="command-hint landing-reveal">type <code>help</code> to see available commands, or use a shortcut:</p>
                 <div class="shortcut-grid landing-reveal"><button class="shortcut" data-command="projects" type="button">projects</button><button class="shortcut" data-command="contact" type="button">contact</button><button class="shortcut" data-command="cat" type="button">cat</button></div>
               </section>
@@ -926,7 +990,6 @@
       function openDesktopApp(name) {
         setStartMenu(false);
         if (name === 'terminal') { openWindow(); return; }
-        if (name === 'notes') { openWindow(); showDesktopToast('notes.txt is read-only — welcome note is inside the terminal.'); return; }
         if (name === 'trash') { showDesktopToast('Trash is empty. Nothing to recover.'); return; }
         const controller = desktopAppControllers.get(name);
         if (controller) controller.open();
