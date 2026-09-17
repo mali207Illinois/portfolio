@@ -40,14 +40,14 @@
       .intro-cursor-hidden, .intro-cursor-hidden * { cursor: none !important; }
       ::selection { color: var(--void); background: var(--green); }
 
-      .terminal-app { --mx: 50%; --my: 30%; width: 100%; height: 100dvh; min-height: 560px; padding: clamp(12px, 2.5vw, 32px); display: flex; flex-direction: column; position: relative; isolation: isolate; }
+      .terminal-app { --mx: 50%; --my: 30%; width: 100%; height: 100dvh; min-height: 560px; padding: clamp(12px, 2.5vw, 32px); display: flex; flex-direction: column; position: relative; isolation: isolate; pointer-events: none; }
       .ambient-glow { position: absolute; z-index: -1; width: 40vw; height: 40vw; left: var(--mx); top: var(--my); translate: -50% -50%; border-radius: 50%; background: rgba(104,95,255,.11); filter: blur(85px); pointer-events: none; transition: left .25s ease-out, top .25s ease-out; }
       .matrix-rain { position: absolute; z-index: -1; inset: 0; overflow: hidden; opacity: .16; pointer-events: none; }
       .matrix-rain i { position: absolute; top: -12%; color: var(--green-dim); font: 15px var(--pixel); writing-mode: vertical-rl; animation: rain-fall linear infinite; }
       .matrix-rain i:nth-child(3n) { color: var(--cyan); }
       .matrix-rain i:nth-child(4n) { color: var(--pink); }
 
-      .terminal-window { width: min(1420px, 100%); flex: 1; min-height: 0; margin: auto; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--screen); box-shadow: 0 0 0 1px rgba(135,217,255,.06), 0 0 42px rgba(83,71,209,.22), 10px 12px 0 rgba(0,0,0,.4); animation: window-open .8s cubic-bezier(.2,.8,.2,1) both; transition: box-shadow .2s ease, opacity .2s ease; }
+      .terminal-window { width: min(1420px, 100%); flex: 1; min-height: 0; margin: auto; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--screen); box-shadow: 0 0 0 1px rgba(135,217,255,.06), 0 0 42px rgba(83,71,209,.22), 10px 12px 0 rgba(0,0,0,.4); animation: window-open .8s cubic-bezier(.2,.8,.2,1) both; transition: box-shadow .2s ease, opacity .2s ease; pointer-events: auto; }
       .terminal-window.is-floating { position: fixed; z-index: 8; flex: none; margin: 0; opacity: 1; animation: none !important; transform: none !important; }
       .terminal-window.is-closed { display: none; }
       .terminal-window.is-minimized { opacity: 0; pointer-events: none; transform: translateY(18px) scale(.96) !important; }
