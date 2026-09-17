@@ -48,7 +48,7 @@
       .matrix-rain i:nth-child(4n) { color: var(--pink); }
 
       .terminal-window { width: min(1420px, 100%); flex: 1; min-height: 0; margin: auto; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--screen); box-shadow: 0 0 0 1px rgba(135,217,255,.06), 0 0 42px rgba(83,71,209,.22), 10px 12px 0 rgba(0,0,0,.4); animation: window-open .8s cubic-bezier(.2,.8,.2,1) both; transition: box-shadow .2s ease, opacity .2s ease; }
-      .terminal-window.is-floating { position: fixed; z-index: 8; flex: none; margin: 0; animation: none !important; transform: none !important; }
+      .terminal-window.is-floating { position: fixed; z-index: 8; flex: none; margin: 0; opacity: 1; animation: none !important; transform: none !important; }
       .terminal-window.is-closed { display: none; }
       .terminal-window.is-minimized { opacity: 0; pointer-events: none; transform: translateY(18px) scale(.96) !important; }
       .terminal-window.is-maximized { border-radius: 2px; }
