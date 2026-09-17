@@ -311,7 +311,8 @@
       body::before { opacity: .08; background: linear-gradient(135deg, transparent 0 48%, rgba(190,214,242,.15) 49%, transparent 50%), linear-gradient(45deg, transparent 0 48%, rgba(190,214,242,.1) 49%, transparent 50%); background-size: 150px 150px; }
       body::after { opacity: .16; background: radial-gradient(circle at 75% 22%, rgba(113,149,197,.22), transparent 25%), linear-gradient(90deg, transparent 0 49.8%, rgba(190,214,242,.035) 50%, transparent 50.2%); }
       .desktop-taskbar { position: fixed; z-index: 0; right: 0; bottom: 0; left: 0; height: 42px; display: flex; align-items: center; gap: 8px; padding: 0 14px; border-top: 1px solid rgba(188,211,238,.3); background: rgba(11,18,30,.86); backdrop-filter: blur(14px); box-shadow: 0 -8px 24px rgba(6,12,22,.3); color: #b4c2d6; font: 10px var(--mono); }
-      .desktop-launcher { width: 30px; height: 28px; display: grid; place-items: center; border: 1px solid #e0efff; background: linear-gradient(145deg, #d8eafa, #7799bd); color: #172536; font-size: 15px; box-shadow: inset 1px 1px rgba(255,255,255,.65), 1px 2px 0 rgba(4,10,20,.35); }
+      .desktop-launcher { width: 30px; height: 28px; display: grid; place-items: center; padding: 0; border: 1px solid #e0efff; background: linear-gradient(145deg, #d8eafa, #7799bd); color: #172536; cursor: pointer; font: 15px/1 var(--mono); box-shadow: inset 1px 1px rgba(255,255,255,.65), 1px 2px 0 rgba(4,10,20,.35); }
+      .desktop-launcher:hover, .desktop-launcher:focus-visible { background: linear-gradient(145deg, #eef7ff, #91b0d1); outline: 1px solid #fff; }
       .desktop-workspace { width: 20px; height: 20px; display: grid; place-items: center; margin-left: 5px; border: 1px solid #90a9c6; color: #b8ffc0; font-size: 9px; }
       .desktop-taskbar-apps { display: flex; align-items: center; gap: 5px; height: 100%; margin-left: 3px; }
       .desktop-taskbar-app { min-width: 108px; display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 10px; border: 1px solid rgba(188,211,238,.3); background: rgba(101,127,160,.24); color: #d7e4f4; }
@@ -330,7 +331,7 @@
       .desktop-tray-item { color: #a9c4e2; font-size: 11px; }
       .desktop-clock { min-width: 43px; padding-left: 11px; border-left: 1px solid rgba(188,211,238,.3); color: #d7e4f4; font-size: 9px; text-align: right; }
       .desktop-icons { position: fixed; z-index: 0; top: 28px; left: 12px; display: grid; gap: 14px; width: 50px; }
-      .desktop-icon { width: 50px; display: grid; justify-items: center; gap: 5px; color: #d7e4f4; font: 8px var(--mono); text-align: center; text-shadow: 0 1px 3px #0b1320; }
+      .desktop-icon { width: 50px; display: grid; justify-items: center; gap: 5px; padding: 0; border: 0; background: transparent; color: #d7e4f4; cursor: var(--portfolio-cursor); font: 8px var(--mono); text-align: center; text-shadow: 0 1px 3px #0b1320; }
       .desktop-icon.is-selected .desktop-icon-art { outline: 2px solid rgba(125,148,208,.9); outline-offset: 2px; box-shadow: 2px 3px 0 rgba(5,11,20,.35), 0 0 14px rgba(125,148,208,.28), inset 1px 1px rgba(255,255,255,.3); }
       .desktop-icon.is-selected > span:last-child { padding: 2px 4px; border-radius: 4px; background: #7183b8; color: #ffffff; text-shadow: none; }
       .desktop-icon-art { position: relative; width: 30px; height: 30px; display: grid; place-items: center; overflow: hidden; border: 1px solid #a2b8d2; background: linear-gradient(145deg, rgba(199,218,240,.48), rgba(70,95,126,.58)); box-shadow: 2px 3px 0 rgba(5,11,20,.35), inset 1px 1px rgba(255,255,255,.3); color: #f0f6ff; font-size: 0; }
@@ -340,6 +341,8 @@
       .desktop-icon-art.icon-folder::after { content: ""; position: absolute; width: 25px; height: 11px; background: #f2ce6b; border-top: 1px solid #fff0aa; transform: translateY(4px); }
       .desktop-icon-art.icon-terminal { background: #15251b; border-color: #9ed2a8; }
       .desktop-icon-art.icon-terminal::before { content: ">_"; width: 26px; height: 18px; display: grid; place-items: center; border: 1px solid #8cc99a; color: #b8ffc0; font: 11px/1 var(--mono); }
+      .desktop-icon-art.icon-mail { background: linear-gradient(145deg, #d4e4f4, #7294b4); border-color: #edf6ff; }
+      .desktop-icon-art.icon-mail::before { content: "✉"; color: #2c4969; font: 22px/1 Arial, sans-serif; }
       .desktop-icon-art.icon-browser { border-radius: 5px; background: linear-gradient(145deg, #b8dcf4, #547c9f); }
       .desktop-icon-art.icon-browser::before { content: "◎"; color: #f3fbff; font: 27px/1 Arial, sans-serif; }
       .desktop-icon-art.icon-document { background: #d7e2ef; border-color: #f2f6fb; }
@@ -352,6 +355,8 @@
       @media (max-width: 780px) {
         .intro-sequence { display: none; }
         .desktop-icons { display: none; }
+        .desktop-app-window { display: none !important; }
+        .desktop-start-menu, .desktop-toast { display: none !important; }
         .terminal-resize-handle { display: none; }
         .desktop-taskbar { height: 29px; padding-inline: 8px; font-size: 8px; }
         .desktop-workspace, .desktop-taskbar-app.ghost { display: none; }
@@ -380,12 +385,85 @@
       .terminal-controls i { display: none; }
       .terminal-resize-handle { position: absolute; right: 0; bottom: 0; z-index: 2; width: 19px; height: 19px; cursor: nwse-resize !important; touch-action: none; }
       .terminal-resize-handle::before { content: ""; position: absolute; right: 3px; bottom: 3px; width: 9px; height: 9px; background: repeating-linear-gradient(135deg, transparent 0 2px, rgba(255,255,255,.7) 2px 3px); opacity: .65; }
+
+      .desktop-app-window { position: fixed; z-index: 7; display: none; flex-direction: column; overflow: hidden; min-width: 420px; min-height: 330px; border: 1px solid #50657e; border-radius: 7px; background: #e9eef4; color: #1d2a3b; box-shadow: 0 18px 42px rgba(4,10,20,.5), 0 0 0 1px rgba(235,245,255,.45); }
+      .desktop-app-window.is-open { display: flex; animation: app-window-open .24s ease-out both; }
+      .desktop-app-window.is-minimized { display: none; }
+      .desktop-app-window.folder-window { width: min(820px, calc(100vw - 170px)); height: min(540px, calc(100vh - 125px)); }
+      .desktop-app-window.mail-window { width: min(720px, calc(100vw - 190px)); height: min(525px, calc(100vh - 135px)); }
+      .desktop-app-titlebar { flex: 0 0 32px; display: flex; align-items: center; gap: 8px; padding: 5px 8px; border-bottom: 1px solid #8293a6; background: linear-gradient(#f7fafc, #c4cfdb); color: #233246; font: 10px var(--mono); cursor: grab; user-select: none; touch-action: none; }
+      .desktop-app-titlebar:active, .desktop-app-titlebar.is-dragging { cursor: grabbing; }
+      .desktop-app-titlebar > * { cursor: inherit; }
+      .desktop-app-title-icon { width: 21px; height: 21px; flex: 0 0 21px; border-radius: 3px; box-shadow: inset 1px 1px rgba(255,255,255,.65), 1px 1px rgba(45,60,80,.2); }
+      .desktop-app-title { font-weight: 700; }
+      .desktop-app-meta { color: #68788b; font-size: 9px; }
+      .desktop-app-controls { display: flex; gap: 3px; margin-left: auto; }
+      .desktop-app-controls button { width: 18px; height: 17px; display: grid; place-items: center; padding: 0; border: 1px solid #7b8b9b; border-radius: 2px; background: #d8e0e8; color: #28384c; cursor: pointer; font: 12px/1 Arial, sans-serif; box-shadow: inset 1px 1px rgba(255,255,255,.75); }
+      .desktop-app-controls button:hover, .desktop-app-controls button:focus-visible { background: #ffffff; outline: 1px solid #60758c; }
+      .desktop-app-controls button:nth-child(1)::before { content: "–"; transform: translateY(-2px); }
+      .desktop-app-controls button:nth-child(2)::before { content: "□"; font-size: 11px; }
+      .desktop-app-controls button:nth-child(3)::before { content: "×"; font-size: 14px; }
+      .desktop-app-controls button:nth-child(3):hover, .desktop-app-controls button:nth-child(3):focus-visible { background: #e39a9a; border-color: #9d5757; }
+      .desktop-app-toolbar { flex: 0 0 32px; display: flex; align-items: center; gap: 7px; padding: 5px 10px; border-bottom: 1px solid #bcc8d4; background: #dbe3eb; color: #506176; font: 9px var(--mono); }
+      .desktop-app-toolbar .toolbar-path { color: #24364c; }
+      .desktop-app-toolbar .toolbar-spacer { margin-left: auto; color: #78889a; }
+      .folder-content { flex: 1; min-height: 0; overflow: auto; padding: 19px; background: linear-gradient(135deg, #f5f8fb, #dce5ee); }
+      .folder-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+      .folder-item { min-height: 175px; display: flex; flex-direction: column; padding: 12px; border: 1px solid transparent; border-radius: 5px; background: rgba(255,255,255,.32); color: #28394f; cursor: default; transition: background .16s, border-color .16s, transform .16s, box-shadow .16s; }
+      .folder-item:hover, .folder-item:focus-within { border-color: #8ca5c0; background: rgba(255,255,255,.72); box-shadow: 0 5px 12px rgba(50,72,98,.14); transform: translateY(-2px); }
+      .folder-item-icon { height: 68px; display: grid; place-items: center; color: #54779b; font: 45px var(--pixel); }
+      .folder-item:nth-child(2) .folder-item-icon { color: #8b6d9e; }
+      .folder-item:nth-child(3) .folder-item-icon { color: #b47d48; }
+      .folder-item small { color: #718196; font: 8px var(--mono); }
+      .folder-item h3 { margin: 10px 0 4px; color: #20344c; font: 21px var(--pixel); font-weight: 400; }
+      .folder-item p { margin: 0; color: #627287; font: 9px/1.5 var(--mono); }
+      .folder-status { margin: 19px 0 0; color: #7a899a; font: 9px var(--mono); }
+      .mail-content { flex: 1; min-height: 0; display: grid; grid-template-columns: 180px minmax(0, 1fr); background: #f0f4f8; }
+      .mail-sidebar { padding: 16px 12px; border-right: 1px solid #c3cfdb; background: #dfe7ef; }
+      .mail-sidebar strong { display: block; margin-bottom: 13px; color: #304963; font: 20px var(--pixel); font-weight: 400; }
+      .mail-sidebar p { margin: 8px 0; padding: 7px 8px; border-radius: 3px; color: #52677e; font: 9px var(--mono); }
+      .mail-sidebar p.active { background: #c0d5e9; color: #1f3d5d; }
+      .mail-form { display: grid; gap: 10px; align-content: start; padding: 20px 24px; }
+      .mail-form h2 { margin: 0 0 7px; color: #263f5d; font: 31px var(--pixel); font-weight: 400; }
+      .mail-form label { display: grid; grid-template-columns: 58px minmax(0, 1fr); align-items: center; gap: 9px; color: #6b7d90; font: 9px var(--mono); }
+      .mail-form input, .mail-form textarea { width: 100%; padding: 8px 9px; border: 1px solid #b8c5d2; border-radius: 3px; outline: 0; background: #fbfdff; color: #273c54; font: 10px var(--mono); }
+      .mail-form textarea { min-height: 140px; resize: vertical; }
+      .mail-form input:focus, .mail-form textarea:focus { border-color: #658bb0; box-shadow: 0 0 0 2px rgba(101,139,176,.17); }
+      .mail-send { justify-self: start; padding: 8px 14px; border: 1px solid #4c7399; border-radius: 3px; background: linear-gradient(#8eb3d1, #5d86ad); color: #fff; cursor: pointer; font: 10px var(--mono); text-shadow: 0 1px rgba(24,50,77,.4); box-shadow: inset 1px 1px rgba(255,255,255,.35); }
+      .mail-send:hover { background: linear-gradient(#a2c4df, #6e98bd); }
+      .mail-status { min-height: 16px; color: #42734f; font: 9px var(--mono); }
+      .desktop-taskbar-app.is-running { border-color: #d6e5f5; background: rgba(194,220,245,.38); color: #fff; box-shadow: inset 0 -2px #b8ffc0; }
+      .desktop-start-menu { position: fixed; z-index: 20; left: 14px; bottom: 52px; width: 248px; overflow: hidden; border: 1px solid #647b95; border-radius: 6px; background: rgba(228,237,246,.97); color: #253a53; box-shadow: 0 18px 35px rgba(4,10,20,.5), inset 1px 1px rgba(255,255,255,.75); }
+      .desktop-start-menu:not(.is-open) { display: none; }
+      .start-menu-header { padding: 12px 14px; background: linear-gradient(135deg, #324a66, #172a42); color: #eaf5ff; font: 16px var(--pixel); letter-spacing: .04em; }
+      .start-menu-header small { display: block; margin-top: 2px; color: #a9c4de; font: 8px var(--mono); }
+      .start-menu-apps { display: grid; gap: 3px; padding: 8px; }
+      .start-menu-app { display: grid; grid-template-columns: 28px 1fr; align-items: center; gap: 8px; padding: 7px 8px; border: 0; border-radius: 3px; background: transparent; color: #2a4059; cursor: pointer; text-align: left; font: 9px var(--mono); }
+      .start-menu-app:hover, .start-menu-app:focus-visible { background: #c8dced; outline: none; }
+      .start-menu-app .desktop-icon-art { width: 24px; height: 24px; box-shadow: inset 1px 1px rgba(255,255,255,.6), 1px 2px rgba(50,70,90,.2); }
+      .start-menu-footer { padding: 8px 13px; border-top: 1px solid #c0ccd8; color: #7b8b9b; font: 8px var(--mono); }
+      .desktop-toast { position: fixed; z-index: 30; right: 18px; bottom: 55px; max-width: 320px; padding: 10px 13px; border: 1px solid #7790a9; border-radius: 4px; background: rgba(230,239,247,.97); color: #2e465f; box-shadow: 0 10px 24px rgba(4,10,20,.35); font: 9px/1.5 var(--mono); opacity: 0; transform: translateY(8px); pointer-events: none; transition: opacity .2s, transform .2s; }
+      .desktop-toast.is-visible { opacity: 1; transform: translateY(0); }
+      @keyframes app-window-open { from { opacity: 0; transform: translateY(9px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
     </style>
   </head>
   <body>
     <div class="intro-sequence" id="intro-sequence" aria-hidden="true"><svg class="intro-pointer" viewBox="0 0 24 31" shape-rendering="crispEdges" aria-hidden="true"><path d="M2 1L22 19H14L18 28L13 31L9 21L2 28Z"></path></svg><span class="intro-click intro-click-one"></span><span class="intro-click intro-click-two"></span></div>
-    <div class="desktop-icons" aria-hidden="true"><div class="desktop-icon"><span class="desktop-icon-art icon-folder"></span><span>projects</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-terminal"></span><span>terminal</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-browser"></span><span>browser</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-document"></span><span>notes.txt</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-trash"></span><span>trash</span></div></div>
-    <div class="desktop-taskbar"><span class="desktop-launcher"><span class="desktop-icon-art icon-home"></span></span><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active" role="button" tabindex="0" aria-label="Open terminal"><span class="desktop-icon-art icon-terminal"></span> terminal</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-folder"></span> files</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-browser"></span> browser</span></span><span class="desktop-tray"><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
+    <div class="desktop-icons"><button class="desktop-icon" data-desktop-open="projects" type="button" aria-label="Open projects folder"><span class="desktop-icon-art icon-folder"></span><span>projects</span></button><button class="desktop-icon" data-desktop-open="terminal" type="button" aria-label="Open terminal"><span class="desktop-icon-art icon-terminal"></span><span>terminal</span></button><button class="desktop-icon" data-desktop-open="contact" type="button" aria-label="Open contact"><span class="desktop-icon-art icon-mail"></span><span>contact</span></button><button class="desktop-icon" data-desktop-open="notes" type="button" aria-label="Open welcome notes"><span class="desktop-icon-art icon-document"></span><span>notes.txt</span></button><button class="desktop-icon" data-desktop-open="trash" type="button" aria-label="Open trash"><span class="desktop-icon-art icon-trash"></span><span>trash</span></button></div>
+    <div class="desktop-taskbar"><button class="desktop-launcher" id="desktop-launcher" type="button" aria-label="Open application menu" aria-expanded="false"><span class="desktop-icon-art icon-home"></span></button><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active" role="button" tabindex="0" aria-label="Open terminal" data-desktop-open="terminal"><span class="desktop-icon-art icon-terminal"></span> terminal</span><span class="desktop-taskbar-app ghost" role="button" tabindex="0" aria-label="Open projects" data-desktop-open="projects"><span class="desktop-icon-art icon-folder"></span> projects</span><span class="desktop-taskbar-app ghost" role="button" tabindex="0" aria-label="Open contact" data-desktop-open="contact"><span class="desktop-icon-art icon-mail"></span> contact</span></span><span class="desktop-tray"><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
+    <div class="desktop-start-menu" id="desktop-start-menu" aria-hidden="true"><div class="start-menu-header">MUSTAFA OS<small>portfolio workspace · session active</small></div><div class="start-menu-apps"><button class="start-menu-app" type="button" data-desktop-open="terminal"><span class="desktop-icon-art icon-terminal"></span><span>Terminal<br /><small>mustafa@portfolio:~$</small></span></button><button class="start-menu-app" type="button" data-desktop-open="projects"><span class="desktop-icon-art icon-folder"></span><span>Projects<br /><small>/home/mustafa/projects</small></span></button><button class="start-menu-app" type="button" data-desktop-open="contact"><span class="desktop-icon-art icon-mail"></span><span>Contact<br /><small>secure channel</small></span></button></div><div class="start-menu-footer">double-click desktop icons to open</div></div>
+    <div class="desktop-app-window folder-window" id="projects-window" data-desktop-window="projects" aria-hidden="true">
+      <div class="desktop-app-titlebar"><span class="desktop-icon-art icon-folder desktop-app-title-icon"></span><span class="desktop-app-title">projects — file manager</span><span class="desktop-app-meta">3 items</span><span class="desktop-app-controls"><button type="button" aria-label="Minimize projects"></button><button type="button" aria-label="Maximize projects"></button><button type="button" aria-label="Close projects"></button></span></div>
+      <div class="desktop-app-toolbar"><span>⌂</span><span class="toolbar-path">/home/mustafa/projects</span><span class="toolbar-spacer">sort: name ▾</span></div>
+      <div class="folder-content"><div class="folder-grid"><article class="folder-item"><div class="folder-item-icon">[◈]</div><small>01 / WEB</small><h3>Lorem Ipsum</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></article><article class="folder-item"><div class="folder-item-icon">[✦]</div><small>02 / IDENTITY</small><h3>Dolor Sit Amet</h3><p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></article><article class="folder-item"><div class="folder-item-icon">[☻]</div><small>03 / DIGITAL</small><h3>Consectetur</h3><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p></article></div><p class="folder-status">3 items · portfolio/projects · read-only</p></div>
+      <span class="terminal-resize-handle" aria-hidden="true"></span>
+    </div>
+    <div class="desktop-app-window mail-window" id="contact-window" data-desktop-window="contact" aria-hidden="true">
+      <div class="desktop-app-titlebar"><span class="desktop-icon-art icon-mail desktop-app-title-icon"></span><span class="desktop-app-title">contact — mail</span><span class="desktop-app-meta">new message</span><span class="desktop-app-controls"><button type="button" aria-label="Minimize contact"></button><button type="button" aria-label="Maximize contact"></button><button type="button" aria-label="Close contact"></button></span></div>
+      <div class="desktop-app-toolbar"><span>✉</span><span class="toolbar-path">/usr/bin/contact</span><span class="toolbar-spacer">secure channel</span></div>
+      <div class="mail-content"><aside class="mail-sidebar"><strong>mailbox</strong><p class="active">✦ compose</p><p>▸ sent</p><p>▸ drafts</p></aside><form class="mail-form" id="desktop-contact-form"><h2>say hello</h2><label>name<input name="name" autocomplete="name" required /></label><label>email<input type="email" name="email" autocomplete="email" required /></label><label>message<textarea name="message" required></textarea></label><button class="mail-send" type="submit">send message ↗</button><div class="mail-status" role="status"></div></form></div>
+      <span class="terminal-resize-handle" aria-hidden="true"></span>
+    </div>
     <div class="terminal-app" id="app">
       <div class="ambient-glow"></div>
       <div class="matrix-rain" aria-hidden="true"></div>
@@ -654,6 +732,219 @@
         if (!isDesktopWindow()) { resetFloatingWindow(); return; }
         if (terminalWindow.classList.contains('is-maximized')) Object.assign(terminalWindow.style, { width: `${window.innerWidth - 24}px`, height: `${window.innerHeight - 66}px` });
         else clampFloatingWindow();
+      });
+
+      const desktopIcons = [...document.querySelectorAll('.desktop-icon')];
+      const desktopAppControllers = new Map();
+
+      function taskbarAppFor(name) {
+        return document.querySelector(`.desktop-taskbar-app[data-desktop-open="${name}"]`);
+      }
+
+      function setTaskbarAppState(name, isRunning) {
+        const taskbarApp = taskbarAppFor(name);
+        if (taskbarApp) taskbarApp.classList.toggle('is-running', isRunning);
+      }
+
+      function setupDesktopAppWindow(element) {
+        const name = element.dataset.desktopWindow;
+        const titlebar = element.querySelector('.desktop-app-titlebar');
+        const resizeHandle = element.querySelector('.terminal-resize-handle');
+        const controls = [...element.querySelectorAll('.desktop-app-controls button')];
+        const state = { positioned: false, maximized: false, restoredBounds: null, drag: null, resize: null };
+
+        function bringToFront() {
+          windowLayer += 1;
+          element.style.zIndex = String(windowLayer);
+        }
+
+        function clampApp() {
+          if (!state.positioned || !element.classList.contains('is-open') || state.maximized) return;
+          const bounds = element.getBoundingClientRect();
+          const left = parseFloat(element.style.left) || bounds.left;
+          const top = parseFloat(element.style.top) || bounds.top;
+          element.style.left = `${clamp(left, 12, window.innerWidth - bounds.width - 12)}px`;
+          element.style.top = `${clamp(top, 12, window.innerHeight - bounds.height - 54)}px`;
+        }
+
+        function open() {
+          if (!isDesktopWindow()) return;
+          element.classList.remove('is-minimized');
+          element.classList.add('is-open');
+          element.setAttribute('aria-hidden', 'false');
+          if (!state.positioned) {
+            const width = element.offsetWidth;
+            const height = element.offsetHeight;
+            const horizontalOffset = name === 'projects' ? -70 : 65;
+            const verticalOffset = name === 'projects' ? -22 : 18;
+            Object.assign(element.style, {
+              left: `${clamp((window.innerWidth - width) / 2 + horizontalOffset, 12, window.innerWidth - width - 12)}px`,
+              top: `${clamp((window.innerHeight - height) / 2 + verticalOffset, 12, window.innerHeight - height - 54)}px`,
+              width: `${width}px`,
+              height: `${height}px`,
+            });
+            state.positioned = true;
+          }
+          setTaskbarAppState(name, true);
+          bringToFront();
+        }
+
+        function close() {
+          element.classList.remove('is-open', 'is-minimized');
+          element.setAttribute('aria-hidden', 'true');
+          setTaskbarAppState(name, false);
+        }
+
+        function minimize() {
+          element.classList.remove('is-closed');
+          element.classList.add('is-minimized');
+          setTaskbarAppState(name, false);
+        }
+
+        function maximize() {
+          if (!isDesktopWindow()) return;
+          open();
+          if (!state.maximized) {
+            const bounds = element.getBoundingClientRect();
+            state.restoredBounds = { left: `${bounds.left}px`, top: `${bounds.top}px`, width: `${bounds.width}px`, height: `${bounds.height}px` };
+            state.maximized = true;
+            Object.assign(element.style, { left: '12px', top: '12px', width: `${window.innerWidth - 24}px`, height: `${window.innerHeight - 66}px` });
+            element.classList.add('is-maximized');
+          } else {
+            state.maximized = false;
+            element.classList.remove('is-maximized');
+            if (state.restoredBounds) Object.assign(element.style, state.restoredBounds);
+            state.restoredBounds = null;
+            clampApp();
+          }
+          bringToFront();
+        }
+
+        function startDrag(event) {
+          if (!isDesktopWindow() || event.button !== 0 || event.target.closest('button')) return;
+          if (state.maximized) maximize();
+          open();
+          const bounds = element.getBoundingClientRect();
+          state.drag = { pointerId: event.pointerId, startX: event.clientX, startY: event.clientY, left: bounds.left, top: bounds.top, width: bounds.width, height: bounds.height };
+          titlebar.classList.add('is-dragging');
+          titlebar.setPointerCapture(event.pointerId);
+          event.preventDefault();
+        }
+
+        function moveDrag(event) {
+          if (!state.drag || event.pointerId !== state.drag.pointerId) return;
+          element.style.left = `${clamp(state.drag.left + event.clientX - state.drag.startX, 12, window.innerWidth - state.drag.width - 12)}px`;
+          element.style.top = `${clamp(state.drag.top + event.clientY - state.drag.startY, 12, window.innerHeight - state.drag.height - 54)}px`;
+        }
+
+        function endDrag(event) {
+          if (!state.drag || event.pointerId !== state.drag.pointerId) return;
+          state.drag = null;
+          titlebar.classList.remove('is-dragging');
+          if (titlebar.hasPointerCapture(event.pointerId)) titlebar.releasePointerCapture(event.pointerId);
+        }
+
+        function startResize(event) {
+          if (!isDesktopWindow() || event.button !== 0 || state.maximized) return;
+          open();
+          const bounds = element.getBoundingClientRect();
+          state.resize = { pointerId: event.pointerId, startX: event.clientX, startY: event.clientY, width: bounds.width, height: bounds.height, left: bounds.left, top: bounds.top };
+          resizeHandle.setPointerCapture(event.pointerId);
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        function moveResize(event) {
+          if (!state.resize || event.pointerId !== state.resize.pointerId) return;
+          const maxWidth = window.innerWidth - state.resize.left - 12;
+          const maxHeight = window.innerHeight - state.resize.top - 54;
+          element.style.width = `${clamp(state.resize.width + event.clientX - state.resize.startX, 420, maxWidth)}px`;
+          element.style.height = `${clamp(state.resize.height + event.clientY - state.resize.startY, 330, maxHeight)}px`;
+        }
+
+        function endResize(event) {
+          if (!state.resize || event.pointerId !== state.resize.pointerId) return;
+          state.resize = null;
+          if (resizeHandle.hasPointerCapture(event.pointerId)) resizeHandle.releasePointerCapture(event.pointerId);
+        }
+
+        element.addEventListener('pointerdown', bringToFront);
+        titlebar.addEventListener('pointerdown', startDrag);
+        titlebar.addEventListener('pointermove', moveDrag);
+        titlebar.addEventListener('pointerup', endDrag);
+        titlebar.addEventListener('pointercancel', endDrag);
+        titlebar.addEventListener('dblclick', (event) => { if (!event.target.closest('button')) maximize(); });
+        resizeHandle.addEventListener('pointerdown', startResize);
+        resizeHandle.addEventListener('pointermove', moveResize);
+        resizeHandle.addEventListener('pointerup', endResize);
+        resizeHandle.addEventListener('pointercancel', endResize);
+        controls[0].addEventListener('click', minimize);
+        controls[1].addEventListener('click', maximize);
+        controls[2].addEventListener('click', close);
+        window.addEventListener('resize', () => { if (isDesktopWindow()) { if (state.maximized) Object.assign(element.style, { width: `${window.innerWidth - 24}px`, height: `${window.innerHeight - 66}px` }); else clampApp(); } });
+        return { open, close };
+      }
+
+      document.querySelectorAll('[data-desktop-window]').forEach((element) => desktopAppControllers.set(element.dataset.desktopWindow, setupDesktopAppWindow(element)));
+
+      const desktopLauncher = document.querySelector('#desktop-launcher');
+      const desktopStartMenu = document.querySelector('#desktop-start-menu');
+
+      function setStartMenu(isOpen) {
+        desktopStartMenu.classList.toggle('is-open', isOpen);
+        desktopStartMenu.setAttribute('aria-hidden', String(!isOpen));
+        desktopLauncher.setAttribute('aria-expanded', String(isOpen));
+      }
+
+      function showDesktopToast(message) {
+        let toast = document.querySelector('#desktop-toast');
+        if (!toast) {
+          toast = document.createElement('div');
+          toast.id = 'desktop-toast';
+          toast.className = 'desktop-toast';
+          document.body.append(toast);
+        }
+        toast.textContent = message;
+        toast.classList.add('is-visible');
+        window.clearTimeout(toast.hideTimer);
+        toast.hideTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 2800);
+      }
+
+      function openDesktopApp(name) {
+        setStartMenu(false);
+        if (name === 'terminal') { openWindow(); return; }
+        if (name === 'notes') { openWindow(); showDesktopToast('notes.txt is read-only — welcome note is inside the terminal.'); return; }
+        if (name === 'trash') { showDesktopToast('Trash is empty. Nothing to recover.'); return; }
+        const controller = desktopAppControllers.get(name);
+        if (controller) controller.open();
+      }
+
+      desktopIcons.forEach((icon) => {
+        icon.addEventListener('click', () => {
+          desktopIcons.forEach((otherIcon) => otherIcon.classList.toggle('is-selected', otherIcon === icon));
+        });
+        icon.addEventListener('dblclick', () => { if (icon.dataset.desktopOpen) openDesktopApp(icon.dataset.desktopOpen); });
+        icon.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); if (icon.dataset.desktopOpen) openDesktopApp(icon.dataset.desktopOpen); } });
+      });
+
+      document.querySelectorAll('.desktop-taskbar-app[data-desktop-open]').forEach((taskbarApp) => {
+        taskbarApp.addEventListener('click', () => openDesktopApp(taskbarApp.dataset.desktopOpen));
+        taskbarApp.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openDesktopApp(taskbarApp.dataset.desktopOpen); } });
+      });
+
+      desktopLauncher.addEventListener('click', () => setStartMenu(!desktopStartMenu.classList.contains('is-open')));
+      document.querySelectorAll('.start-menu-app[data-desktop-open]').forEach((startMenuApp) => {
+        startMenuApp.addEventListener('click', () => openDesktopApp(startMenuApp.dataset.desktopOpen));
+      });
+      document.addEventListener('pointerdown', (event) => {
+        if (desktopStartMenu.classList.contains('is-open') && !desktopStartMenu.contains(event.target) && !desktopLauncher.contains(event.target)) setStartMenu(false);
+      });
+
+      document.querySelector('#desktop-contact-form').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const status = event.currentTarget.querySelector('.mail-status');
+        status.textContent = 'message prepared. email hello@mustafaali.org directly to send it.';
+        event.currentTarget.reset();
       });
 
       const commands = {
