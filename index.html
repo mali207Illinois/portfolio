@@ -37,6 +37,7 @@
       button, input, textarea { font: inherit; }
       button { color: inherit; }
       body, button, a, input, textarea { cursor: var(--portfolio-cursor); }
+      .intro-cursor-hidden, .intro-cursor-hidden * { cursor: none !important; }
       ::selection { color: var(--void); background: var(--green); }
 
       .terminal-app { --mx: 50%; --my: 30%; width: 100%; height: 100dvh; min-height: 560px; padding: clamp(12px, 2.5vw, 32px); display: flex; flex-direction: column; position: relative; isolation: isolate; }
@@ -602,6 +603,7 @@
           return;
         }
 
+        document.body.classList.add('intro-cursor-hidden');
         const terminalIcon = document.querySelector('.desktop-icon-art.icon-terminal');
         const terminalIconRect = terminalIcon.getBoundingClientRect();
         const target = { x: terminalIconRect.left + (terminalIconRect.width / 2), y: terminalIconRect.top + (terminalIconRect.height / 2) };
@@ -657,6 +659,7 @@
         window.setTimeout(() => desktopTerminal.classList.add('is-selected'), 2650);
         window.setTimeout(() => taskbarTerminal.classList.add('is-running'), 3250);
         window.setTimeout(startLandingReveal, 4100);
+        window.setTimeout(() => document.body.classList.remove('intro-cursor-hidden'), 4000);
         window.setTimeout(() => introSequence.classList.add('is-complete'), 4500);
       }
 
