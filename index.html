@@ -613,8 +613,7 @@
         introSequence.style.setProperty('--click-x', `${target.x - 10}px`);
         introSequence.style.setProperty('--click-y', `${target.y - 10}px`);
 
-        function animatePointer(now) {
-          const elapsed = now - sequenceStartedAt;
+        function pointerFrame(elapsed) {
           const travelProgress = Math.min(1, elapsed / travelDuration);
           const easedProgress = travelProgress * travelProgress * (3 - (2 * travelProgress));
           const point = cubicPoint(start, controlOne, controlTwo, target, easedProgress);
@@ -635,12 +634,26 @@
 
           const pointerX = point.x + driftX + settleX - 2;
           const pointerY = point.y + driftY + settleY - 1.5;
-          introPointer.style.opacity = String(Math.min(1, opacity));
-          introPointer.style.transform = `translate3d(${pointerX}px, ${pointerY}px, 0) scale(${scale})`;
-          if (elapsed < 4000) window.requestAnimationFrame(animatePointer);
+          return {
+            opacity: String(Math.min(1, opacity)),
+            transform: `translate3d(${pointerX}px, ${pointerY}px, 0) scale(${scale})`,
+          };
         }
 
-        window.requestAnimationFrame(animatePointer);
+        const pointerKeyframes = Array.from({ length: 121 }, (_, index) => {
+          const elapsed = (index / 120) * 4000;
+          return { offset: index / 120, ...pointerFrame(elapsed) };
+        });
+        if (typeof introPointer.animate === 'function') {
+          introPointer.animate(pointerKeyframes, { duration: 4000, easing: 'linear', fill: 'both' });
+        } else {
+          function animatePointer(now) {
+            const elapsed = now - sequenceStartedAt;
+            Object.assign(introPointer.style, pointerFrame(elapsed));
+            if (elapsed < 4000) window.requestAnimationFrame(animatePointer);
+          }
+          window.requestAnimationFrame(animatePointer);
+        }
         window.setTimeout(() => desktopTerminal.classList.add('is-selected'), 2650);
         window.setTimeout(() => taskbarTerminal.classList.add('is-running'), 3250);
         window.setTimeout(startLandingReveal, 4100);
