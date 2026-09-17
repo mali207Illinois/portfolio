@@ -928,6 +928,12 @@
         icon.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); if (icon.dataset.desktopOpen) openDesktopApp(icon.dataset.desktopOpen); } });
       });
 
+      document.addEventListener('pointerdown', (event) => {
+        const clickedElement = event.target instanceof Element ? event.target : null;
+        if (clickedElement?.closest('.desktop-icon, .terminal-window, .desktop-app-window, .desktop-taskbar, .desktop-start-menu')) return;
+        desktopIcons.forEach((icon) => icon.classList.remove('is-selected'));
+      });
+
       document.querySelectorAll('.folder-item').forEach((item) => {
         item.addEventListener('click', () => {
           document.querySelectorAll('.folder-item').forEach((otherItem) => otherItem.classList.toggle('is-selected', otherItem === item));
