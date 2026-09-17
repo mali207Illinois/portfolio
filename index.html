@@ -49,6 +49,7 @@
 
       .terminal-window { width: min(1420px, 100%); flex: 1; min-height: 0; margin: auto; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--screen); box-shadow: 0 0 0 1px rgba(135,217,255,.06), 0 0 42px rgba(83,71,209,.22), 10px 12px 0 rgba(0,0,0,.4); animation: window-open .8s cubic-bezier(.2,.8,.2,1) both; transition: box-shadow .2s ease, opacity .2s ease; pointer-events: auto; }
       .terminal-window.is-floating { position: fixed; z-index: 8; flex: none; margin: 0; opacity: 1; animation: none !important; transform: none !important; }
+      .terminal-window.is-focused { box-shadow: 0 18px 45px rgba(4,10,20,.62), 0 0 0 2px rgba(214,231,250,.22); }
       .terminal-window.is-closed { display: none; }
       .terminal-window.is-minimized { opacity: 0; pointer-events: none; transform: translateY(18px) scale(.96) !important; }
       .terminal-window.is-maximized { border-radius: 2px; }
@@ -389,6 +390,7 @@
       .desktop-app-window { position: fixed; z-index: 7; display: none; flex-direction: column; overflow: hidden; min-width: 420px; min-height: 330px; border: 1px solid #50657e; border-radius: 7px; background: #e9eef4; color: #1d2a3b; box-shadow: 0 18px 42px rgba(4,10,20,.5), 0 0 0 1px rgba(235,245,255,.45); }
       .desktop-app-window.is-open { display: flex; animation: app-window-open .24s ease-out both; }
       .desktop-app-window.is-minimized { display: none; }
+      .desktop-app-window.is-focused { box-shadow: 0 20px 46px rgba(4,10,20,.62), 0 0 0 2px rgba(214,231,250,.35); }
       .desktop-app-window.folder-window { width: min(820px, calc(100vw - 170px)); height: min(540px, calc(100vh - 125px)); }
       .desktop-app-window.mail-window { width: min(720px, calc(100vw - 190px)); height: min(525px, calc(100vh - 135px)); }
       .desktop-app-titlebar { flex: 0 0 32px; display: flex; align-items: center; gap: 8px; padding: 5px 8px; border-bottom: 1px solid #8293a6; background: linear-gradient(#f7fafc, #c4cfdb); color: #233246; font: 10px var(--mono); cursor: grab; user-select: none; touch-action: none; }
@@ -589,10 +591,16 @@
         return Math.min(Math.max(value, minimum), Math.max(minimum, maximum));
       }
 
+      function focusWindowElement(element) {
+        document.querySelectorAll('.terminal-window, .desktop-app-window').forEach((windowElement) => windowElement.classList.remove('is-focused'));
+        element.classList.add('is-focused');
+        windowLayer += 1;
+        element.style.zIndex = String(windowLayer);
+      }
+
       function bringWindowToFront() {
         if (!isDesktopWindow()) return;
-        windowLayer += 1;
-        terminalWindow.style.zIndex = String(windowLayer);
+        focusWindowElement(terminalWindow);
       }
 
       function makeWindowFloating() {
@@ -605,11 +613,9 @@
             top: `${bounds.top}px`,
             width: `${bounds.width}px`,
             height: `${bounds.height}px`,
-            zIndex: String(++windowLayer),
           });
-        } else {
-          bringWindowToFront();
         }
+        bringWindowToFront();
         return true;
       }
 
@@ -654,7 +660,7 @@
         taskbarTerminal.classList.add('is-running');
         startLandingReveal();
         landingView.classList.add('landing-complete');
-        bringWindowToFront();
+        makeWindowFloating();
       }
 
       function closeWindow() {
@@ -719,7 +725,7 @@
         if (terminalResizeHandle.hasPointerCapture(event.pointerId)) terminalResizeHandle.releasePointerCapture(event.pointerId);
       }
 
-      terminalWindow.addEventListener('pointerdown', bringWindowToFront);
+      terminalWindow.addEventListener('pointerdown', makeWindowFloating);
       terminalTitlebar.addEventListener('pointerdown', beginWindowDrag);
       terminalTitlebar.addEventListener('pointermove', moveWindowDrag);
       terminalTitlebar.addEventListener('pointerup', endWindowDrag);
@@ -760,8 +766,7 @@
         const state = { positioned: false, maximized: false, restoredBounds: null, drag: null, resize: null };
 
         function bringToFront() {
-          windowLayer += 1;
-          element.style.zIndex = String(windowLayer);
+          focusWindowElement(element);
         }
 
         function clampApp() {
