@@ -110,9 +110,9 @@
       .intro-pointer { position: absolute; top: 0; left: 0; width: 25px; height: 32px; overflow: visible; opacity: 0; transform-origin: 1px 1px; will-change: transform, opacity; }
       .intro-pointer path { fill: #ffffff; stroke: #101820; stroke-width: 1.5; stroke-linejoin: round; }
       .intro-click { position: absolute; left: var(--click-x); top: var(--click-y); width: 20px; height: 20px; border: 1px solid var(--green); border-radius: 50%; box-shadow: 0 0 12px rgba(184,255,192,.45); opacity: 0; }
-      .intro-click-one { animation: click-ripple-one 3.1s ease-out both; }
-      .intro-click-two { animation: click-ripple-two 3.1s ease-out both; }
-      .terminal-window { opacity: 0; animation: terminal-open .75s 2.68s cubic-bezier(.2,.8,.2,1) both; }
+      .intro-click-one { animation: click-ripple-one 3.8s ease-out both; }
+      .intro-click-two { animation: click-ripple-two 3.8s ease-out both; }
+      .terminal-window { opacity: 0; animation: terminal-open .75s 3.25s cubic-bezier(.2,.8,.2,1) both; }
       .intro-skip .terminal-window { animation: none; opacity: 1; transform: none; filter: none; }
 
       .view-heading { margin: 0; color: var(--green); font: 400 clamp(50px, 8vw, 100px)/.72 var(--pixel); }
@@ -623,26 +623,26 @@
           const settleAmount = Math.max(0, 1 - (settleElapsed / 650));
           const settleX = Math.sin(settleElapsed / 55) * .8 * settleAmount;
           const settleY = Math.cos(settleElapsed / 67) * .55 * settleAmount;
-          const pressOne = Math.max(0, Math.min(1, (elapsed - 2080) / 95));
-          const releaseOne = Math.max(0, Math.min(1, (elapsed - 2175) / 180));
-          const pressTwo = Math.max(0, Math.min(1, (elapsed - 2370) / 95));
-          const releaseTwo = Math.max(0, Math.min(1, (elapsed - 2465) / 180));
+          const pressOne = Math.max(0, Math.min(1, (elapsed - 2650) / 95));
+          const releaseOne = Math.max(0, Math.min(1, (elapsed - 2745) / 180));
+          const pressTwo = Math.max(0, Math.min(1, (elapsed - 3000) / 95));
+          const releaseTwo = Math.max(0, Math.min(1, (elapsed - 3095) / 180));
           let scale = 1 - (0.2 * (pressOne * (1 - releaseOne)));
           scale -= 0.2 * (pressTwo * (1 - releaseTwo));
-          const opacity = elapsed < 170 ? elapsed / 170 : Math.max(0, 1 - Math.max(0, elapsed - 2860) / 260);
+          const opacity = elapsed < 170 ? elapsed / 170 : Math.max(0, 1 - Math.max(0, elapsed - 3320) / 280);
 
           const pointerX = point.x + driftX + settleX - 2;
           const pointerY = point.y + driftY + settleY - 1.5;
           introPointer.style.opacity = String(Math.min(1, opacity));
           introPointer.style.transform = `translate3d(${pointerX}px, ${pointerY}px, 0) scale(${scale})`;
-          if (elapsed < 3150) window.requestAnimationFrame(animatePointer);
+          if (elapsed < 4000) window.requestAnimationFrame(animatePointer);
         }
 
         window.requestAnimationFrame(animatePointer);
-        window.setTimeout(() => desktopTerminal.classList.add('is-selected'), 2080);
-        window.setTimeout(() => taskbarTerminal.classList.add('is-running'), 2680);
-        window.setTimeout(startLandingReveal, 3500);
-        window.setTimeout(() => introSequence.classList.add('is-complete'), 3900);
+        window.setTimeout(() => desktopTerminal.classList.add('is-selected'), 2650);
+        window.setTimeout(() => taskbarTerminal.classList.add('is-running'), 3250);
+        window.setTimeout(startLandingReveal, 4100);
+        window.setTimeout(() => introSequence.classList.add('is-complete'), 4500);
       }
 
       playIntroSequence();
