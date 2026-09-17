@@ -115,7 +115,7 @@
       .intro-click { position: absolute; left: var(--click-x); top: var(--click-y); width: 20px; height: 20px; border: 1px solid var(--green); border-radius: 50%; box-shadow: 0 0 12px rgba(184,255,192,.45); opacity: 0; }
       .intro-click-one { animation: click-ripple-one 3.8s ease-out both; }
       .intro-click-two { animation: click-ripple-two 3.8s ease-out both; }
-      .terminal-window { opacity: 0; animation: terminal-open .75s 3.25s cubic-bezier(.2,.8,.2,1) both; }
+      .terminal-window { opacity: 0; animation: terminal-open .75s 3.45s cubic-bezier(.2,.8,.2,1) both; }
       .intro-skip .terminal-window { animation: none; opacity: 1; transform: none; filter: none; }
 
       .view-heading { margin: 0; color: var(--green); font: 400 clamp(50px, 8vw, 100px)/.72 var(--pixel); }
@@ -301,7 +301,7 @@
       .command-input { border-bottom: 1px solid #1c3520; padding-bottom: 3px; }
 
       /* desktop environment behind the terminal window */
-      body { background: radial-gradient(circle at 18% 12%, rgba(93,121,158,.45), transparent 32%), linear-gradient(145deg, #2d3a4f 0%, #1c293b 52%, #101a2a 100%); }
+      body { background: #0b1528 url("assets/desktop-night.png") center / cover no-repeat fixed; }
       body::before { opacity: .08; background: linear-gradient(135deg, transparent 0 48%, rgba(190,214,242,.15) 49%, transparent 50%), linear-gradient(45deg, transparent 0 48%, rgba(190,214,242,.1) 49%, transparent 50%); background-size: 150px 150px; }
       body::after { opacity: .16; background: radial-gradient(circle at 75% 22%, rgba(113,149,197,.22), transparent 25%), linear-gradient(90deg, transparent 0 49.8%, rgba(190,214,242,.035) 50%, transparent 50.2%); }
       .desktop-taskbar { position: fixed; z-index: 0; right: 0; bottom: 0; left: 0; height: 42px; display: flex; align-items: center; gap: 8px; padding: 0 14px; border-top: 1px solid rgba(188,211,238,.3); background: rgba(11,18,30,.86); backdrop-filter: blur(14px); box-shadow: 0 -8px 24px rgba(6,12,22,.3); color: #b4c2d6; font: 10px var(--mono); }
@@ -610,7 +610,8 @@
         const start = { x: window.innerWidth * .72, y: window.innerHeight * .12 };
         const controlOne = { x: window.innerWidth * .61, y: window.innerHeight * .05 };
         const controlTwo = { x: window.innerWidth * .18, y: window.innerHeight * .36 };
-        const travelDuration = 2150;
+        const travelDuration = 2350;
+        const introDuration = 4200;
         const sequenceStartedAt = performance.now();
         introSequence.style.setProperty('--click-x', `${target.x - 10}px`);
         introSequence.style.setProperty('--click-y', `${target.y - 10}px`);
@@ -626,13 +627,13 @@
           const settleAmount = Math.max(0, 1 - (settleElapsed / 650));
           const settleX = Math.sin(settleElapsed / 55) * .8 * settleAmount;
           const settleY = Math.cos(settleElapsed / 67) * .55 * settleAmount;
-          const pressOne = Math.max(0, Math.min(1, (elapsed - 2650) / 95));
-          const releaseOne = Math.max(0, Math.min(1, (elapsed - 2745) / 180));
-          const pressTwo = Math.max(0, Math.min(1, (elapsed - 3000) / 95));
-          const releaseTwo = Math.max(0, Math.min(1, (elapsed - 3095) / 180));
+          const pressOne = Math.max(0, Math.min(1, (elapsed - 2850) / 95));
+          const releaseOne = Math.max(0, Math.min(1, (elapsed - 2945) / 180));
+          const pressTwo = Math.max(0, Math.min(1, (elapsed - 3200) / 95));
+          const releaseTwo = Math.max(0, Math.min(1, (elapsed - 3295) / 180));
           let scale = 1 - (0.2 * (pressOne * (1 - releaseOne)));
           scale -= 0.2 * (pressTwo * (1 - releaseTwo));
-          const opacity = elapsed < 170 ? elapsed / 170 : Math.max(0, 1 - Math.max(0, elapsed - 3320) / 280);
+          const opacity = elapsed < 170 ? elapsed / 170 : Math.max(0, 1 - Math.max(0, elapsed - 3520) / 280);
 
           const pointerX = point.x + driftX + settleX - 2;
           const pointerY = point.y + driftY + settleY - 1.5;
@@ -643,24 +644,24 @@
         }
 
         const pointerKeyframes = Array.from({ length: 121 }, (_, index) => {
-          const elapsed = (index / 120) * 4000;
+          const elapsed = (index / 120) * introDuration;
           return { offset: index / 120, ...pointerFrame(elapsed) };
         });
         if (typeof introPointer.animate === 'function') {
-          introPointer.animate(pointerKeyframes, { duration: 4000, easing: 'linear', fill: 'both' });
+          introPointer.animate(pointerKeyframes, { duration: introDuration, easing: 'linear', fill: 'both' });
         } else {
           function animatePointer(now) {
             const elapsed = now - sequenceStartedAt;
             Object.assign(introPointer.style, pointerFrame(elapsed));
-            if (elapsed < 4000) window.requestAnimationFrame(animatePointer);
+            if (elapsed < introDuration) window.requestAnimationFrame(animatePointer);
           }
           window.requestAnimationFrame(animatePointer);
         }
-        window.setTimeout(() => desktopTerminal.classList.add('is-selected'), 2650);
-        window.setTimeout(() => taskbarTerminal.classList.add('is-running'), 3250);
-        window.setTimeout(startLandingReveal, 4100);
-        window.setTimeout(() => document.body.classList.remove('intro-cursor-hidden'), 4000);
-        window.setTimeout(() => introSequence.classList.add('is-complete'), 4500);
+        window.setTimeout(() => desktopTerminal.classList.add('is-selected'), 2850);
+        window.setTimeout(() => taskbarTerminal.classList.add('is-running'), 3450);
+        window.setTimeout(startLandingReveal, 4300);
+        window.setTimeout(() => document.body.classList.remove('intro-cursor-hidden'), 4200);
+        window.setTimeout(() => introSequence.classList.add('is-complete'), 4700);
       }
 
       playIntroSequence();
