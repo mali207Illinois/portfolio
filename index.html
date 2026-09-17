@@ -596,6 +596,7 @@
         element.classList.add('is-focused');
         windowLayer += 1;
         element.style.zIndex = String(windowLayer);
+        app.style.zIndex = element === terminalWindow ? String(windowLayer) : '1';
       }
 
       function bringWindowToFront() {
@@ -633,6 +634,7 @@
       function resetFloatingWindow() {
         terminalWindow.classList.remove('is-floating', 'is-maximized');
         Object.assign(terminalWindow.style, { left: '', top: '', width: '', height: '', zIndex: '', flex: '', margin: '' });
+        app.style.zIndex = '';
         restoredWindowBounds = null;
       }
 
