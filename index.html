@@ -324,6 +324,7 @@
       .desktop-tray-item { color: #a9c4e2; font-size: 11px; }
       .desktop-clock { min-width: 43px; padding-left: 11px; border-left: 1px solid rgba(188,211,238,.3); color: #d7e4f4; font-size: 9px; text-align: right; }
       .desktop-icons { position: fixed; z-index: 0; top: 28px; left: 12px; display: grid; gap: 14px; width: 50px; }
+      .desktop-wallpaper-portrait { position: fixed; z-index: 0; top: 50%; left: 50%; width: clamp(136px, 16vw, 214px); height: auto; transform: translate(-50%, -50%); border: 1px solid rgba(214,231,250,.46); box-shadow: 0 12px 28px rgba(5,11,20,.38), 0 0 0 8px rgba(173,198,231,.06); image-rendering: pixelated; pointer-events: none; }
       .desktop-icon { width: 50px; display: grid; justify-items: center; gap: 5px; color: #d7e4f4; font: 8px var(--mono); text-align: center; text-shadow: 0 1px 3px #0b1320; }
       .desktop-icon.is-selected .desktop-icon-art { outline: 2px solid rgba(125,148,208,.9); outline-offset: 2px; box-shadow: 2px 3px 0 rgba(5,11,20,.35), 0 0 14px rgba(125,148,208,.28), inset 1px 1px rgba(255,255,255,.3); }
       .desktop-icon.is-selected > span:last-child { padding: 2px 4px; border-radius: 4px; background: #7183b8; color: #ffffff; text-shadow: none; }
@@ -346,6 +347,7 @@
       @media (max-width: 780px) {
         .intro-sequence { display: none; }
         .desktop-icons { display: none; }
+        .desktop-wallpaper-portrait { display: none; }
         .desktop-taskbar { height: 29px; padding-inline: 8px; font-size: 8px; }
         .desktop-workspace, .desktop-taskbar-app.ghost { display: none; }
         .desktop-taskbar-apps { margin-left: 0; }
@@ -375,6 +377,7 @@
   </head>
   <body>
     <div class="intro-sequence" id="intro-sequence" aria-hidden="true"><svg class="intro-pointer" viewBox="0 0 24 31" shape-rendering="crispEdges" aria-hidden="true"><path d="M2 1L22 19H14L18 28L13 31L9 21L2 28Z"></path></svg><span class="intro-click intro-click-one"></span><span class="intro-click intro-click-two"></span></div>
+    <img class="desktop-wallpaper-portrait" src="assets/profile-pixel.png" alt="" aria-hidden="true" />
     <div class="desktop-icons" aria-hidden="true"><div class="desktop-icon"><span class="desktop-icon-art icon-folder"></span><span>projects</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-terminal"></span><span>terminal</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-browser"></span><span>browser</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-document"></span><span>notes.txt</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-trash"></span><span>trash</span></div></div>
     <div class="desktop-taskbar" aria-hidden="true"><span class="desktop-launcher"><span class="desktop-icon-art icon-home"></span></span><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active"><span class="desktop-icon-art icon-terminal"></span> terminal</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-folder"></span> files</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-browser"></span> browser</span></span><span class="desktop-tray"><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
     <div class="terminal-app" id="app">
