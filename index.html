@@ -47,8 +47,14 @@
       .matrix-rain i:nth-child(3n) { color: var(--cyan); }
       .matrix-rain i:nth-child(4n) { color: var(--pink); }
 
-      .terminal-window { width: min(1420px, 100%); flex: 1; min-height: 0; margin: auto; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--screen); box-shadow: 0 0 0 1px rgba(135,217,255,.06), 0 0 42px rgba(83,71,209,.22), 10px 12px 0 rgba(0,0,0,.4); animation: window-open .8s cubic-bezier(.2,.8,.2,1) both; }
-      .terminal-titlebar { position: relative; flex: 0 0 39px; display: flex; align-items: center; gap: 10px; overflow: hidden; padding: 7px 12px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #171634, #080a13); font: 12px var(--mono); }
+      .terminal-window { width: min(1420px, 100%); flex: 1; min-height: 0; margin: auto; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--screen); box-shadow: 0 0 0 1px rgba(135,217,255,.06), 0 0 42px rgba(83,71,209,.22), 10px 12px 0 rgba(0,0,0,.4); animation: window-open .8s cubic-bezier(.2,.8,.2,1) both; transition: box-shadow .2s ease, opacity .2s ease; }
+      .terminal-window.is-floating { position: fixed; z-index: 8; flex: none; margin: 0; animation: none !important; transform: none !important; }
+      .terminal-window.is-closed { display: none; }
+      .terminal-window.is-minimized { opacity: 0; pointer-events: none; transform: translateY(18px) scale(.96) !important; }
+      .terminal-window.is-maximized { border-radius: 2px; }
+      .terminal-titlebar { position: relative; flex: 0 0 39px; display: flex; align-items: center; gap: 10px; overflow: hidden; padding: 7px 12px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #171634, #080a13); font: 12px var(--mono); cursor: grab; user-select: none; touch-action: none; }
+      .terminal-titlebar:active, .terminal-titlebar.is-dragging { cursor: grabbing; }
+      .terminal-titlebar > * { cursor: inherit; }
       .terminal-titlebar::after { content: ""; position: absolute; top: 0; left: -30%; width: 24%; height: 1px; background: var(--cyan); box-shadow: 0 0 12px 2px rgba(135,217,255,.55); pointer-events: none; animation: scan-sweep 4.8s ease-in-out 1.2s infinite; }
       .terminal-icon { width: 18px; height: 18px; display: grid; place-items: center; border: 1px solid var(--green-dim); color: var(--green); font-size: 12px; animation: icon-pulse 3s ease-in-out infinite; }
       .terminal-title { flex: 1; color: var(--cyan); }
@@ -346,6 +352,7 @@
       @media (max-width: 780px) {
         .intro-sequence { display: none; }
         .desktop-icons { display: none; }
+        .terminal-resize-handle { display: none; }
         .desktop-taskbar { height: 29px; padding-inline: 8px; font-size: 8px; }
         .desktop-workspace, .desktop-taskbar-app.ghost { display: none; }
         .desktop-taskbar-apps { margin-left: 0; }
@@ -371,12 +378,14 @@
       .terminal-controls button:nth-child(3)::before { content: "×"; font-size: 14px; }
       .terminal-controls button:nth-child(3):hover, .terminal-controls button:nth-child(3):focus-visible { border-color: #7a3333; background: #d68b8b; }
       .terminal-controls i { display: none; }
+      .terminal-resize-handle { position: absolute; right: 0; bottom: 0; z-index: 2; width: 19px; height: 19px; cursor: nwse-resize !important; touch-action: none; }
+      .terminal-resize-handle::before { content: ""; position: absolute; right: 3px; bottom: 3px; width: 9px; height: 9px; background: repeating-linear-gradient(135deg, transparent 0 2px, rgba(255,255,255,.7) 2px 3px); opacity: .65; }
     </style>
   </head>
   <body>
     <div class="intro-sequence" id="intro-sequence" aria-hidden="true"><svg class="intro-pointer" viewBox="0 0 24 31" shape-rendering="crispEdges" aria-hidden="true"><path d="M2 1L22 19H14L18 28L13 31L9 21L2 28Z"></path></svg><span class="intro-click intro-click-one"></span><span class="intro-click intro-click-two"></span></div>
     <div class="desktop-icons" aria-hidden="true"><div class="desktop-icon"><span class="desktop-icon-art icon-folder"></span><span>projects</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-terminal"></span><span>terminal</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-browser"></span><span>browser</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-document"></span><span>notes.txt</span></div><div class="desktop-icon"><span class="desktop-icon-art icon-trash"></span><span>trash</span></div></div>
-    <div class="desktop-taskbar" aria-hidden="true"><span class="desktop-launcher"><span class="desktop-icon-art icon-home"></span></span><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active"><span class="desktop-icon-art icon-terminal"></span> terminal</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-folder"></span> files</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-browser"></span> browser</span></span><span class="desktop-tray"><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
+    <div class="desktop-taskbar"><span class="desktop-launcher"><span class="desktop-icon-art icon-home"></span></span><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active" role="button" tabindex="0" aria-label="Open terminal"><span class="desktop-icon-art icon-terminal"></span> terminal</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-folder"></span> files</span><span class="desktop-taskbar-app ghost"><span class="desktop-icon-art icon-browser"></span> browser</span></span><span class="desktop-tray"><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
     <div class="terminal-app" id="app">
       <div class="ambient-glow"></div>
       <div class="matrix-rain" aria-hidden="true"></div>
@@ -413,6 +422,7 @@
           </main>
           <aside class="system-panel"><p class="system-label">system profile</p><div class="system-avatar"><img src="assets/profile-pixel.png" alt="Pixel art portrait of Mustafa Ali" /></div><h2 class="system-name">mustafa ali</h2><p class="system-role">designer / developer</p><div class="system-stats"><div class="stat-row"><span>status</span><strong>available</strong></div><div class="stat-row"><span>location</span><strong>illinois, usa</strong></div><div class="stat-row"><span>uptime</span><strong id="uptime">00:00:00</strong></div><div class="stat-row"><span>visitors</span><strong id="visitor-count">004237</strong></div></div><div class="system-shortcuts"><button type="button" data-command="help">[?] command list</button><button type="button" data-command="cat">[+] pet the cat</button></div><p class="system-footer">all systems nominal<br />made with curiosity + too much coffee</p></aside>
         </div>
+        <span class="terminal-resize-handle" aria-hidden="true"></span>
       </div>
     </div>
     <script>
@@ -469,7 +479,15 @@
       const introPointer = document.querySelector('.intro-pointer');
       const desktopTerminal = document.querySelector('.desktop-icon-art.icon-terminal').closest('.desktop-icon');
       const taskbarTerminal = document.querySelector('.desktop-taskbar-app.active');
+      const terminalWindow = document.querySelector('.terminal-window');
+      const terminalTitlebar = terminalWindow.querySelector('.terminal-titlebar');
+      const terminalResizeHandle = terminalWindow.querySelector('.terminal-resize-handle');
+      const [minimizeWindowButton, maximizeWindowButton, closeWindowButton] = terminalWindow.querySelectorAll('.terminal-controls button');
       const landingRevealTargets = [...landingView.querySelectorAll('.landing-reveal')];
+      let windowDragState = null;
+      let windowResizeState = null;
+      let restoredWindowBounds = null;
+      let windowLayer = 8;
 
       function startLandingReveal() {
         if (landingView.dataset.landingReady === 'true') return;
@@ -483,6 +501,160 @@
       function focusCommandInputIfDesktop() {
         if (window.matchMedia('(pointer: fine)').matches) input.focus();
       }
+
+      function isDesktopWindow() {
+        return window.matchMedia('(pointer: fine)').matches && window.innerWidth > 780;
+      }
+
+      function clamp(value, minimum, maximum) {
+        return Math.min(Math.max(value, minimum), Math.max(minimum, maximum));
+      }
+
+      function bringWindowToFront() {
+        if (!isDesktopWindow()) return;
+        windowLayer += 1;
+        terminalWindow.style.zIndex = String(windowLayer);
+      }
+
+      function makeWindowFloating() {
+        if (!isDesktopWindow()) return false;
+        if (!terminalWindow.classList.contains('is-floating')) {
+          const bounds = terminalWindow.getBoundingClientRect();
+          terminalWindow.classList.add('is-floating');
+          Object.assign(terminalWindow.style, {
+            left: `${bounds.left}px`,
+            top: `${bounds.top}px`,
+            width: `${bounds.width}px`,
+            height: `${bounds.height}px`,
+            zIndex: String(++windowLayer),
+          });
+        } else {
+          bringWindowToFront();
+        }
+        return true;
+      }
+
+      function clampFloatingWindow() {
+        if (!terminalWindow.classList.contains('is-floating')) return;
+        const bounds = terminalWindow.getBoundingClientRect();
+        const left = parseFloat(terminalWindow.style.left) || bounds.left;
+        const top = parseFloat(terminalWindow.style.top) || bounds.top;
+        const maxLeft = window.innerWidth - bounds.width - 12;
+        const maxTop = window.innerHeight - bounds.height - 54;
+        terminalWindow.style.left = `${clamp(left, 12, maxLeft)}px`;
+        terminalWindow.style.top = `${clamp(top, 12, maxTop)}px`;
+      }
+
+      function resetFloatingWindow() {
+        terminalWindow.classList.remove('is-floating', 'is-maximized');
+        Object.assign(terminalWindow.style, { left: '', top: '', width: '', height: '', zIndex: '', flex: '', margin: '' });
+        restoredWindowBounds = null;
+      }
+
+      function maximizeWindow() {
+        if (!makeWindowFloating()) return;
+        if (!terminalWindow.classList.contains('is-maximized')) {
+          const bounds = terminalWindow.getBoundingClientRect();
+          restoredWindowBounds = { left: `${bounds.left}px`, top: `${bounds.top}px`, width: `${bounds.width}px`, height: `${bounds.height}px` };
+          terminalWindow.classList.add('is-maximized');
+          Object.assign(terminalWindow.style, { left: '12px', top: '12px', width: `${window.innerWidth - 24}px`, height: `${window.innerHeight - 66}px` });
+        } else {
+          terminalWindow.classList.remove('is-maximized');
+          if (restoredWindowBounds) Object.assign(terminalWindow.style, restoredWindowBounds);
+          restoredWindowBounds = null;
+          clampFloatingWindow();
+        }
+        bringWindowToFront();
+      }
+
+      function openWindow() {
+        terminalWindow.classList.remove('is-closed', 'is-minimized');
+        taskbarTerminal.classList.add('is-running');
+        bringWindowToFront();
+      }
+
+      function closeWindow() {
+        terminalWindow.classList.remove('is-minimized');
+        terminalWindow.classList.add('is-closed');
+        taskbarTerminal.classList.remove('is-running');
+      }
+
+      function minimizeWindow() {
+        terminalWindow.classList.remove('is-closed');
+        terminalWindow.classList.add('is-minimized');
+        taskbarTerminal.classList.remove('is-running');
+      }
+
+      function beginWindowDrag(event) {
+        if (!isDesktopWindow() || event.button !== 0 || event.target.closest('button')) return;
+        if (terminalWindow.classList.contains('is-maximized')) maximizeWindow();
+        if (!makeWindowFloating()) return;
+        const bounds = terminalWindow.getBoundingClientRect();
+        windowDragState = { pointerId: event.pointerId, startX: event.clientX, startY: event.clientY, left: bounds.left, top: bounds.top, width: bounds.width, height: bounds.height };
+        terminalTitlebar.classList.add('is-dragging');
+        terminalTitlebar.setPointerCapture(event.pointerId);
+        event.preventDefault();
+      }
+
+      function moveWindowDrag(event) {
+        if (!windowDragState || event.pointerId !== windowDragState.pointerId) return;
+        const nextLeft = windowDragState.left + event.clientX - windowDragState.startX;
+        const nextTop = windowDragState.top + event.clientY - windowDragState.startY;
+        terminalWindow.style.left = `${clamp(nextLeft, 12, window.innerWidth - windowDragState.width - 12)}px`;
+        terminalWindow.style.top = `${clamp(nextTop, 12, window.innerHeight - windowDragState.height - 54)}px`;
+      }
+
+      function endWindowDrag(event) {
+        if (!windowDragState || event.pointerId !== windowDragState.pointerId) return;
+        windowDragState = null;
+        terminalTitlebar.classList.remove('is-dragging');
+        if (terminalTitlebar.hasPointerCapture(event.pointerId)) terminalTitlebar.releasePointerCapture(event.pointerId);
+      }
+
+      function beginWindowResize(event) {
+        if (!isDesktopWindow() || event.button !== 0 || terminalWindow.classList.contains('is-maximized')) return;
+        if (!makeWindowFloating()) return;
+        const bounds = terminalWindow.getBoundingClientRect();
+        windowResizeState = { pointerId: event.pointerId, startX: event.clientX, startY: event.clientY, width: bounds.width, height: bounds.height, left: bounds.left, top: bounds.top };
+        terminalResizeHandle.setPointerCapture(event.pointerId);
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      function moveWindowResize(event) {
+        if (!windowResizeState || event.pointerId !== windowResizeState.pointerId) return;
+        const maxWidth = window.innerWidth - windowResizeState.left - 12;
+        const maxHeight = window.innerHeight - windowResizeState.top - 54;
+        terminalWindow.style.width = `${clamp(windowResizeState.width + event.clientX - windowResizeState.startX, 440, maxWidth)}px`;
+        terminalWindow.style.height = `${clamp(windowResizeState.height + event.clientY - windowResizeState.startY, 330, maxHeight)}px`;
+      }
+
+      function endWindowResize(event) {
+        if (!windowResizeState || event.pointerId !== windowResizeState.pointerId) return;
+        windowResizeState = null;
+        if (terminalResizeHandle.hasPointerCapture(event.pointerId)) terminalResizeHandle.releasePointerCapture(event.pointerId);
+      }
+
+      terminalWindow.addEventListener('pointerdown', bringWindowToFront);
+      terminalTitlebar.addEventListener('pointerdown', beginWindowDrag);
+      terminalTitlebar.addEventListener('pointermove', moveWindowDrag);
+      terminalTitlebar.addEventListener('pointerup', endWindowDrag);
+      terminalTitlebar.addEventListener('pointercancel', endWindowDrag);
+      terminalTitlebar.addEventListener('dblclick', (event) => { if (!event.target.closest('button')) maximizeWindow(); });
+      terminalResizeHandle.addEventListener('pointerdown', beginWindowResize);
+      terminalResizeHandle.addEventListener('pointermove', moveWindowResize);
+      terminalResizeHandle.addEventListener('pointerup', endWindowResize);
+      terminalResizeHandle.addEventListener('pointercancel', endWindowResize);
+      minimizeWindowButton.addEventListener('click', minimizeWindow);
+      maximizeWindowButton.addEventListener('click', maximizeWindow);
+      closeWindowButton.addEventListener('click', closeWindow);
+      taskbarTerminal.addEventListener('click', openWindow);
+      taskbarTerminal.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openWindow(); } });
+      window.addEventListener('resize', () => {
+        if (!isDesktopWindow()) { resetFloatingWindow(); return; }
+        if (terminalWindow.classList.contains('is-maximized')) Object.assign(terminalWindow.style, { width: `${window.innerWidth - 24}px`, height: `${window.innerHeight - 66}px` });
+        else clampFloatingWindow();
+      });
 
       const commands = {
         home: { view: 'home', result: 'returning to /home' },
