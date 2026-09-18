@@ -310,7 +310,7 @@
       .command-input { border-bottom: 1px solid #1c3520; padding-bottom: 3px; }
 
       /* desktop environment behind the terminal window */
-      body { background: #0b1528 url("assets/desktop-night.png") center / cover no-repeat fixed; }
+      body { background: radial-gradient(circle at 18% 12%, rgba(93,121,158,.45), transparent 32%), linear-gradient(145deg, #2d3a4f 0%, #1c293b 52%, #101a2a 100%); }
       body::before { opacity: .08; background: linear-gradient(135deg, transparent 0 48%, rgba(190,214,242,.15) 49%, transparent 50%), linear-gradient(45deg, transparent 0 48%, rgba(190,214,242,.1) 49%, transparent 50%); background-size: 150px 150px; }
       body::after { opacity: .16; background: radial-gradient(circle at 75% 22%, rgba(113,149,197,.22), transparent 25%), linear-gradient(90deg, transparent 0 49.8%, rgba(190,214,242,.035) 50%, transparent 50.2%); }
       .desktop-taskbar { position: fixed; z-index: 0; right: 0; bottom: 0; left: 0; height: 42px; display: flex; align-items: center; gap: 8px; padding: 0 14px; border-top: 1px solid rgba(188,211,238,.3); background: rgba(11,18,30,.86); backdrop-filter: blur(14px); box-shadow: 0 -8px 24px rgba(6,12,22,.3); color: #b4c2d6; font: 10px var(--mono); }
@@ -391,9 +391,14 @@
       .terminal-controls { display: flex; gap: 4px; margin-left: auto; }
       .terminal-controls button { width: 17px; height: 16px; display: grid; place-items: center; padding: 0; border: 1px solid #6b6b6b; border-radius: 2px; background: #c9c9c9; color: #252525; cursor: pointer; font: 12px/1 Arial, sans-serif; box-shadow: inset 1px 1px rgba(255,255,255,.6); }
       .terminal-controls button:hover, .terminal-controls button:focus-visible { background: #ededed; outline: 1px solid #555; }
-      .terminal-controls button:nth-child(1)::before { content: "–"; transform: translateY(-2px); }
-      .terminal-controls button:nth-child(2)::before { content: "□"; font-size: 11px; }
+      .terminal-controls button:nth-child(1) { border-color: #5f9468; background: #b8dfa6; }
+      .terminal-controls button:nth-child(2) { border-color: #aa8739; background: #f0d37a; }
+      .terminal-controls button:nth-child(3) { border-color: #9b5050; background: #dc8b8b; }
+      .terminal-controls button:nth-child(1)::before { content: "□"; font-size: 11px; }
+      .terminal-controls button:nth-child(2)::before { content: "–"; transform: translateY(-2px); }
       .terminal-controls button:nth-child(3)::before { content: "×"; font-size: 14px; }
+      .terminal-controls button:nth-child(1):hover, .terminal-controls button:nth-child(1):focus-visible { background: #d6f0c7; }
+      .terminal-controls button:nth-child(2):hover, .terminal-controls button:nth-child(2):focus-visible { background: #ffe9a8; }
       .terminal-controls button:nth-child(3):hover, .terminal-controls button:nth-child(3):focus-visible { border-color: #7a3333; background: #d68b8b; }
       .terminal-controls i { display: none; }
       .terminal-resize-handle { position: absolute; right: 0; bottom: 0; z-index: 2; width: 19px; height: 19px; cursor: nwse-resize !important; touch-action: none; }
@@ -415,14 +420,29 @@
       .desktop-app-controls { display: flex; gap: 3px; margin-left: auto; }
       .desktop-app-controls button { width: 18px; height: 17px; display: grid; place-items: center; padding: 0; border: 1px solid #7b8b9b; border-radius: 2px; background: #d8e0e8; color: #28384c; cursor: pointer; font: 12px/1 Arial, sans-serif; box-shadow: inset 1px 1px rgba(255,255,255,.75); }
       .desktop-app-controls button:hover, .desktop-app-controls button:focus-visible { background: #ffffff; outline: 1px solid #60758c; }
-      .desktop-app-controls button:nth-child(1)::before { content: "–"; transform: translateY(-2px); }
-      .desktop-app-controls button:nth-child(2)::before { content: "□"; font-size: 11px; }
+      .desktop-app-controls button:nth-child(1) { border-color: #5f9468; background: #b8dfa6; }
+      .desktop-app-controls button:nth-child(2) { border-color: #aa8739; background: #f0d37a; }
+      .desktop-app-controls button:nth-child(3) { border-color: #9b5050; background: #dc8b8b; }
+      .desktop-app-controls button:nth-child(1)::before { content: "□"; font-size: 11px; }
+      .desktop-app-controls button:nth-child(2)::before { content: "–"; transform: translateY(-2px); }
       .desktop-app-controls button:nth-child(3)::before { content: "×"; font-size: 14px; }
+      .desktop-app-controls button:nth-child(1):hover, .desktop-app-controls button:nth-child(1):focus-visible { background: #d6f0c7; }
+      .desktop-app-controls button:nth-child(2):hover, .desktop-app-controls button:nth-child(2):focus-visible { background: #ffe9a8; }
       .desktop-app-controls button:nth-child(3):hover, .desktop-app-controls button:nth-child(3):focus-visible { background: #e39a9a; border-color: #9d5757; }
-      .desktop-app-toolbar { flex: 0 0 32px; display: flex; align-items: center; gap: 7px; padding: 5px 10px; border-bottom: 1px solid #bcc8d4; background: #dbe3eb; color: #506176; font: 9px var(--mono); }
-      .desktop-app-toolbar .toolbar-path { color: #24364c; }
-      .desktop-app-toolbar .toolbar-spacer { margin-left: auto; color: #78889a; }
-      .folder-content { flex: 1; min-height: 0; overflow: auto; padding: 19px; background: linear-gradient(135deg, #f5f8fb, #dce5ee); }
+      .desktop-app-toolbar { flex: 0 0 34px; display: flex; align-items: center; gap: 6px; padding: 5px 9px; border-bottom: 1px solid #bcc8d4; background: #dbe3eb; color: #506176; font: 9px var(--mono); }
+      .desktop-app-toolbar .toolbar-nav, .desktop-app-toolbar .toolbar-view { width: 22px; height: 21px; display: grid; place-items: center; border: 1px solid #aebdca; border-radius: 2px; background: #eef3f7; color: #526b83; box-shadow: inset 1px 1px rgba(255,255,255,.75); }
+      .desktop-app-toolbar .toolbar-nav:hover, .desktop-app-toolbar .toolbar-view:hover { background: #ffffff; color: #263f5b; }
+      .desktop-app-toolbar .toolbar-path { min-width: 0; flex: 1; padding: 5px 8px; border: 1px solid #acbbc9; border-radius: 2px; background: #f7fafc; color: #24364c; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .desktop-app-toolbar .toolbar-spacer { margin-left: 2px; color: #78889a; white-space: nowrap; }
+      .folder-content { flex: 1; min-height: 0; display: grid; grid-template-columns: 146px minmax(0, 1fr); overflow: hidden; background: linear-gradient(135deg, #f5f8fb, #dce5ee); }
+      .folder-sidebar { min-width: 0; padding: 15px 10px; border-right: 1px solid #c1ccd7; background: rgba(223,232,240,.78); }
+      .folder-sidebar-title { margin: 0 8px 8px; color: #8290a0; font: 8px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+      .folder-sidebar button { width: 100%; display: flex; align-items: center; gap: 8px; padding: 7px 8px; border: 0; border-radius: 3px; background: transparent; color: #52677e; cursor: pointer; text-align: left; font: 9px var(--mono); }
+      .folder-sidebar button:hover, .folder-sidebar button.active { background: #c5d8e9; color: #203f5e; }
+      .folder-main { min-width: 0; min-height: 0; overflow: auto; padding: 17px; }
+      .folder-main-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 13px; }
+      .folder-main-head strong { color: #304963; font: 18px var(--pixel); font-weight: 400; }
+      .folder-main-head span { color: #7a8999; font: 8px var(--mono); }
       .folder-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
       .folder-item { min-height: 175px; display: flex; flex-direction: column; padding: 12px; border: 1px solid transparent; border-radius: 5px; background: rgba(255,255,255,.32); color: #28394f; cursor: default; transition: background .16s, border-color .16s, transform .16s, box-shadow .16s; }
       .folder-item:hover, .folder-item:focus-within { border-color: #8ca5c0; background: rgba(255,255,255,.72); box-shadow: 0 5px 12px rgba(50,72,98,.14); transform: translateY(-2px); }
@@ -433,14 +453,23 @@
       .folder-item small { color: #718196; font: 8px var(--mono); }
       .folder-item h3 { margin: 10px 0 4px; color: #20344c; font: 21px var(--pixel); font-weight: 400; }
       .folder-item p { margin: 0; color: #627287; font: 9px/1.5 var(--mono); }
-      .folder-status { margin: 19px 0 0; color: #7a899a; font: 9px var(--mono); }
+      .folder-status { margin: 15px 0 0; color: #7a899a; font: 9px var(--mono); }
       .mail-content { flex: 1; min-height: 0; display: grid; grid-template-columns: 180px minmax(0, 1fr); background: #f0f4f8; }
       .mail-sidebar { padding: 16px 12px; border-right: 1px solid #c3cfdb; background: #dfe7ef; }
       .mail-sidebar strong { display: block; margin-bottom: 13px; color: #304963; font: 20px var(--pixel); font-weight: 400; }
-      .mail-sidebar p { margin: 8px 0; padding: 7px 8px; border-radius: 3px; color: #52677e; font: 9px var(--mono); }
+      .mail-sidebar p { display: flex; justify-content: space-between; gap: 8px; margin: 5px 0; padding: 8px; border-radius: 3px; color: #52677e; font: 9px var(--mono); }
       .mail-sidebar p.active { background: #c0d5e9; color: #1f3d5d; }
+      .mail-sidebar p:hover { background: #d0e0ed; }
+      .mail-count { color: #7d8ea0; font-size: 8px; }
+      .mail-compose-toolbar { height: 21px; padding: 0 9px; border: 1px solid #6d8eae; border-radius: 2px; background: linear-gradient(#a4c2dc, #759abb); color: #fff; cursor: pointer; font: 9px var(--mono); text-shadow: 0 1px rgba(24,50,77,.35); }
+      .mail-compose-toolbar:hover { background: linear-gradient(#bad4e8, #88a9c7); }
+      .mail-toolbar .mail-search { min-width: 115px; flex: 1; padding: 5px 8px; border: 1px solid #acbbc9; border-radius: 2px; background: #f7fafc; color: #8391a0; }
+      .mail-toolbar .mail-status-chip { color: #4e7f59; font-size: 8px; white-space: nowrap; }
       .mail-form { display: grid; gap: 10px; align-content: start; padding: 20px 24px; }
-      .mail-form h2 { margin: 0 0 7px; color: #263f5d; font: 31px var(--pixel); font-weight: 400; }
+      .mail-form-head { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 4px; padding-bottom: 12px; border-bottom: 1px solid #d1d9e2; }
+      .mail-overline { display: block; margin-bottom: 3px; color: #7b8998; font: 8px var(--mono); letter-spacing: .08em; }
+      .mail-form h2 { margin: 0; color: #263f5d; font: 31px var(--pixel); font-weight: 400; }
+      .mail-draft { padding: 4px 7px; border: 1px solid #c2ccd6; border-radius: 10px; color: #718092; font: 8px var(--mono); }
       .mail-form label { display: grid; grid-template-columns: 58px minmax(0, 1fr); align-items: center; gap: 9px; color: #6b7d90; font: 9px var(--mono); }
       .mail-form input, .mail-form textarea { width: 100%; padding: 8px 9px; border: 1px solid #b8c5d2; border-radius: 3px; outline: 0; background: #fbfdff; color: #273c54; font: 10px var(--mono); }
       .mail-form textarea { min-height: 140px; resize: vertical; }
@@ -450,6 +479,11 @@
       .mail-status { min-height: 16px; color: #42734f; font: 9px var(--mono); }
       .document-toolbar { flex: 0 0 31px; display: flex; align-items: center; gap: 18px; padding: 5px 12px; border-bottom: 1px solid #c4cbd3; background: #eef1f4; color: #596777; font: 9px Arial, sans-serif; }
       .document-toolbar span:first-child { color: #274a70; font-weight: 700; }
+      .document-toolbar .toolbar-menu { color: #596777; font-weight: 400; }
+      .document-toolbar .toolbar-divider { width: 1px; height: 18px; background: #c7cfd8; }
+      .document-toolbar .word-tool, .document-toolbar .toolbar-select { height: 21px; display: grid; place-items: center; padding: 0 6px; border: 1px solid transparent; color: #596777; font: 10px Arial, sans-serif; }
+      .document-toolbar .word-tool:hover, .document-toolbar .toolbar-select { border-color: #c2ccd6; background: #fff; }
+      .document-toolbar .toolbar-select { min-width: 48px; justify-content: start; font-size: 9px; }
       .document-content { flex: 1; min-height: 0; overflow: auto; padding: 18px; background: #c8d0d9; }
       .document-page { min-height: 680px; margin-bottom: 18px; padding: 58px 54px 48px; background: #fff; color: #252b33; box-shadow: 0 2px 7px rgba(45,56,68,.24); font: 12px/1.55 Arial, sans-serif; }
       .document-page:last-child { margin-bottom: 0; }
@@ -505,38 +539,25 @@
     <div class="desktop-taskbar"><button class="desktop-launcher" id="desktop-launcher" type="button" aria-label="Open application menu" aria-expanded="false"><span class="desktop-icon-art icon-home"></span></button><span class="desktop-taskbar-apps"><span class="desktop-taskbar-app active" role="button" tabindex="0" aria-label="Open terminal" data-desktop-open="terminal"><span class="desktop-icon-art icon-terminal"></span><span class="desktop-taskbar-label">terminal</span></span><span class="desktop-taskbar-app ghost" role="button" tabindex="0" aria-label="Open projects" data-desktop-open="projects"><span class="desktop-icon-art icon-folder"></span><span class="desktop-taskbar-label">projects</span></span><span class="desktop-taskbar-app ghost" role="button" tabindex="0" aria-label="Open contact" data-desktop-open="contact"><span class="desktop-icon-art icon-mail"></span><span class="desktop-taskbar-label">contact</span></span><span class="desktop-taskbar-app ghost" role="button" tabindex="0" aria-label="Open cats text" data-desktop-open="cats"><span class="desktop-icon-art icon-document"></span><span class="desktop-taskbar-label">cats.txt</span></span></span><span class="desktop-tray"><span class="desktop-tray-item">◖)))</span><span class="desktop-tray-item">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
     <div class="desktop-start-menu" id="desktop-start-menu" aria-hidden="true"><div class="start-menu-header">MUSTAFA OS<small>portfolio workspace · session active</small></div><div class="start-menu-apps"><button class="start-menu-app" type="button" data-desktop-open="terminal"><span class="desktop-icon-art icon-terminal"></span><span>Terminal<br /><small>mustafa@portfolio:~$</small></span></button><button class="start-menu-app" type="button" data-desktop-open="projects"><span class="desktop-icon-art icon-folder"></span><span>Projects<br /><small>/home/mustafa/projects</small></span></button><button class="start-menu-app" type="button" data-desktop-open="contact"><span class="desktop-icon-art icon-mail"></span><span>Contact<br /><small>secure channel</small></span></button><button class="start-menu-app" type="button" data-desktop-open="cats"><span class="desktop-icon-art icon-document"></span><span>Cats.txt<br /><small>ASCII document</small></span></button></div><div class="start-menu-footer">double-click desktop icons to open</div></div>
     <div class="desktop-app-window folder-window" id="projects-window" data-desktop-window="projects" aria-hidden="true">
-      <div class="desktop-app-titlebar"><span class="desktop-icon-art icon-folder desktop-app-title-icon"></span><span class="desktop-app-title">projects — file manager</span><span class="desktop-app-meta">3 items</span><span class="desktop-app-controls"><button type="button" aria-label="Minimize projects"></button><button type="button" aria-label="Maximize projects"></button><button type="button" aria-label="Close projects"></button></span></div>
-      <div class="desktop-app-toolbar"><span>⌂</span><span class="toolbar-path">/home/mustafa/projects</span><span class="toolbar-spacer">sort: name ▾</span></div>
-      <div class="folder-content"><div class="folder-grid"><article class="folder-item" tabindex="0"><div class="folder-item-icon">[◈]</div><small>01 / WEB</small><h3>Lorem Ipsum</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></article><article class="folder-item" tabindex="0"><div class="folder-item-icon">[✦]</div><small>02 / IDENTITY</small><h3>Dolor Sit Amet</h3><p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></article><article class="folder-item" tabindex="0"><div class="folder-item-icon">[☻]</div><small>03 / DIGITAL</small><h3>Consectetur Adipiscing</h3><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p></article></div><p class="folder-status">3 items · portfolio/projects · read-only</p></div>
+      <div class="desktop-app-titlebar"><span class="desktop-icon-art icon-folder desktop-app-title-icon"></span><span class="desktop-app-title">projects — file manager</span><span class="desktop-app-meta">3 items</span><span class="desktop-app-controls"><button type="button" aria-label="Maximize projects"></button><button type="button" aria-label="Minimize projects"></button><button type="button" aria-label="Close projects"></button></span></div>
+      <div class="desktop-app-toolbar"><button class="toolbar-nav" type="button" aria-label="Back">←</button><button class="toolbar-nav" type="button" aria-label="Forward">→</button><button class="toolbar-nav" type="button" aria-label="Up one folder">↑</button><span class="toolbar-path">/home/mustafa/projects</span><button class="toolbar-view" type="button" aria-label="Icon view">▦</button><button class="toolbar-view" type="button" aria-label="List view">☷</button></div>
+      <div class="folder-content"><aside class="folder-sidebar"><p class="folder-sidebar-title">Places</p><button class="active" type="button">⌂ <span>Home</span></button><button type="button">▣ <span>Projects</span></button><button type="button">▤ <span>Recent</span></button><p class="folder-sidebar-title">Devices</p><button type="button">▰ <span>portfolio disk</span></button></aside><section class="folder-main"><div class="folder-main-head"><strong>projects</strong><span>3 items · icon view</span></div><div class="folder-grid"><article class="folder-item" tabindex="0"><div class="folder-item-icon">[◈]</div><small>01 / WEB</small><h3>Lorem Ipsum</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></article><article class="folder-item" tabindex="0"><div class="folder-item-icon">[✦]</div><small>02 / IDENTITY</small><h3>Dolor Sit Amet</h3><p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></article><article class="folder-item" tabindex="0"><div class="folder-item-icon">[☻]</div><small>03 / DIGITAL</small><h3>Consectetur Adipiscing</h3><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p></article></div><p class="folder-status">3 items · portfolio/projects · read-only</p></section></div>
       <span class="terminal-resize-handle" aria-hidden="true"></span>
     </div>
     <div class="desktop-app-window mail-window" id="contact-window" data-desktop-window="contact" aria-hidden="true">
-      <div class="desktop-app-titlebar"><span class="desktop-icon-art icon-mail desktop-app-title-icon"></span><span class="desktop-app-title">contact — mail</span><span class="desktop-app-meta">new message</span><span class="desktop-app-controls"><button type="button" aria-label="Minimize contact"></button><button type="button" aria-label="Maximize contact"></button><button type="button" aria-label="Close contact"></button></span></div>
-      <div class="desktop-app-toolbar"><span>✉</span><span class="toolbar-path">/usr/bin/contact</span><span class="toolbar-spacer">secure channel</span></div>
-      <div class="mail-content"><aside class="mail-sidebar"><strong>mailbox</strong><p class="active">✦ compose</p><p>▸ sent</p><p>▸ drafts</p></aside><form class="mail-form" id="desktop-contact-form"><h2>say hello</h2><label>name<input name="name" autocomplete="name" required /></label><label>email<input type="email" name="email" autocomplete="email" required /></label><label>message<textarea name="message" required></textarea></label><button class="mail-send" type="submit">send message ↗</button><div class="mail-status" role="status"></div></form></div>
+      <div class="desktop-app-titlebar"><span class="desktop-icon-art icon-mail desktop-app-title-icon"></span><span class="desktop-app-title">contact — mail</span><span class="desktop-app-meta">new message</span><span class="desktop-app-controls"><button type="button" aria-label="Maximize contact"></button><button type="button" aria-label="Minimize contact"></button><button type="button" aria-label="Close contact"></button></span></div>
+      <div class="desktop-app-toolbar mail-toolbar"><button class="toolbar-nav" type="button" aria-label="Back">←</button><button class="toolbar-nav" type="button" aria-label="Refresh inbox">↻</button><button class="mail-compose-toolbar" type="button">Compose</button><span class="mail-search">⌕ Search mail</span><span class="mail-status-chip">● secure channel</span></div>
+      <div class="mail-content"><aside class="mail-sidebar"><strong>mailbox</strong><p class="active">✦ <span>compose</span><span class="mail-count">new</span></p><p>▸ <span>sent</span><span class="mail-count">—</span></p><p>▸ <span>drafts</span><span class="mail-count">1</span></p><p>▸ <span>archive</span><span class="mail-count">12</span></p></aside><form class="mail-form" id="desktop-contact-form"><div class="mail-form-head"><div><span class="mail-overline">NEW MESSAGE</span><h2>say hello</h2></div><span class="mail-draft">draft</span></div><label>name<input name="name" autocomplete="name" required /></label><label>email<input type="email" name="email" autocomplete="email" required /></label><label>subject<input name="subject" autocomplete="off" /></label><label>message<textarea name="message" required></textarea></label><button class="mail-send" type="submit">send message ↗</button><div class="mail-status" role="status"></div></form></div>
       <span class="terminal-resize-handle" aria-hidden="true"></span>
     </div>
     <div class="desktop-app-window document-window" id="cats-window" data-desktop-window="cats" aria-hidden="true">
-      <div class="desktop-app-titlebar"><span class="desktop-icon-art icon-document desktop-app-title-icon"></span><span class="desktop-app-title">cats.txt — word processor</span><span class="desktop-app-meta">read-only</span><span class="desktop-app-controls"><button type="button" aria-label="Minimize cats document"></button><button type="button" aria-label="Maximize cats document"></button><button type="button" aria-label="Close cats document"></button></span></div>
-      <div class="document-toolbar"><span>FILE</span><span>EDIT</span><span>VIEW</span><span>FORMAT</span><span class="toolbar-spacer">100% · monospaced</span></div>
+      <div class="desktop-app-titlebar"><span class="desktop-icon-art icon-document desktop-app-title-icon"></span><span class="desktop-app-title">cats.txt — word processor</span><span class="desktop-app-meta">read-only</span><span class="desktop-app-controls"><button type="button" aria-label="Maximize cats document"></button><button type="button" aria-label="Minimize cats document"></button><button type="button" aria-label="Close cats document"></button></span></div>
+      <div class="document-toolbar"><span class="toolbar-menu">FILE</span><span class="toolbar-menu">EDIT</span><span class="toolbar-menu">VIEW</span><span class="toolbar-menu">FORMAT</span><span class="toolbar-divider"></span><button class="word-tool" type="button" aria-label="Undo">↶</button><button class="word-tool" type="button" aria-label="Redo">↷</button><button class="word-tool" type="button" aria-label="Bold"><strong>B</strong></button><button class="word-tool" type="button" aria-label="Italic"><em>I</em></button><span class="toolbar-select">Arial ▾</span><span class="toolbar-select">12 ▾</span><span class="toolbar-spacer">100%</span></div>
       <div class="document-content">
         <article class="document-page">
           <div class="cat-document-title">i like cats</div>
           <div class="cat-photo-grid">
             <figure class="cat-photo-card"><img src="assets/cats/cat-01.jpg" alt="White and gray cat looking toward the camera" loading="eager" /></figure>
-            <figure class="cat-photo-card"><img src="assets/cats/cat-02.jpg" alt="Orange cat sitting against a pale background" loading="eager" /></figure>
-          </div>
-        </article>
-        <article class="document-page">
-          <div class="cat-photo-grid">
-            <figure class="cat-photo-card"><img src="assets/cats/cat-03.jpg" alt="Gray tabby cat resting on a soft surface" loading="lazy" /></figure>
-            <figure class="cat-photo-card"><img src="assets/cats/cat-04.jpg" alt="Black and white cat resting indoors" loading="lazy" /></figure>
-          </div>
-        </article>
-        <article class="document-page">
-          <div class="cat-photo-grid">
-            <figure class="cat-photo-card"><img src="assets/cats/cat-05.jpg" alt="Cat sitting beside a window" loading="lazy" /></figure>
-            <figure class="cat-photo-card"><img src="assets/cats/cat-06.jpg" alt="Fluffy cat with bright eyes" loading="lazy" /></figure>
           </div>
         </article>
       </div>
@@ -546,7 +567,7 @@
       <div class="ambient-glow"></div>
       <div class="matrix-rain" aria-hidden="true"></div>
       <div class="terminal-window">
-        <div class="terminal-titlebar"><span class="terminal-icon">&gt;_</span><span class="terminal-title">mustafa@portfolio:~$ <em>tty1 // bash</em></span><span class="terminal-controls" aria-label="Window controls"><button type="button" aria-label="Minimize window"></button><button type="button" aria-label="Expand window"></button><button type="button" aria-label="Close window"></button></span></div>
+        <div class="terminal-titlebar"><span class="terminal-icon">&gt;_</span><span class="terminal-title">mustafa@portfolio:~$ <em>tty1 // bash</em></span><span class="terminal-controls" aria-label="Window controls"><button type="button" aria-label="Expand window"></button><button type="button" aria-label="Minimize window"></button><button type="button" aria-label="Close window"></button></span></div>
         <div class="terminal-content">
           <main class="terminal-main">
             <div class="session-bar"><span>SESSION_ID: <strong id="session-id">MA-0000</strong> // BUILD: <strong>branch-terminal-version</strong></span></div>
@@ -638,7 +659,7 @@
       const terminalWindow = document.querySelector('.terminal-window');
       const terminalTitlebar = terminalWindow.querySelector('.terminal-titlebar');
       const terminalResizeHandle = terminalWindow.querySelector('.terminal-resize-handle');
-      const [minimizeWindowButton, maximizeWindowButton, closeWindowButton] = terminalWindow.querySelectorAll('.terminal-controls button');
+      const [maximizeWindowButton, minimizeWindowButton, closeWindowButton] = terminalWindow.querySelectorAll('.terminal-controls button');
       const landingRevealTargets = [...landingView.querySelectorAll('.landing-reveal')];
       let windowDragState = null;
       let windowResizeState = null;
@@ -966,8 +987,8 @@
         resizeHandle.addEventListener('pointermove', moveResize);
         resizeHandle.addEventListener('pointerup', endResize);
         resizeHandle.addEventListener('pointercancel', endResize);
-        controls[0].addEventListener('click', minimize);
-        controls[1].addEventListener('click', maximize);
+        controls[0].addEventListener('click', maximize);
+        controls[1].addEventListener('click', minimize);
         controls[2].addEventListener('click', close);
         window.addEventListener('resize', () => { if (isDesktopWindow()) { if (state.maximized) Object.assign(element.style, { width: `${window.innerWidth - 24}px`, height: `${window.innerHeight - 66}px` }); else clampApp(); } });
         return { open, close };
