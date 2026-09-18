@@ -214,6 +214,7 @@
       @keyframes log-in { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
       @keyframes shortcut-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
       @keyframes shortcut-pulse { 0%, 100% { border-color: var(--line); background-color: rgba(35,106,59,.05); box-shadow: 0 0 0 rgba(184,255,192,0), inset 0 0 0 rgba(184,255,192,0); } 50% { border-color: rgba(184,255,192,.94); background-color: rgba(35,106,59,.34); box-shadow: 0 0 18px rgba(184,255,192,.38), inset 0 0 9px rgba(184,255,192,.14); } }
+      @keyframes secret-pulse { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.16); filter: brightness(1.45); } }
       @keyframes click-ripple-one { 0%, 68% { opacity: 0; transform: scale(.35); } 71% { opacity: .95; transform: scale(.65); } 78%, 100% { opacity: 0; transform: scale(1.7); } }
       @keyframes click-ripple-two { 0%, 76% { opacity: 0; transform: scale(.35); } 79% { opacity: .95; transform: scale(.65); } 86%, 100% { opacity: 0; transform: scale(1.7); } }
       @keyframes terminal-open { 0% { opacity: 0; transform: translateY(16px) scale(.96); filter: brightness(1.35); border-color: transparent; box-shadow: 0 0 0 transparent; } 18% { opacity: 1; border-color: #ffffff; box-shadow: 0 0 0 3px rgba(255,255,255,.75), 0 0 32px rgba(184,255,192,.45); } 62% { border-color: #ffffff; box-shadow: 0 0 0 2px rgba(255,255,255,.32), 0 18px 45px rgba(4,10,20,.55); } 100% { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1); border-color: #526987; box-shadow: 0 18px 45px rgba(4,10,20,.55), 0 0 0 1px rgba(214,231,250,.08); } }
@@ -295,7 +296,7 @@
       .view-heading { font-size: clamp(44px, 7vw, 82px); }
       .view-heading::before { content: "$ "; color: var(--green-dim); }
       .view-back { margin-bottom: 16px; padding: 8px 12px; border: 1px solid #477b51; border-radius: 3px; background: rgba(35,106,59,.2); color: var(--green); box-shadow: inset 0 0 0 1px rgba(184,255,192,.06), 0 0 10px rgba(184,255,192,.05); text-shadow: 0 0 7px rgba(184,255,192,.2); }
-      .view-back:hover, .view-back:focus-visible { border-color: var(--green); background: rgba(184,255,192,.12); color: #effff0; box-shadow: inset 0 0 10px rgba(184,255,192,.08), 0 0 14px rgba(184,255,192,.16); transform: translateX(-3px); }
+      .view-back:hover, .view-back:focus-visible { border-color: var(--green); background: rgba(184,255,192,.12); color: #effff0; box-shadow: inset 0 0 10px rgba(184,255,192,.08), 0 0 14px rgba(184,255,192,.16); transform: none; }
       .shortcut-grid { gap: 7px; }
       .shortcut { border-color: var(--line); border-radius: 0; background: transparent; }
       .shortcut::before { content: "$ "; color: var(--green-dim); }
@@ -440,6 +441,9 @@
       .terminal-window .view.active[data-view="home"] .shortcut::before { content: "./"; color: var(--green-dim); }
       .terminal-window .view.active[data-view="home"] .landing-reveal.is-visible { animation: terminal-line-in .3s ease-out both; }
       .terminal-window .view.active[data-view="home"] .shortcut-grid.landing-reveal.is-visible .shortcut { animation: shortcut-rise .35s ease-out both, shortcut-pulse 4.8s ease-in-out 1s infinite; }
+      .terminal-window .view.active[data-view="home"] .home-logo { cursor: help; }
+      body.easter-egg-awake .terminal-window { box-shadow: 0 18px 45px rgba(4,10,20,.62), 0 0 0 2px rgba(184,255,192,.35), 0 0 24px rgba(184,255,192,.18); }
+      body.easter-egg-awake .terminal-icon { animation: secret-pulse .8s ease-in-out 3; }
       .terminal-resize-handle { position: absolute; right: 0; bottom: 0; z-index: 2; width: 19px; height: 19px; cursor: nwse-resize !important; touch-action: none; }
       .terminal-resize-handle::before { content: ""; position: absolute; right: 3px; bottom: 3px; width: 9px; height: 9px; background: repeating-linear-gradient(135deg, transparent 0 2px, rgba(255,255,255,.7) 2px 3px); opacity: .65; }
 
@@ -526,11 +530,12 @@
       .document-content { flex: 1; min-height: 0; overflow: auto; padding: 18px; background: #c8d0d9; }
       .document-page { min-height: 680px; margin-bottom: 18px; padding: 58px 54px 48px; background: #fff; color: #252b33; box-shadow: 0 2px 7px rgba(45,56,68,.24); font: 12px/1.55 Arial, sans-serif; }
       .document-page:last-child { margin-bottom: 0; }
-      .cat-document-title { display: block; width: 100%; margin: 0 0 28px; color: #252b33; font: 18px/1.2 Arial, sans-serif; }
-      .cat-photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; align-items: start; clear: both; }
-      .cat-photo-card { min-width: 0; margin: 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
-      .cat-photo-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: transparent; }
-      .cat-photo-card figcaption { display: none; }
+      .resume-page { min-height: 100%; padding: 42px 48px 54px; }
+      .resume-text { margin: 0; color: #2c3e52; white-space: pre-wrap; font: 11px/1.72 var(--mono); }
+      .resume-text .resume-name { color: #203a5b; font: 700 27px/1.1 var(--pixel); letter-spacing: .04em; }
+      .resume-text .resume-role { color: #55728f; }
+      .resume-text .resume-section { color: #396788; font-weight: 700; letter-spacing: .08em; }
+      .resume-text .resume-placeholder { color: #7b8997; }
       .document-status { flex: 0 0 23px; padding: 5px 10px; border-top: 1px solid #adb7c2; background: #dce3ea; color: #697786; font: 8px var(--mono); }
       .desktop-taskbar-app.is-running { border-color: #d6e5f5; background: rgba(194,220,245,.38); color: #fff; box-shadow: inset 0 -2px #b8ffc0; }
       .desktop-start-menu { position: fixed; z-index: 20; left: 14px; bottom: 52px; width: 248px; overflow: hidden; border: 1px solid #647b95; border-radius: 6px; background: rgba(228,237,246,.97); color: #253a53; box-shadow: 0 18px 35px rgba(4,10,20,.5), inset 1px 1px rgba(255,255,255,.75); }
@@ -559,7 +564,7 @@
       .folder-grid.is-list .folder-item h3 { margin: 0; font-size: 18px; }
       .folder-grid.is-list .folder-item p { grid-column: 3; grid-row: 1 / 3; max-width: 180px; }
       @keyframes app-window-open { from { opacity: 0; transform: translateY(9px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-      @media (max-width: 760px) { .desktop-app-window.document-window { width: calc(100vw - 24px); height: calc(100vh - 90px); } .cat-photo-grid { grid-template-columns: 1fr; } .document-page { padding-inline: 22px; } }
+      @media (max-width: 760px) { .desktop-app-window.document-window { width: calc(100vw - 24px); height: calc(100vh - 90px); } .document-page { padding-inline: 22px; } .resume-page { padding: 30px 24px 40px; } .resume-text { font-size: 10px; } }
 
       /* mobile stays a focused terminal; the desktop environment is pointer-only */
       @media (max-width: 780px) {
@@ -598,9 +603,9 @@
   </head>
   <body>
     <div class="intro-sequence" id="intro-sequence" aria-hidden="true"><svg class="intro-pointer" viewBox="0 0 24 31" shape-rendering="crispEdges" aria-hidden="true"><path d="M2 1L22 19H14L18 28L13 31L9 21L2 28Z"></path></svg><span class="intro-click intro-click-one"></span><span class="intro-click intro-click-two"></span></div>
-    <div class="desktop-icons"><button class="desktop-icon" data-desktop-open="projects" type="button" aria-label="Open projects folder"><span class="desktop-icon-art icon-folder"></span><span>projects</span></button><button class="desktop-icon" data-desktop-open="terminal" type="button" aria-label="Open terminal"><span class="desktop-icon-art icon-terminal"></span><span>terminal</span></button><button class="desktop-icon" data-desktop-open="contact" type="button" aria-label="Open mail"><span class="desktop-icon-art icon-mail"></span><span>mail</span></button><button class="desktop-icon" data-desktop-open="cats" type="button" aria-label="Open cats text document"><span class="desktop-icon-art icon-document"></span><span>cats.txt</span></button><button class="desktop-icon" data-desktop-open="trash" type="button" aria-label="Open trash"><span class="desktop-icon-art icon-trash"></span><span>trash</span></button></div>
-    <div class="desktop-taskbar"><button class="desktop-launcher" id="desktop-launcher" type="button" aria-label="Open application menu" aria-expanded="false"><span class="desktop-icon-art icon-home"></span></button><span class="desktop-taskbar-apps"><button class="desktop-taskbar-app active" type="button" aria-label="Open terminal" title="Terminal" data-desktop-open="terminal"><span class="desktop-icon-art icon-terminal"></span><span class="desktop-taskbar-label">terminal</span></button><button class="desktop-taskbar-app ghost" type="button" aria-label="Open projects" title="Projects" data-desktop-open="projects"><span class="desktop-icon-art icon-folder"></span><span class="desktop-taskbar-label">projects</span></button><button class="desktop-taskbar-app ghost" type="button" aria-label="Open contact" title="Mail" data-desktop-open="contact"><span class="desktop-icon-art icon-mail"></span><span class="desktop-taskbar-label">contact</span></button><button class="desktop-taskbar-app ghost" type="button" aria-label="Open cats text" title="cats.txt" data-desktop-open="cats"><span class="desktop-icon-art icon-document"></span><span class="desktop-taskbar-label">cats.txt</span></button></span><span class="desktop-tray"><span class="desktop-tray-item" aria-label="Network connected">◖)))</span><span class="desktop-tray-item" aria-label="Sound on">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
-    <div class="desktop-start-menu" id="desktop-start-menu" aria-hidden="true"><div class="start-menu-header">MUSTAFA OS<small>portfolio workspace · session active</small></div><div class="start-menu-apps"><button class="start-menu-app" type="button" data-desktop-open="terminal"><span class="desktop-icon-art icon-terminal"></span><span>Terminal<br /><small>mustafa@portfolio:~$</small></span></button><button class="start-menu-app" type="button" data-desktop-open="projects"><span class="desktop-icon-art icon-folder"></span><span>Projects<br /><small>/home/mustafa/projects</small></span></button><button class="start-menu-app" type="button" data-desktop-open="contact"><span class="desktop-icon-art icon-mail"></span><span>Contact<br /><small>secure channel</small></span></button><button class="start-menu-app" type="button" data-desktop-open="cats"><span class="desktop-icon-art icon-document"></span><span>Cats.txt<br /><small>read-only document</small></span></button></div><div class="start-menu-footer">double-click desktop icons · alt+tab switches windows</div></div>
+    <div class="desktop-icons"><button class="desktop-icon" data-desktop-open="projects" type="button" aria-label="Open projects folder"><span class="desktop-icon-art icon-folder"></span><span>projects</span></button><button class="desktop-icon" data-desktop-open="terminal" type="button" aria-label="Open terminal"><span class="desktop-icon-art icon-terminal"></span><span>terminal</span></button><button class="desktop-icon" data-desktop-open="contact" type="button" aria-label="Open mail"><span class="desktop-icon-art icon-mail"></span><span>mail</span></button><button class="desktop-icon" data-desktop-open="resume" type="button" aria-label="Open resume text document"><span class="desktop-icon-art icon-document"></span><span>resume.txt</span></button><button class="desktop-icon" data-desktop-open="trash" type="button" aria-label="Open trash"><span class="desktop-icon-art icon-trash"></span><span>trash</span></button></div>
+    <div class="desktop-taskbar"><button class="desktop-launcher" id="desktop-launcher" type="button" aria-label="Open application menu" aria-expanded="false"><span class="desktop-icon-art icon-home"></span></button><span class="desktop-taskbar-apps"><button class="desktop-taskbar-app active" type="button" aria-label="Open terminal" title="Terminal" data-desktop-open="terminal"><span class="desktop-icon-art icon-terminal"></span><span class="desktop-taskbar-label">terminal</span></button><button class="desktop-taskbar-app ghost" type="button" aria-label="Open projects" title="Projects" data-desktop-open="projects"><span class="desktop-icon-art icon-folder"></span><span class="desktop-taskbar-label">projects</span></button><button class="desktop-taskbar-app ghost" type="button" aria-label="Open contact" title="Mail" data-desktop-open="contact"><span class="desktop-icon-art icon-mail"></span><span class="desktop-taskbar-label">contact</span></button><button class="desktop-taskbar-app ghost" type="button" aria-label="Open resume text" title="resume.txt" data-desktop-open="resume"><span class="desktop-icon-art icon-document"></span><span class="desktop-taskbar-label">resume.txt</span></button></span><span class="desktop-tray"><span class="desktop-tray-item" aria-label="Network connected">◖)))</span><span class="desktop-tray-item" aria-label="Sound on">▰</span><span class="desktop-clock" id="desktop-clock">--:--</span></span></div>
+    <div class="desktop-start-menu" id="desktop-start-menu" aria-hidden="true"><div class="start-menu-header">MUSTAFA OS<small>portfolio workspace · session active</small></div><div class="start-menu-apps"><button class="start-menu-app" type="button" data-desktop-open="terminal"><span class="desktop-icon-art icon-terminal"></span><span>Terminal<br /><small>mustafa@portfolio:~$</small></span></button><button class="start-menu-app" type="button" data-desktop-open="projects"><span class="desktop-icon-art icon-folder"></span><span>Projects<br /><small>/home/mustafa/projects</small></span></button><button class="start-menu-app" type="button" data-desktop-open="contact"><span class="desktop-icon-art icon-mail"></span><span>Contact<br /><small>secure channel</small></span></button><button class="start-menu-app" type="button" data-desktop-open="resume"><span class="desktop-icon-art icon-document"></span><span>Resume.txt<br /><small>read-only document</small></span></button></div><div class="start-menu-footer">double-click desktop icons · alt+tab switches windows</div></div>
     <div class="desktop-context-menu" id="desktop-context-menu" aria-hidden="true"><div class="context-muted">DESKTOP</div><button type="button" data-context-action="terminal">▣ <span>Open terminal</span></button><button type="button" data-context-action="projects">▰ <span>Open Projects</span></button><div class="context-separator"></div><button type="button" data-context-action="arrange">⌗ <span>Arrange icons</span></button><button type="button" data-context-action="refresh">↻ <span>Refresh desktop</span></button></div>
     <div class="desktop-app-window folder-window" id="projects-window" data-desktop-window="projects" aria-hidden="true">
       <div class="desktop-app-titlebar"><span class="desktop-icon-art icon-folder desktop-app-title-icon"></span><span class="desktop-app-title">projects — file manager</span><span class="desktop-app-meta">3 items</span><span class="desktop-app-controls"><button type="button" aria-label="Maximize projects"></button><button type="button" aria-label="Minimize projects"></button><button type="button" aria-label="Close projects"></button></span></div>
@@ -614,18 +619,46 @@
       <div class="mail-content"><aside class="mail-sidebar"><strong>mailbox</strong><p class="active">✦ <span>compose</span><span class="mail-count">new</span></p><p>▸ <span>sent</span><span class="mail-count">—</span></p><p>▸ <span>drafts</span><span class="mail-count">1</span></p><p>▸ <span>archive</span><span class="mail-count">12</span></p></aside><form class="mail-form" id="desktop-contact-form"><div class="mail-form-head"><div><span class="mail-overline">NEW MESSAGE</span><h2>say hello</h2></div><span class="mail-draft">draft</span></div><label>name<input name="name" autocomplete="name" required /></label><label>email<input type="email" name="email" autocomplete="email" required /></label><label>subject<input name="subject" autocomplete="off" /></label><label>message<textarea name="message" required></textarea></label><button class="mail-send" type="submit">send message ↗</button><div class="mail-status" role="status"></div></form></div>
       <span class="terminal-resize-handle" aria-hidden="true"></span>
     </div>
-    <div class="desktop-app-window document-window" id="cats-window" data-desktop-window="cats" aria-hidden="true">
-      <div class="desktop-app-titlebar"><span class="desktop-icon-art icon-document desktop-app-title-icon"></span><span class="desktop-app-title">cats.txt — word processor</span><span class="desktop-app-meta">read-only</span><span class="desktop-app-controls"><button type="button" aria-label="Maximize cats document"></button><button type="button" aria-label="Minimize cats document"></button><button type="button" aria-label="Close cats document"></button></span></div>
-      <div class="document-toolbar"><span class="toolbar-menu">FILE</span><span class="toolbar-menu">EDIT</span><span class="toolbar-menu">VIEW</span><span class="toolbar-menu">FORMAT</span><span class="toolbar-divider"></span><button class="word-tool" type="button" aria-label="Undo">↶</button><button class="word-tool" type="button" aria-label="Redo">↷</button><button class="word-tool" type="button" aria-label="Bold"><strong>B</strong></button><button class="word-tool" type="button" aria-label="Italic"><em>I</em></button><span class="toolbar-select">Arial ▾</span><span class="toolbar-select">12 ▾</span><span class="toolbar-spacer">100%</span></div>
+    <div class="desktop-app-window document-window" id="resume-window" data-desktop-window="resume" aria-hidden="true">
+      <div class="desktop-app-titlebar"><span class="desktop-icon-art icon-document desktop-app-title-icon"></span><span class="desktop-app-title">resume.txt — text editor</span><span class="desktop-app-meta">read-only</span><span class="desktop-app-controls"><button type="button" aria-label="Maximize resume document"></button><button type="button" aria-label="Minimize resume document"></button><button type="button" aria-label="Close resume document"></button></span></div>
+      <div class="document-toolbar"><span class="toolbar-menu">FILE</span><span class="toolbar-menu">EDIT</span><span class="toolbar-menu">VIEW</span><span class="toolbar-divider"></span><button class="word-tool" type="button" aria-label="Undo">↶</button><button class="word-tool" type="button" aria-label="Redo">↷</button><span class="toolbar-select">Monospace ▾</span><span class="toolbar-select">11 ▾</span><span class="toolbar-spacer">100%</span></div>
       <div class="document-content">
-        <article class="document-page">
-          <div class="cat-document-title">i like cats</div>
-          <div class="cat-photo-grid">
-            <figure class="cat-photo-card"><img src="assets/cats/cat-01.jpg" alt="White and gray cat looking toward the camera" loading="eager" /></figure>
-          </div>
+        <article class="document-page resume-page">
+          <pre class="resume-text"><span class="resume-name">MUSTAFA ALI</span>
+<span class="resume-role">UIUC STUDENT + BUILDER</span>
+────────────────────────────────────────────────────────────
+
+<span class="resume-section">CONTACT</span>
+<span class="resume-placeholder">[email]  [phone]  [city, state]  [portfolio URL]</span>
+<span class="resume-placeholder">[LinkedIn URL]  [GitHub URL]</span>
+
+<span class="resume-section">SUMMARY</span>
+<span class="resume-placeholder">[Write a concise professional summary here.]</span>
+<span class="resume-placeholder">[Mention your focus, strengths, and the kind of work you want to do.]</span>
+
+<span class="resume-section">EDUCATION</span>
+University of Illinois Urbana-Champaign
+<span class="resume-placeholder">[Degree / field of study] · [Expected graduation]</span>
+<span class="resume-placeholder">[Relevant coursework, honors, or activities]</span>
+
+<span class="resume-section">EXPERIENCE</span>
+<span class="resume-placeholder">[Role] · [Company or organization] · [Dates]</span>
+<span class="resume-placeholder">[Describe a responsibility or measurable accomplishment.]</span>
+<span class="resume-placeholder">[Role] · [Company or organization] · [Dates]</span>
+<span class="resume-placeholder">[Describe a responsibility or measurable accomplishment.]</span>
+
+<span class="resume-section">SELECTED PROJECTS</span>
+<span class="resume-placeholder">[Project name] · [One-line description] · [Link]</span>
+<span class="resume-placeholder">[Project name] · [One-line description] · [Link]</span>
+
+<span class="resume-section">SKILLS</span>
+<span class="resume-placeholder">[Design tools] · [Languages] · [Frameworks] · [Collaboration]</span>
+
+<span class="resume-section">ADDITIONAL</span>
+<span class="resume-placeholder">[Certifications, awards, interests, or other relevant details]</span></pre>
         </article>
       </div>
-      <div class="document-status">Page 1 of 1 &nbsp;·&nbsp; 1 word &nbsp;·&nbsp; Read-only</div>
+      <div class="document-status">resume.txt &nbsp;·&nbsp; read-only &nbsp;·&nbsp; placeholder content</div>
       <span class="terminal-resize-handle" aria-hidden="true"></span>
     </div>
     <div class="terminal-app" id="app">
@@ -1145,6 +1178,14 @@
         toast.hideTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 2800);
       }
 
+      function activateEasterEgg(message) {
+        document.body.classList.remove('easter-egg-awake');
+        void document.body.offsetWidth;
+        document.body.classList.add('easter-egg-awake');
+        window.setTimeout(() => document.body.classList.remove('easter-egg-awake'), 2600);
+        if (isDesktopWindow()) showDesktopToast(message);
+      }
+
       function openDesktopApp(name) {
         setStartMenu(false);
         if (name === 'terminal') { openWindow(); return; }
@@ -1220,9 +1261,10 @@
         actionButton.addEventListener('click', () => showDesktopToast(`${actionButton.getAttribute('aria-label')} is unavailable in this read-only demo.`));
       });
 
-      document.querySelectorAll('#cats-window .word-tool, #cats-window .toolbar-menu, #cats-window .toolbar-select').forEach((tool) => {
-        tool.addEventListener('click', () => showDesktopToast('cats.txt is read-only.'));
+      document.querySelectorAll('#resume-window .word-tool, #resume-window .toolbar-menu, #resume-window .toolbar-select').forEach((tool) => {
+        tool.addEventListener('click', () => showDesktopToast('resume.txt is read-only.'));
       });
+      document.querySelector('.terminal-tab-new')?.addEventListener('click', () => activateEasterEgg('new shell spawned in /tmp/secret-shell.'));
 
       document.querySelectorAll('.desktop-taskbar-app[data-desktop-open]').forEach((taskbarApp) => {
         taskbarApp.addEventListener('click', () => openDesktopApp(taskbarApp.dataset.desktopOpen));
@@ -1294,6 +1336,19 @@
         }
       });
 
+      const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+      let konamiProgress = 0;
+      window.addEventListener('keydown', (event) => {
+        if (event.target instanceof Element && event.target.matches('input, textarea')) return;
+        const pressedKey = event.key.length === 1 ? event.key.toLowerCase() : event.key;
+        if (pressedKey === konamiSequence[konamiProgress]) konamiProgress += 1;
+        else konamiProgress = pressedKey === konamiSequence[0] ? 1 : 0;
+        if (konamiProgress === konamiSequence.length) {
+          konamiProgress = 0;
+          activateEasterEgg('secret sequence accepted · developer mode unlocked.');
+        }
+      });
+
       document.querySelector('#desktop-contact-form').addEventListener('submit', (event) => {
         event.preventDefault();
         const status = event.currentTarget.querySelector('.mail-status');
@@ -1318,7 +1373,16 @@
         projects: { view: 'projects', result: 'scanning /home/mustafa/projects' },
         contact: { view: 'contact', result: 'opening secure channel' },
         help: { view: 'help', result: 'printing available commands' },
+        pwd: { view: 'home', result: '/home/mustafa' },
+        whoami: { view: 'home', result: 'mustafa.ali · uiuc student + builder' },
+        coffee: { view: 'home', result: 'brewing a fresh cup of curiosity… done.' },
       };
+      const fortuneLines = [
+        'fortune: the best interface is the one that makes someone smile.',
+        'fortune: keep building small things until they become useful things.',
+        'fortune: a curious mind is already halfway to a good project.'
+      ];
+      let fortuneIndex = 0;
 
       function setView(name) {
         views.forEach((view) => view.classList.toggle('active', view.dataset.view === name));
@@ -1360,6 +1424,14 @@
         } else if (command === 'clear' || command === 'cls') {
           transcript.replaceChildren();
           setView('home');
+        } else if (command === 'sudo' || command.startsWith('sudo ')) {
+          setView('home');
+          const result = command.includes('sandwich') ? 'permission granted: sandwich.exe is imaginary but delicious.' : 'sudo: curiosity is the only required privilege here.';
+          echoCommand(command, result);
+        } else if (command === 'fortune') {
+          setView('home');
+          echoCommand(command, fortuneLines[fortuneIndex % fortuneLines.length]);
+          fortuneIndex += 1;
         } else if (command === 'cat' || command === 'meow') {
           setView('home');
           const catIndex = catMessageIndex % catMessages.length;
@@ -1374,6 +1446,19 @@
 
       document.querySelector('#command-form').addEventListener('submit', (event) => { event.preventDefault(); runCommand(input.value); });
       document.querySelectorAll('[data-command]').forEach((button) => button.addEventListener('click', () => runCommand(button.dataset.command)));
+      const homeLogo = document.querySelector('#home-heading');
+      let homeLogoClicks = 0;
+      let homeLogoClickTimer = null;
+      homeLogo.addEventListener('click', () => {
+        homeLogoClicks += 1;
+        window.clearTimeout(homeLogoClickTimer);
+        if (homeLogoClicks >= 3) {
+          homeLogoClicks = 0;
+          activateEasterEgg('logo handshake accepted · welcome, builder.');
+        } else {
+          homeLogoClickTimer = window.setTimeout(() => { homeLogoClicks = 0; }, 650);
+        }
+      });
       input.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowUp') { event.preventDefault(); historyIndex = Math.max(0, historyIndex - 1); input.value = history[historyIndex] || ''; }
         if (event.key === 'ArrowDown') { event.preventDefault(); historyIndex = Math.min(history.length, historyIndex + 1); input.value = history[historyIndex] || ''; }
@@ -1425,8 +1510,17 @@
       }
 
       function playIntroSequence() {
+        const introCookieName = 'mustafa-portfolio-intro-seen';
+        const introCookieSeen = document.cookie.split(';').some((cookie) => cookie.trim() === `${introCookieName}=1`);
+        let introStorageSeen = false;
+        try { introStorageSeen = window.localStorage.getItem(introCookieName) === '1'; } catch (error) { /* storage may be unavailable for restricted file URLs */ }
+        const introAlreadySeen = introCookieSeen || introStorageSeen;
+        if (!introAlreadySeen) {
+          document.cookie = `${introCookieName}=1; max-age=31536000; path=/; SameSite=Lax`;
+          try { window.localStorage.setItem(introCookieName, '1'); } catch (error) { /* cookie remains the hosted-site marker */ }
+        }
         const isCompactDevice = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 780;
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || isCompactDevice) {
+        if (introAlreadySeen || window.matchMedia('(prefers-reduced-motion: reduce)').matches || isCompactDevice) {
           document.body.classList.add('intro-skip');
           taskbarTerminal.classList.add('is-running');
           introSequence.classList.add('is-complete');
