@@ -84,22 +84,24 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .interface-hero {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  width: 100%;
-  margin-top: clamp(48px, 8svh, 106px);
+  justify-content: center;
+  grid-column: 2;
+  grid-row: 1;
+  height: 42px;
   text-align: center;
 }
 
 .identity {
   margin: 0;
   color: #e5e2d9;
-  font-size: clamp(3.3rem, 8.7vw, 8.75rem);
-  font-weight: 500;
-  line-height: 0.92;
-  letter-spacing: -0.055em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.65rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
   white-space: nowrap;
-  text-shadow: 0 5px 35px #070908, 0 0 85px #070908;
+  text-shadow: 0 2px 18px #070908;
 }
 
 .chapter {
@@ -120,13 +122,15 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .chapter:focus-visible { outline: 1px solid #d5d0c4; outline-offset: 5px; }
 
 .interface-footer {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
   align-self: stretch;
   margin-top: auto;
   width: 100%;
 }
 
-.projects-control { position: relative; pointer-events: auto; }
+.projects-control { position: relative; grid-column: 1; grid-row: 1; justify-self: start; pointer-events: auto; }
 
 .projects-toggle {
   display: inline-flex;
@@ -199,11 +203,21 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 @media (max-width: 700px) {
   .interface { padding: 25px 22px 28px; }
-  .interface-hero { margin-top: clamp(54px, 7svh, 82px); }
-  .identity { font-size: clamp(2.2rem, 10vw, 4.2rem); letter-spacing: -0.045em; }
   .chapter { top: 25px; right: 22px; font-size: 0.53rem; letter-spacing: 0.03em; }
   .projects-toggle { min-height: 44px; }
   .scene-shell canvas { cursor: default; }
+}
+
+@media (max-width: 500px) {
+  .interface { padding: 25px 12px 28px; }
+  .identity, .projects-toggle { letter-spacing: 0.11em; }
+  .projects-toggle { min-width: 0; gap: 4px; padding-inline: 7px; white-space: nowrap; }
+}
+
+@media (max-width: 370px) {
+  .interface-footer { grid-template-columns: 1fr; row-gap: 12px; }
+  .interface-hero { grid-column: 1; grid-row: 1; height: auto; }
+  .projects-control { grid-column: 1; grid-row: 2; }
 }
 
 @media (prefers-reduced-motion: reduce) {
