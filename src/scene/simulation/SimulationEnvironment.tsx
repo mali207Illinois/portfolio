@@ -12,7 +12,6 @@ import {
   PerspectiveGrid,
   StarLayer,
   TerrainFar,
-  TerrainNear,
 } from './SimulationLayers';
 import { DataNetwork } from './DataNetwork';
 import { FlightParticles } from './FlightParticles';
@@ -44,7 +43,6 @@ export function SimulationEnvironment({ progress, pointer, inspection, mobile, r
       <AtmosphericLayer progress={progress} reducedMotion={reducedMotion} mobile={mobile} />
       <group ref={environment}>
         <PerspectiveGrid progress={progress} pointer={pointer} mobile={mobile} reducedMotion={reducedMotion} />
-        <TerrainNear progress={progress} pointer={pointer} mobile={mobile} reducedMotion={reducedMotion} />
         <TerrainFar progress={progress} pointer={pointer} mobile={mobile} reducedMotion={reducedMotion} />
         <OrbitalSphereA progress={progress} pointer={pointer} mobile={mobile} reducedMotion={reducedMotion} />
         {!mobile && <OrbitalSphereB progress={progress} pointer={pointer} mobile={mobile} reducedMotion={reducedMotion} />}

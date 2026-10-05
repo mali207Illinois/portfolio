@@ -33,26 +33,6 @@ function noise(x: number, y: number, seed: number) {
   return (a * (1 - u) + b * u) * (1 - v) + (c * (1 - u) + d * u) * v;
 }
 
-export function createTerrainGeometry(width: number, depth: number, segmentsX: number, segmentsY: number, amplitude: number, seed: number) {
-  const geometry = new PlaneGeometry(width, depth, segmentsX, segmentsY);
-  const positions = geometry.getAttribute('position');
-
-  for (let index = 0; index < positions.count; index += 1) {
-    const x = positions.getX(index);
-    const y = positions.getY(index);
-    const broad = noise(x * 0.075, y * 0.075, seed);
-    const detail = noise(x * 0.22, y * 0.22, seed + 11);
-    const ridge = 1 - Math.abs(2 * broad - 1);
-    const edge = Math.max(Math.abs(x / (width * 0.5)), Math.abs(y / (depth * 0.5)));
-    const taper = Math.pow(Math.max(0, 1 - edge * edge), 1.7);
-    positions.setZ(index, (ridge * 0.8 + detail * 0.2) * amplitude * taper);
-  }
-
-  positions.needsUpdate = true;
-  geometry.computeVertexNormals();
-  return geometry;
-}
-
 export function createMountainTerrainGeometry(width: number, depth: number, segmentsX: number, segmentsY: number, amplitude: number, seed: number) {
   const geometry = new PlaneGeometry(width, depth, segmentsX, segmentsY);
   const positions = geometry.getAttribute('position');

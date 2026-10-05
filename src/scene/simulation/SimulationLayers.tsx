@@ -22,7 +22,6 @@ import {
   createMountainTerrainGeometry,
   createPerspectiveGridGeometry,
   createReferenceSphereGeometry,
-  createTerrainGeometry,
 } from './simulationGeometry';
 import type { OrbitArcSpec } from './simulationGeometry';
 
@@ -85,44 +84,6 @@ export function PerspectiveGrid({ progress, pointer, mobile, reducedMotion }: Si
   });
 
   return <group ref={grid}><lineSegments geometry={geometry} material={material} /></group>;
-}
-
-export function TerrainNear({ progress, pointer, mobile, reducedMotion }: SimulationLayerProps) {
-  const terrain = useRef<Group>(null);
-  const geometry = useMemo(() => createTerrainGeometry(
-    mobile ? 25 : 34,
-    mobile ? 28 : 38,
-    mobile ? 18 : 35,
-    mobile ? 15 : 28,
-    0.46,
-    17,
-  ), [mobile]);
-  const material = useMemo(() => new MeshBasicMaterial({
-    color: '#788991',
-    wireframe: true,
-    transparent: true,
-    opacity: mobile ? 0.05 : 0.08,
-    depthWrite: false,
-  }), [mobile]);
-
-  useEffect(() => () => { geometry.dispose(); material.dispose(); }, [geometry, material]);
-  const depth = mobile ? 28 : 38;
-  useFrame(({ clock }, delta) => {
-    if (!terrain.current) return;
-    const travel = reducedMotion ? 0 : progress.current;
-    const flight = reducedMotion ? 0 : clock.elapsedTime;
-    terrain.current.rotation.x = -Math.PI / 2 + 0.019 * Math.min(travel / 0.6, 1);
-    terrain.current.position.x = MathUtils.damp(terrain.current.position.x, pointerX(pointer, mobile, reducedMotion) * -0.22, 1.4, delta);
-    terrain.current.position.z = -16 - (flight * (mobile ? 0.72 : 1.15)) % depth - travel * 3.4;
-    material.opacity = (mobile ? 0.05 : 0.08) * simulationFade(travel);
-  });
-
-  return (
-    <group ref={terrain} position={[0, -4.84, -16]} rotation={[-Math.PI / 2, 0, 0]}>
-      <mesh geometry={geometry} material={material} />
-      <mesh geometry={geometry} material={material} position={[0, depth, 0]} />
-    </group>
-  );
 }
 
 export function TerrainFar({ progress, pointer, mobile, reducedMotion }: SimulationLayerProps) {
