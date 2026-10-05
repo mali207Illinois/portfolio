@@ -1,0 +1,163 @@
+:root {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #d5d0c4;
+  background: #070908;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: auto; scrollbar-color: #27302d #070908; scrollbar-width: thin; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #070908; }
+::-webkit-scrollbar-thumb { background: #27302d; }
+
+body { min-width: 320px; margin: 0; }
+
+button, a { -webkit-tap-highlight-color: transparent; }
+
+::selection { color: #070908; background: #d5d0c4; }
+
+.experience { position: relative; min-height: 185svh; background: #070908; }
+
+.scene-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: #070908;
+}
+
+.scene-shell canvas { display: block; touch-action: pan-y; cursor: grab; }
+.scene-shell canvas:active { cursor: grabbing; }
+
+.scene-blackout {
+  position: fixed;
+  z-index: 2;
+  inset: 0;
+  background: #000;
+  opacity: var(--scene-blackout, 0);
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.system-handoff {
+  position: fixed;
+  z-index: 3;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: #b8d1bf;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  opacity: var(--handoff-opacity, 0);
+  pointer-events: none;
+  will-change: opacity;
+}
+.system-handoff-index { color: #8b9d90; font-size: 10px; letter-spacing: 0.28em; }
+.system-handoff-reticle {
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+  border: 1px solid rgba(151, 194, 160, 0.36);
+  border-radius: 50%;
+  box-shadow: 0 0 0 15px rgba(151, 194, 160, 0.035), inset 0 0 28px rgba(151, 194, 160, 0.07);
+  color: #a9e6b6;
+  font-size: 25px;
+  font-weight: 200;
+}
+.system-handoff-label { font-size: 10px; letter-spacing: 0.18em; text-align: center; }
+.system-handoff-track { width: min(240px, 58vw); height: 1px; margin-top: 2px; background: rgba(151, 194, 160, 0.25); }
+.system-handoff-track span { display: block; width: 100%; height: 100%; background: #a9e6b6; transform: scaleX(var(--handoff-progress, 0)); transform-origin: left; }
+
+.canvas-fallback {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  color: #9e9f99;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.interface {
+  position: fixed;
+  z-index: 1;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(25px, 3.7vw, 58px);
+  pointer-events: none;
+  opacity: calc(1 - var(--terminal-reveal, 0));
+}
+
+.interface-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 30px; }
+
+.identity {
+  width: fit-content;
+  margin: 0;
+  color: #d9d5cc;
+  font-size: clamp(1rem, 1.5vw, 1.38rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.035em;
+}
+
+.chapter {
+  color: #929a96;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.13em;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.interface-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  width: 100%;
+}
+
+.instruction {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  color: #a0a6a1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: clamp(0.59rem, 0.76vw, 0.68rem);
+  font-weight: 400;
+  letter-spacing: 0.19em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.instruction::before { content: ''; width: 19px; height: 1px; background: #777e79; }
+.instruction-enter::before { background: #a77853; }
+
+.scroll-runway { height: 185svh; }
+
+@media (max-width: 700px) {
+  .experience { min-height: 165svh; }
+  .interface { padding: 25px 22px 28px; }
+  .interface-header { gap: 10px; }
+  .identity { font-size: clamp(1rem, 4.7vw, 1.22rem); }
+  .chapter { font-size: 0.53rem; letter-spacing: 0.03em; }
+  .interface-footer { justify-content: flex-end; }
+  .scroll-runway { height: 165svh; }
+  .scene-shell canvas { cursor: default; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
