@@ -22,15 +22,10 @@ export function SimulationPointerTracker({ pointer, enabled }: { pointer: RefObj
       pointer.current.present = true;
       invalidate();
     };
-    const onLeave = () => {
-      pointer.current.present = false;
-      invalidate();
-    };
+    // Retain the last view angle when the pointer moves onto UI or leaves the page.
     canvas.addEventListener('pointermove', onMove);
-    canvas.addEventListener('pointerleave', onLeave);
     return () => {
       canvas.removeEventListener('pointermove', onMove);
-      canvas.removeEventListener('pointerleave', onLeave);
     };
   }, [enabled, gl, invalidate, pointer]);
 

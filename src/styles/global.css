@@ -39,6 +39,38 @@ button, a { -webkit-tap-highlight-color: transparent; }
   text-transform: uppercase;
 }
 
+.scene-loading {
+  position: fixed;
+  z-index: 5;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #070908;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 800ms ease, visibility 800ms;
+}
+.scene-loading.is-ready { opacity: 0; visibility: hidden; pointer-events: none; }
+.scene-loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(270px, calc(100vw - 72px));
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  text-align: center;
+  text-transform: uppercase;
+}
+.scene-loading-index { color: #87948a; font-size: 0.58rem; letter-spacing: 0.22em; }
+.scene-loading-title { margin-top: 17px; color: #d5dcd5; font-size: 0.78rem; letter-spacing: 0.18em; }
+.scene-loading-track { width: 100%; height: 2px; margin-top: 27px; overflow: hidden; background: #29342d; }
+.scene-loading-track span { display: block; width: 36%; height: 100%; background: #b9d0be; animation: scene-loading-sweep 1.35s ease-in-out infinite alternate; }
+.scene-loading-status { margin-top: 13px; color: #788b80; font-size: 0.55rem; letter-spacing: 0.18em; }
+
+@keyframes scene-loading-sweep {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(280%); }
+}
+
 .interface {
   position: fixed;
   z-index: 1;
@@ -68,15 +100,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   letter-spacing: -0.055em;
   white-space: nowrap;
   text-shadow: 0 5px 35px #070908, 0 0 85px #070908;
-}
-
-.identity-subtitle {
-  margin: clamp(14px, 1.9vw, 24px) 0 0;
-  color: #bdc8c0;
-  font-size: clamp(0.8rem, 1.3vw, 1rem);
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  text-shadow: 0 2px 18px #070908;
 }
 
 .chapter {
@@ -178,7 +201,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .interface { padding: 25px 22px 28px; }
   .interface-hero { margin-top: clamp(54px, 7svh, 82px); }
   .identity { font-size: clamp(2.2rem, 10vw, 4.2rem); letter-spacing: -0.045em; }
-  .identity-subtitle { font-size: 0.75rem; letter-spacing: 0.12em; }
   .chapter { top: 25px; right: 22px; font-size: 0.53rem; letter-spacing: 0.03em; }
   .projects-toggle { min-height: 44px; }
   .scene-shell canvas { cursor: default; }
@@ -186,5 +208,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .scene-loading-track span { width: 100%; animation: none !important; }
   .projects-panel { transition: none; }
 }

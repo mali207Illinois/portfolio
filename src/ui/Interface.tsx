@@ -36,7 +36,6 @@ export function Interface() {
       <a className="chapter" href="mailto:mali207@illinois.edu">mali207@illinois.edu</a>
       <div className="interface-hero">
         <h1 className="identity">MUSTAFA ALI</h1>
-        <p className="identity-subtitle">UIUC student and Builder</p>
       </div>
       <div className="interface-footer">
         <div className="projects-control" ref={projectsRef}>

@@ -1,6 +1,6 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import type { RefObject } from 'react';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { ACESFilmicToneMapping, PCFSoftShadowMap, SRGBColorSpace } from 'three';
 import { CAMERA } from '../config/experience';
 import { CameraRig } from './CameraRig';
@@ -15,9 +15,28 @@ interface ExperienceCanvasProps {
   progress: RefObject<number>;
   mobile: boolean;
   reducedMotion: boolean;
+  onReady: () => void;
 }
 
-export function ExperienceCanvas({ progress, mobile, reducedMotion }: ExperienceCanvasProps) {
+function SceneReadySignal({ onReady }: { onReady: () => void }) {
+  const reported = useRef(false);
+  const nextFrame = useRef<number | null>(null);
+
+  useFrame(() => {
+    if (reported.current) return;
+    reported.current = true;
+    // The first 3D frame finishes rendering before this callback runs.
+    nextFrame.current = requestAnimationFrame(onReady);
+  });
+
+  useEffect(() => () => {
+    if (nextFrame.current !== null) cancelAnimationFrame(nextFrame.current);
+  }, []);
+
+  return null;
+}
+
+export function ExperienceCanvas({ progress, mobile, reducedMotion, onReady }: ExperienceCanvasProps) {
   const camera = mobile ? CAMERA.mobile : CAMERA.desktop;
   const inspection = useRef<InspectionOffset>({ yaw: 0, elevation: 0, dragging: false });
   const pointer = useRef<SimulationPointer>({ x: 0, y: 0, present: false });
@@ -50,6 +69,7 @@ export function ExperienceCanvas({ progress, mobile, reducedMotion }: Experience
       <HeroParallax pointer={pointer} enabled={!mobile && !reducedMotion}>
         <FighterJet mobile={mobile} reducedMotion={reducedMotion} />
       </HeroParallax>
+      <SceneReadySignal onReady={onReady} />
     </Canvas>
   );
 }
