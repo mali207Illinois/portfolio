@@ -132,8 +132,8 @@ export function TerrainFar({ progress, pointer, mobile, reducedMotion }: Simulat
   const rearGeometry = useMemo(() => mobile ? null : createMountainTerrainGeometry(88, 30, 64, 22, 7.8, 118), [mobile]);
   const fill = useMemo(() => new MeshBasicMaterial({ color: '#080b10', side: DoubleSide }), []);
   const rearFill = useMemo(() => new MeshBasicMaterial({ color: '#090d12', side: DoubleSide }), []);
-  const wire = useMemo(() => new MeshBasicMaterial({ vertexColors: true, wireframe: true, transparent: true, opacity: mobile ? 0.3 : 0.53, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1, toneMapped: false, side: DoubleSide }), [mobile]);
-  const rearWire = useMemo(() => new MeshBasicMaterial({ vertexColors: true, wireframe: true, transparent: true, opacity: 0.24, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1, toneMapped: false, side: DoubleSide }), []);
+  const wire = useMemo(() => new MeshBasicMaterial({ vertexColors: true, wireframe: true, transparent: true, opacity: mobile ? 0.3 : 0.53, depthWrite: false, toneMapped: false, side: DoubleSide }), [mobile]);
+  const rearWire = useMemo(() => new MeshBasicMaterial({ vertexColors: true, wireframe: true, transparent: true, opacity: 0.24, depthWrite: false, toneMapped: false, side: DoubleSide }), []);
 
   useEffect(() => () => { geometry.dispose(); rearGeometry?.dispose(); fill.dispose(); rearFill.dispose(); wire.dispose(); rearWire.dispose(); }, [geometry, rearGeometry, fill, rearFill, wire, rearWire]);
   useFrame(({ clock }, delta) => {
@@ -154,11 +154,11 @@ export function TerrainFar({ progress, pointer, mobile, reducedMotion }: Simulat
     <>
       <group ref={nearRidge} position={[0, -6.1, -30]} rotation={[-Math.PI / 2, 0, 0]}>
         <mesh geometry={geometry} material={fill} />
-        <mesh geometry={geometry} material={wire} />
+        <mesh geometry={geometry} material={wire} position={[0, 0, 0.025]} />
       </group>
       {rearGeometry && <group ref={rearRidge} position={[0, -5.6, -46]} rotation={[-Math.PI / 2, 0, 0]}>
         <mesh geometry={rearGeometry} material={rearFill} />
-        <mesh geometry={rearGeometry} material={rearWire} />
+        <mesh geometry={rearGeometry} material={rearWire} position={[0, 0, 0.025]} />
       </group>}
     </>
   );

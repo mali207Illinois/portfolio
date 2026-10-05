@@ -162,23 +162,6 @@ export function TerminalChapter({ active, reducedMotion }: TerminalChapterProps)
           <span className="terminal-tab-meta">bash · 80×24</span>
         </div>
         <div className="terminal-content">
-          <div className={'terminal-radar' + (view === 'home' ? '' : ' is-hidden')} aria-hidden="true">
-            <div className="terminal-radar-label"><span>02 / FLIGHT COMPUTER</span><span>LINK ACTIVE</span></div>
-            <div className="terminal-radar-face">
-              <span className="terminal-radar-sweep" />
-              <svg viewBox="0 0 220 220" focusable="false">
-                <circle className="terminal-radar-ring" cx="110" cy="110" r="94" />
-                <circle className="terminal-radar-ring" cx="110" cy="110" r="66" />
-                <circle className="terminal-radar-ring" cx="110" cy="110" r="35" />
-                <path className="terminal-radar-axis" d="M110 8v204M8 110h204" />
-                <path className="terminal-radar-jet" d="M110 35 116 82 164 113 164 122 120 109 119 159 138 175 138 184 110 174 82 184 82 175 101 159 100 109 56 122 56 113 104 82Z" />
-                <path className="terminal-radar-axis" d="M110 51v112" />
-                <circle className="terminal-radar-blip" cx="51" cy="64" r="2.4" />
-                <circle className="terminal-radar-blip" cx="177" cy="151" r="2" />
-              </svg>
-            </div>
-            <div className="terminal-radar-footer"><span>VECTOR / LIVE</span><span>MODE / EXPLORE</span></div>
-          </div>
           <div className="terminal-main">
             <div className="terminal-output" ref={outputRef} tabIndex={0}>
               {view === 'home' && (

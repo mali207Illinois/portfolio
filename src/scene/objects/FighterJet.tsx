@@ -74,14 +74,6 @@ const STABILIZER: Point2[] = [
   [0.56, -2.47], [1.57, -2.65], [2.12, -3.12],
   [2.02, -3.43], [0.65, -3.3],
 ];
-// Compact close-coupled canards give the airframe an experimental X-plane
-// profile without changing its established proportions.
-const CANARD: Point2[] = [
-  [0.38, 1.82], [0.57, 1.22], [1.53, 0.88], [1.49, 1.22], [0.53, 1.98],
-];
-const CANARD_TIP: Point2[] = [
-  [1.19, 1.0], [1.52, 0.885], [1.47, 1.11], [1.17, 1.35],
-];
 const LERX: Point2[] = [[0.57, 1.1], [1.16, 0.05], [0.72, -0.55]];
 const INTAKE: Point2[] = [[0.68, 0.25], [1.08, -0.12], [1.04, -0.86], [0.73, -1.02]];
 
@@ -216,25 +208,6 @@ function Wing({ side, mobile }: { side: number; mobile: boolean }) {
   );
 }
 
-function Canard({ side }: { side: number }) {
-  return (
-    <group>
-      <AerospacePanel
-        outline={mirrored(CANARD, side)} depth={0.12}
-        surface={m.shellDark} edge={m.shellEdge} position={[0, 0, 0.36]} bevel={0.018}
-      />
-      <AerospacePanel
-        outline={mirrored(CANARD_TIP, side)} depth={0.014}
-        surface={flightTestMarking} edge={flightTestMarking} position={[0, 0, 0.43]} bevel={0.003}
-      />
-      <StructuralRail
-        from={[side * 0.46, 1.76, 0.43]} to={[side * 1.42, 1.12, 0.43]}
-        width={0.034} depth={0.022} material={m.shellEdge} radius={0.005}
-      />
-    </group>
-  );
-}
-
 function Engine({ side }: { side: number }) {
   return (
     <group position={[side * 0.39, -2.65, -0.18]}>
@@ -280,7 +253,6 @@ export function FighterJet({ mobile, reducedMotion }: FighterJetProps) {
       <AerospacePanel outline={DORSAL_PANEL} depth={0.07} surface={m.frame} edge={m.shellEdge} position={[0, 0, 0.54]} bevel={0.015} />
       {[-1, 1].map((side) => (
         <group key={side}>
-          <Canard side={side} />
           <AerospacePanel outline={mirrored(INTAKE, side)} depth={0.055} surface={m.cavity} edge={m.frame} position={[0, 0, 0.26]} bevel={0.01} />
           <StructuralRail from={[side * 0.75, 0.19, 0.31]} to={[side * 1.02, -0.16, 0.31]} width={0.055} depth={0.055} material={m.shellEdge} radius={0.01} />
           <VerticalFin side={side} />
