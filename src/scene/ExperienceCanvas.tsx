@@ -44,7 +44,7 @@ export function ExperienceCanvas({ progress, mobile, reducedMotion }: Experience
       fallback={<div className="canvas-fallback">3D view unavailable.</div>}
     >
       <LightingRig mobile={mobile} />
-      <CameraRig progress={progress} mobile={mobile} reducedMotion={reducedMotion} inspection={inspection} />
+      <CameraRig progress={progress} pointer={pointer} mobile={mobile} reducedMotion={reducedMotion} inspection={inspection} />
       <SimulationPointerTracker pointer={pointer} enabled={!mobile} />
       <SimulationEnvironment progress={progress} pointer={pointer} inspection={inspection} mobile={mobile} reducedMotion={reducedMotion} />
       <HeroParallax pointer={pointer} enabled={!mobile && !reducedMotion}>

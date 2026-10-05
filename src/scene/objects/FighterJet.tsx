@@ -109,7 +109,7 @@ const flightTestMarking = new MeshStandardMaterial({
   color: '#d19a4c', metalness: 0.32, roughness: 0.56,
   emissive: '#583416', emissiveIntensity: 0.12, side: DoubleSide,
 });
-const FIXED_AIRCRAFT_YAW = Math.PI - (20 * Math.PI / 180);
+const FIXED_AIRCRAFT_YAW = Math.PI - (5 * Math.PI / 180);
 
 function createCanopyGeometry() {
   const geometry = new BufferGeometry();

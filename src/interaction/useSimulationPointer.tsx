@@ -17,8 +17,8 @@ export function SimulationPointerTracker({ pointer, enabled }: { pointer: RefObj
     const canvas = gl.domElement;
     const onMove = (event: PointerEvent) => {
       const bounds = canvas.getBoundingClientRect();
-      pointer.current.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1;
-      pointer.current.y = 1 - ((event.clientY - bounds.top) / bounds.height) * 2;
+      pointer.current.x = MathUtils.clamp(((event.clientX - bounds.left) / bounds.width) * 2 - 1, -1, 1);
+      pointer.current.y = MathUtils.clamp(1 - ((event.clientY - bounds.top) / bounds.height) * 2, -1, 1);
       pointer.current.present = true;
       invalidate();
     };
