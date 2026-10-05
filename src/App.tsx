@@ -38,7 +38,6 @@ export function App() {
       {showScene && (
         <div className={`scene-loading${sceneReady ? ' is-ready' : ''}`} role="status" aria-label="Loading the 3D scene" aria-hidden={sceneReady}>
           <div className="scene-loading-content">
-            <span className="scene-loading-index">FLIGHT SYSTEM / 01</span>
             <span className="scene-loading-title">Preparing the scene</span>
             <span className="scene-loading-track" aria-hidden="true"><span /></span>
             <span className="scene-loading-status">Initializing view</span>

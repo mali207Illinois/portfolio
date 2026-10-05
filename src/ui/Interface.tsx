@@ -34,7 +34,6 @@ export function Interface() {
   return (
     <div className="interface">
       <div className="interface-stack">
-        <p className="interface-kicker" aria-hidden="true">FLIGHT SYSTEM / 01</p>
         <div className="interface-hero">
           <h1 className="identity">MUSTAFA ALI</h1>
           <p className="identity-subtitle">Student @ University of Illinois at Urbana Champaign</p>

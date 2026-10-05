@@ -61,8 +61,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   text-align: center;
   text-transform: uppercase;
 }
-.scene-loading-index { color: #87948a; font-size: 0.58rem; letter-spacing: 0.22em; }
-.scene-loading-title { margin-top: 17px; color: #d5dcd5; font-size: 0.78rem; letter-spacing: 0.18em; }
+.scene-loading-title { margin-top: 0; color: #d5dcd5; font-size: 0.78rem; letter-spacing: 0.18em; }
 .scene-loading-track { width: 100%; height: 2px; margin-top: 27px; overflow: hidden; background: #29342d; }
 .scene-loading-track span { display: block; width: 36%; height: 100%; background: #b9d0be; animation: scene-loading-sweep 1.35s ease-in-out infinite alternate; }
 .scene-loading-status { margin-top: 13px; color: #788b80; font-size: 0.55rem; letter-spacing: 0.18em; }
@@ -91,8 +90,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   margin-top: auto;
   pointer-events: auto;
 }
-
-.interface-kicker { display: none; }
 
 .interface-hero {
   display: flex;
@@ -280,26 +277,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .experience.is-static .interface-stack::before { top: -1px; left: 22px; }
 .experience.is-static .interface-stack::after { right: 22px; bottom: -1px; opacity: 0.55; }
 
-.experience.is-static .interface-kicker {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin: 0;
-  color: #82958a;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.52rem;
-  letter-spacing: 0.2em;
-}
-
-.experience.is-static .interface-kicker::before {
-  width: 5px;
-  height: 5px;
-  border: 1px solid #9ab9a2;
-  border-radius: 50%;
-  box-shadow: 0 0 9px rgba(154, 185, 162, 0.6);
-  content: '';
-}
-
 .experience.is-static .interface-hero { align-items: flex-start; gap: 7px; }
 .experience.is-static .chapter { font-size: 0.62rem; }
 .experience.is-static .projects-control { align-self: stretch; }
@@ -309,6 +286,16 @@ button, a { -webkit-tap-highlight-color: transparent; }
   border-color: rgba(143, 171, 150, 0.35);
   background: #030504;
 }
+
+.experience:not(.is-static) .interface { justify-content: center; }
+.experience:not(.is-static) .interface-stack { gap: 22px; margin-top: 0; }
+.experience:not(.is-static) .interface-hero { gap: 7px; }
+.experience:not(.is-static) .identity,
+.experience:not(.is-static) .projects-toggle { font-size: 0.72rem; }
+.experience:not(.is-static) .identity-subtitle { font-size: 0.62rem; }
+.experience:not(.is-static) .chapter { font-size: 0.68rem; }
+.experience:not(.is-static) .projects-toggle { min-width: 194px; min-height: 48px; gap: 32px; padding-inline: 16px; }
+.experience:not(.is-static) .projects-toggle-icon { font-size: 1.05rem; }
 
 
 
