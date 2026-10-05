@@ -18,6 +18,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 ::selection { color: #070908; background: #d5d0c4; }
 
 .experience { position: relative; height: 100svh; overflow: hidden; background: #070908; }
+.experience.is-static { background: #000; }
 
 .scene-shell {
   position: fixed;
@@ -77,19 +78,27 @@ button, a { -webkit-tap-highlight-color: transparent; }
   inset: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   padding: clamp(25px, 3.7vw, 58px);
   pointer-events: none;
 }
 
+.interface-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  margin-top: auto;
+  pointer-events: auto;
+}
+
+.interface-kicker { display: none; }
+
 .interface-hero {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  grid-column: 2;
-  grid-row: 1;
-  height: 42px;
-  text-align: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
 }
 
 .identity {
@@ -104,10 +113,16 @@ button, a { -webkit-tap-highlight-color: transparent; }
   text-shadow: 0 2px 18px #070908;
 }
 
+.identity-subtitle {
+  margin: 0;
+  color: #a4aaa3;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.57rem;
+  line-height: 1.5;
+  letter-spacing: 0.035em;
+}
+
 .chapter {
-  position: absolute;
-  top: clamp(25px, 3.7vw, 58px);
-  right: clamp(25px, 3.7vw, 58px);
   color: #929a96;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.62rem;
@@ -121,16 +136,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .chapter:hover, .chapter:focus-visible { color: #d5d0c4; }
 .chapter:focus-visible { outline: 1px solid #d5d0c4; outline-offset: 5px; }
 
-.interface-footer {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: center;
-  align-self: stretch;
-  margin-top: auto;
-  width: 100%;
-}
-
-.projects-control { position: relative; grid-column: 1; grid-row: 1; justify-self: start; pointer-events: auto; }
+.projects-control { position: relative; pointer-events: auto; }
 
 .projects-toggle {
   display: inline-flex;
@@ -163,7 +169,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   width: min(320px, calc(100vw - 44px));
   padding: 16px 17px 8px;
   border: 1px solid rgba(189, 200, 192, 0.35);
-  background: rgba(7, 12, 10, 0.89);
+  background: rgba(7, 12, 10, 0.97);
   box-shadow: 0 14px 38px rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(18px);
   opacity: 0;
@@ -199,29 +205,123 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .project-link:hover { color: #fff; padding-left: 4px; }
 .project-number, .project-link-arrow { color: #788b80; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.65rem; }
 
+.experience.is-static {
+  background:
+    radial-gradient(ellipse at 50% 48%, rgba(20, 31, 24, 0.34), transparent 54%),
+    #000;
+}
+
+.mobile-particles {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.mobile-particles span {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #bbd4c0;
+  box-shadow: 0 0 8px 1px rgba(145, 197, 157, 0.34);
+  opacity: 0.28;
+  animation: mobile-particle-float var(--particle-duration, 13s) ease-in-out var(--particle-delay, 0s) infinite alternate;
+  will-change: transform, opacity;
+}
+
+.mobile-particles span:nth-child(1) { left: 12%; top: 14%; --particle-duration: 14s; --particle-delay: -5s; --particle-x: 7px; }
+.mobile-particles span:nth-child(2) { left: 86%; top: 20%; --particle-duration: 17s; --particle-delay: -11s; --particle-x: -8px; }
+.mobile-particles span:nth-child(3) { left: 8%; top: 43%; --particle-duration: 12s; --particle-delay: -3s; --particle-x: 6px; }
+.mobile-particles span:nth-child(4) { left: 92%; top: 49%; --particle-duration: 16s; --particle-delay: -8s; --particle-x: -5px; }
+.mobile-particles span:nth-child(5) { left: 17%; top: 76%; --particle-duration: 18s; --particle-delay: -14s; --particle-x: 8px; }
+.mobile-particles span:nth-child(6) { left: 82%; top: 82%; --particle-duration: 13s; --particle-delay: -7s; --particle-x: -7px; }
+.mobile-particles span:nth-child(7) { left: 48%; top: 10%; --particle-duration: 15s; --particle-delay: -10s; --particle-x: 5px; }
+.mobile-particles span:nth-child(8) { left: 55%; top: 91%; --particle-duration: 19s; --particle-delay: -2s; --particle-x: -6px; }
+.mobile-particles span:nth-child(9) { left: 4%; top: 63%; --particle-duration: 11s; --particle-delay: -6s; --particle-x: 7px; }
+.mobile-particles span:nth-child(10) { left: 96%; top: 67%; --particle-duration: 17s; --particle-delay: -13s; --particle-x: -8px; }
+.mobile-particles span:nth-child(11) { left: 28%; top: 27%; --particle-duration: 16s; --particle-delay: -4s; --particle-x: 6px; }
+.mobile-particles span:nth-child(12) { left: 73%; top: 31%; --particle-duration: 14s; --particle-delay: -9s; --particle-x: -5px; }
+
+@keyframes mobile-particle-float {
+  from { transform: translate3d(0, 0, 0); opacity: 0.16; }
+  to { transform: translate3d(var(--particle-x, 6px), -19px, 0); opacity: 0.62; }
+}
+
+.experience.is-static .interface {
+  align-items: center;
+  justify-content: center;
+  padding: 28px 24px;
+}
+
+.experience.is-static .interface-stack {
+  position: relative;
+  align-items: stretch;
+  gap: 19px;
+  width: min(360px, 100%);
+  margin-top: 0;
+  padding: 24px 22px 22px;
+  border: 1px solid rgba(143, 171, 150, 0.2);
+  background: linear-gradient(145deg, rgba(16, 24, 19, 0.8), rgba(4, 6, 5, 0.96) 66%);
+  box-shadow: inset 0 0 34px rgba(139, 179, 148, 0.035), 0 28px 90px rgba(0, 0, 0, 0.36);
+}
+
+.experience.is-static .interface-stack::before,
+.experience.is-static .interface-stack::after {
+  position: absolute;
+  content: '';
+  width: 42px;
+  height: 1px;
+  background: #a5c7ae;
+  box-shadow: 0 0 10px rgba(165, 199, 174, 0.5);
+}
+
+.experience.is-static .interface-stack::before { top: -1px; left: 22px; }
+.experience.is-static .interface-stack::after { right: 22px; bottom: -1px; opacity: 0.55; }
+
+.experience.is-static .interface-kicker {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  color: #82958a;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.2em;
+}
+
+.experience.is-static .interface-kicker::before {
+  width: 5px;
+  height: 5px;
+  border: 1px solid #9ab9a2;
+  border-radius: 50%;
+  box-shadow: 0 0 9px rgba(154, 185, 162, 0.6);
+  content: '';
+}
+
+.experience.is-static .interface-hero { align-items: flex-start; gap: 7px; }
+.experience.is-static .chapter { font-size: 0.62rem; }
+.experience.is-static .projects-control { align-self: stretch; }
+.experience.is-static .projects-toggle { width: 100%; min-height: 48px; }
+.experience.is-static .projects-panel {
+  z-index: 2;
+  border-color: rgba(143, 171, 150, 0.35);
+  background: #030504;
+}
+
 
 
 @media (max-width: 700px) {
   .interface { padding: 25px 22px 28px; }
-  .chapter { top: 25px; right: 22px; font-size: 0.53rem; letter-spacing: 0.03em; }
   .projects-toggle { min-height: 44px; }
-  .scene-shell canvas { cursor: default; }
-}
-
-@media (max-width: 500px) {
-  .interface { padding: 25px 12px 28px; }
-  .identity, .projects-toggle { letter-spacing: 0.11em; }
-  .projects-toggle { min-width: 0; gap: 4px; padding-inline: 7px; white-space: nowrap; }
-}
-
-@media (max-width: 370px) {
-  .interface-footer { grid-template-columns: 1fr; row-gap: 12px; }
-  .interface-hero { grid-column: 1; grid-row: 1; height: auto; }
-  .projects-control { grid-column: 1; grid-row: 2; }
+  .experience.is-static .interface { padding: 28px 22px; }
+  .experience.is-static .interface-stack { padding: 24px 20px 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .scene-loading-track span { width: 100%; animation: none !important; }
+  .mobile-particles span { animation: none !important; opacity: 0.34; }
   .projects-panel { transition: none; }
 }
